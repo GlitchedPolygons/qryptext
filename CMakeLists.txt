@@ -34,6 +34,7 @@ set(${PROJECT_NAME}_INCLUDE_DIR
         )
 
 set(${PROJECT_NAME}_HEADERS
+        ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/constants.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/decrypt.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/encrypt.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/sign.h

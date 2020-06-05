@@ -21,12 +21,6 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
-
-int qryptext_encrypt(uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, uint8_t* public_key, size_t public_key_len);
-
-int qryptext_encrypt_malloc(uint8_t* data, size_t data_length, uint8_t** output, size_t* output_length, uint8_t* public_key, size_t public_key_len);
-
 #ifdef __cplusplus
 } // extern "C"
 #endif
