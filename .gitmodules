@@ -1,0 +1,6 @@
+[submodule "lib/oqs"]
+	path = lib/oqs
+	url = https://github.com/open-quantum-safe/liboqs
+[submodule "lib/mbedtls"]
+	path = lib/mbedtls
+	url = https://github.com/ARMmbed/mbedtls
