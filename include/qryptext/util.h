@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-#ifndef QRYPTEXT_CONSTANTS_H
-#define QRYPTEXT_CONSTANTS_H
+#ifndef QRYPTEXT_UTIL_H
+#define QRYPTEXT_UTIL_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,12 +23,18 @@ extern "C" {
 
 #include <stdint.h>
 
-int qryptext_encrypt(uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, uint8_t* public_key, size_t public_key_length);
-
-int qryptext_encrypt_malloc(uint8_t* data, size_t data_length, uint8_t** output, size_t* output_length, uint8_t* public_key, size_t public_key_length);
+/**
+ * Calculates the final output size of an AES-CBC encrypted ciphertext (based on a given plaintext length).
+ * @param plaintext_length The amount of bytes to encrypt.
+ * @return The final output size of the ciphertext if you encrypt data that is plaintext_length long.
+ */
+static inline size_t qryptext_aes_cbc_kyber1024_calc_ciphertext_length(const size_t plaintext_length)
+{
+    return plaintext_length + 32 - (plaintext_length % 16) + OQS_KEM_kyber_1024_length_ciphertext;
+}
 
 #ifdef __cplusplus
 } // extern "C"
 #endif
 
-#endif // QRYPTEXT_CONSTANTS_H
+#endif // QRYPTEXT_UTIL_H

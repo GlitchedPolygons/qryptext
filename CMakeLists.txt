@@ -24,6 +24,11 @@ option(QRYPTEXT_ENABLE_TESTS "Build qryptext tests." OFF)
 # OQS Options
 option(OQS_USE_OPENSSL "Build OQS with OpenSSL support." OFF)
 option(OQS_BUILD_ONLY_LIB "Build OQS without tests, docs, etc..." ON)
+option(OQS_ENABLE_KEM_kyber_1024 "Build OQS with kyber1024 support." ON)
+
+if (NOT OQS_ENABLE_KEM_kyber_1024)
+    message(FATAL_ERROR "Please build OQS with KEM-Kyber-1024 support!")
+endif ()
 
 # MbedTLS Options
 option(ENABLE_TESTING "Build MbedTLS tests." OFF)
@@ -35,6 +40,7 @@ set(${PROJECT_NAME}_INCLUDE_DIR
 
 set(${PROJECT_NAME}_HEADERS
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/constants.h
+        ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/util.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/decrypt.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/encrypt.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/sign.h
@@ -42,6 +48,7 @@ set(${PROJECT_NAME}_HEADERS
         )
 
 set(${PROJECT_NAME}_SOURCES
+        ${CMAKE_CURRENT_LIST_DIR}/src/util.c
         ${CMAKE_CURRENT_LIST_DIR}/src/decrypt.c
         ${CMAKE_CURRENT_LIST_DIR}/src/encrypt.c
         ${CMAKE_CURRENT_LIST_DIR}/src/sign.c
