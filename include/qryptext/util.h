@@ -22,13 +22,14 @@ extern "C" {
 #endif
 
 #include <stdint.h>
+#include <stddef.h>
 
 /**
- * Calculates the final output size of an AES-CBC encrypted ciphertext (based on a given plaintext length).
+ * Calculates the final output size of a ciphertext that would result from the qryptext_encrypt() function (based on a given plaintext length).
  * @param plaintext_length The amount of bytes to encrypt.
- * @return The final output size of the ciphertext if you encrypt data that is plaintext_length long.
+ * @return The final output size of the ciphertext if you encrypt data that is plaintext_length long with qryptext_encrypt().
  */
-static inline size_t qryptext_aes_cbc_kyber1024_calc_ciphertext_length(const size_t plaintext_length)
+static inline size_t qryptext_calc_ciphertext_length(const size_t plaintext_length)
 {
     return plaintext_length + 32 - (plaintext_length % 16) + OQS_KEM_kyber_1024_length_ciphertext;
 }
