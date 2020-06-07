@@ -24,9 +24,26 @@ extern "C" {
 #include <stdint.h>
 #include <stddef.h>
 
-int qryptext_encrypt(uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, uint8_t* public_key, size_t public_key_length);
+#define QRYPTEXT_ENCRYPTION_ERROR_NULL_ARG 1000
+#define QRYPTEXT_ENCRYPTION_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE 1001
+#define QRYPTEXT_ENCRYPTION_ERROR_INVALID_KYBER_KEY_FORMAT 1002
+#define QRYPTEXT_ENCRYPTION_ERROR_INVALID_RSA_KEY_FORMAT 1003
+#define QRYPTEXT_ENCRYPTION_ERROR_OUT_OF_MEMORY 1004
 
-int qryptext_encrypt_malloc(uint8_t* data, size_t data_length, uint8_t** output, size_t* output_length, uint8_t* public_key, size_t public_key_length);
+/**
+ * Encrypts a given byte array of data using AES256-CBC, Kyber1024 and (optionally) RSA.
+ * @param data The data to encrypt.
+ * @param data_length Length of the data array.
+ * @param output_buffer Where to write the encrypted ciphertext into (make sure that this is allocated sufficiently big!).
+ * @param output_buffer_size How big the output buffer is (use qryptext_calc_ciphertext_length() for allocation size guideline).
+ * @param output_length Where to write the number of bytes written to the output buffer into (will be left untouched in case of a failure).
+ * @param public_kyber1024_key The Kyber1024 public key with which to encrypt the AES key.
+ * @param public_kyber1024_key_length The length of the public_kyber1024_key array.
+ * @param public_rsa_key [OPTIONAL] RSA public key (PEM-formatted string) with which to additionally encrypt the AES key (can be left <c>NULL</c> if you want Kyber-only).
+ * @param public_rsa_key_length [OPTIONAL] Length of the public_rsa_key string (this is ignored if public_rsa_key is <c>NULL</c>).
+ * @return The status code: <c>0</c> if encryption succeeded, all other status codes can be found inside the various qryptext header files.
+ */
+int qryptext_encrypt(uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, uint8_t* public_kyber1024_key, size_t public_kyber1024_key_length, uint8_t* public_rsa_key, size_t public_rsa_key_length);
 
 #ifdef __cplusplus
 } // extern "C"

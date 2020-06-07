@@ -25,7 +25,7 @@ option(QRYPTEXT_ENABLE_TESTS "Build qryptext tests." OFF)
 option(OQS_USE_OPENSSL "Build OQS with OpenSSL support." OFF)
 option(OQS_BUILD_ONLY_LIB "Build OQS without tests, docs, etc..." ON)
 option(OQS_ENABLE_KEM_kyber_1024 "Build OQS with kyber1024 support." ON)
-option(OQS_ENABLE_SIG_FALCON, "Build OQS with FALCON signing support.", ON)
+option(OQS_ENABLE_SIG_FALCON "Build OQS with FALCON signing support." ON)
 
 if (NOT OQS_ENABLE_KEM_kyber_1024)
     message(FATAL_ERROR "Please build OQS with KEM-Kyber-1024 support!")
