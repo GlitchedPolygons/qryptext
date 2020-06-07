@@ -44,7 +44,7 @@ extern "C" {
  * @param public_rsa_key_length [OPTIONAL] Length of the public_rsa_key string (this is ignored if public_rsa_key is <c>NULL</c>).
  * @return The status code: <c>0</c> if encryption succeeded, all other status codes can be found inside the various qryptext header files.
  */
-int qryptext_encrypt(uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, uint8_t* public_kyber1024_key, size_t public_kyber1024_key_length, uint8_t* public_rsa_key, size_t public_rsa_key_length);
+int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, const size_t output_buffer_size, size_t* output_length, const uint8_t* public_kyber1024_key, const size_t public_kyber1024_key_length, const uint8_t* public_rsa_key, const size_t public_rsa_key_length);
 
 #ifdef __cplusplus
 } // extern "C"

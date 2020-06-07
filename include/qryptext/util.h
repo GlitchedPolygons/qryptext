@@ -42,11 +42,11 @@ static inline size_t qryptext_calc_ciphertext_length(const size_t plaintext_leng
  * Gets a random 12-digit integer (ergo between <c>100000000000</c> and <c>999999999999</c>).
  * @return Random 12-digit integer
  */
-static inline long long int get_random_big_int()
+static inline uint64_t get_random_big_int()
 {
     srand(time(NULL) * time(NULL));
-    const long long int min = 100000000000;
-    const long long int max = 999999999999;
+    const uint64_t min = 100000000000;
+    const uint64_t max = 999999999999;
     return min + rand() / (RAND_MAX / (max - min + 1) + 1);
 }
 

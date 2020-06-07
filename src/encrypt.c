@@ -21,6 +21,7 @@
 #include <mbedtls/platform.h>
 #include <mbedtls/ctr_drbg.h>
 #include <pqclean_kyber1024_clean/api.h>
+
 #include "qryptext/util.h"
 #include "qryptext/encrypt.h"
 
@@ -59,8 +60,7 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
     mbedtls_entropy_init(&entropy);
     mbedtls_ctr_drbg_init(&ctr_drbg);
 
-    snprintf(pers, sizeof(pers), "qryptext_#!-$/.+@3#0%ull", get_random_big_int());
-
+    snprintf(pers, sizeof(pers), "qryptext_#!-$/.+@3#0%llu", get_random_big_int());
     ret = mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy, (const unsigned char*)pers, sizeof pers);
     if (ret != 0)
     {
