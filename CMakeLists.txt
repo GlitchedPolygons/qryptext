@@ -86,6 +86,7 @@ endif ()
 
 target_include_directories(${PROJECT_NAME}
         PUBLIC ${${PROJECT_NAME}_INCLUDE_DIR}
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber
         PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/mbedtls/include
         )
 

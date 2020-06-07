@@ -21,8 +21,12 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
+#include <stdlib.h>
 #include <stddef.h>
+#include <stdint.h>
+#include <time.h>
+#include <kem_kyber.h>
+#include <pqclean_kyber1024_clean/api.h>
 
 /**
  * Calculates the final output size of a ciphertext that would result from the qryptext_encrypt() function (based on a given plaintext length).
@@ -32,6 +36,18 @@ extern "C" {
 static inline size_t qryptext_calc_ciphertext_length(const size_t plaintext_length)
 {
     return plaintext_length + 32 - (plaintext_length % 16) + OQS_KEM_kyber_1024_length_ciphertext;
+}
+
+/**
+ * Gets a random 12-digit integer (ergo between <c>100000000000</c> and <c>999999999999</c>).
+ * @return Random 12-digit integer
+ */
+static inline long long int get_random_big_int()
+{
+    srand(time(NULL) * time(NULL));
+    const long long int min = 100000000000;
+    const long long int max = 999999999999;
+    return min + rand() / (RAND_MAX / (max - min + 1) + 1);
 }
 
 #ifdef __cplusplus
