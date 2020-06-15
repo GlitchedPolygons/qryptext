@@ -33,18 +33,15 @@ endif ()
 
 if (NOT OQS_ENABLE_SIG_FALCON)
     message(FATAL_ERROR "Please build OQS with Falcon1024 signing support!")
-endif()
+endif ()
 
 # MbedTLS Options
 option(ENABLE_TESTING "Build MbedTLS tests." OFF)
 option(ENABLE_PROGRAMS "Build MbedTLS example programs." OFF)
 
-set(${PROJECT_NAME}_INCLUDE_DIR
-        ${CMAKE_CURRENT_LIST_DIR}/include
-        )
-
 set(${PROJECT_NAME}_HEADERS
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/constants.h
+        ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/types.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/util.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/decrypt.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/encrypt.h
@@ -91,7 +88,7 @@ target_include_directories(oqs
         )
 
 target_include_directories(${PROJECT_NAME}
-        PUBLIC ${${PROJECT_NAME}_INCLUDE_DIR}
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include
         PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/lib/oqs/include
         PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/mbedtls/include
         PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber

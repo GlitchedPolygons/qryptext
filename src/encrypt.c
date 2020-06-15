@@ -25,16 +25,16 @@
 #include "qryptext/util.h"
 #include "qryptext/encrypt.h"
 
-int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, const size_t output_buffer_size, size_t* output_length, const uint8_t* public_kyber1024_key, const size_t public_kyber1024_key_length, const uint8_t* public_rsa_key, const size_t public_rsa_key_length)
+int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, const qryptext_kyber1024_public_key public_kyber1024_key)
 {
     int ret = 1;
 
-    if (data == NULL || output_buffer == NULL || output_length == NULL || public_kyber1024_key == NULL || public_rsa_key == NULL)
+    if (data == NULL || output_buffer == NULL || output_length == NULL)
     {
         return QRYPTEXT_ENCRYPTION_ERROR_NULL_ARG;
     }
 
-    if (data_length == 0 || public_kyber1024_key_length == 0)
+    if (data_length == 0)
     {
         return QRYPTEXT_ENCRYPTION_ERROR_INVALID_ARG;
     }

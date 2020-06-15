@@ -23,6 +23,7 @@ extern "C" {
 
 #include <stdint.h>
 #include <stddef.h>
+#include "qryptext/types.h"
 
 #define QRYPTEXT_ENCRYPTION_ERROR_NULL_ARG 1000
 #define QRYPTEXT_ENCRYPTION_ERROR_INVALID_ARG 1001
@@ -39,12 +40,9 @@ extern "C" {
  * @param output_buffer_size How big the output buffer is (use qryptext_calc_ciphertext_length() for allocation size guideline).
  * @param output_length Where to write the number of bytes written to the output buffer into (will be left untouched in case of a failure).
  * @param public_kyber1024_key The Kyber1024 public key with which to encrypt the AES key.
- * @param public_kyber1024_key_length The length of the public_kyber1024_key array.
- * @param public_rsa_key [OPTIONAL] RSA public key (PEM-formatted string) with which to additionally encrypt the AES key (can be left <c>NULL</c> if you want Kyber-only).
- * @param public_rsa_key_length [OPTIONAL] Length of the public_rsa_key string (this is ignored if public_rsa_key is <c>NULL</c>).
  * @return The status code: <c>0</c> if encryption succeeded, all other status codes can be found inside the various qryptext header files.
  */
-int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, const size_t output_buffer_size, size_t* output_length, const uint8_t* public_kyber1024_key, const size_t public_kyber1024_key_length, const uint8_t* public_rsa_key, const size_t public_rsa_key_length);
+int qryptext_encrypt(const uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, qryptext_kyber1024_public_key public_kyber1024_key);
 
 #ifdef __cplusplus
 } // extern "C"
