@@ -24,10 +24,10 @@ option(QRYPTEXT_ENABLE_TESTS "Build qryptext tests." OFF)
 # OQS Options
 option(OQS_USE_OPENSSL "Build OQS with OpenSSL support." OFF)
 option(OQS_BUILD_ONLY_LIB "Build OQS without tests, docs, etc..." ON)
-option(OQS_ENABLE_KEM_kyber_1024 "Build OQS with kyber1024 support." ON)
+option(OQS_ENABLE_KEM_KYBER "Build OQS with KYBER support." ON)
 option(OQS_ENABLE_SIG_FALCON "Build OQS with FALCON signing support." ON)
 
-if (NOT OQS_ENABLE_KEM_kyber_1024)
+if (NOT OQS_ENABLE_KEM_KYBER)
     message(FATAL_ERROR "Please build OQS with KEM-Kyber-1024 support!")
 endif ()
 
@@ -65,7 +65,7 @@ if (NOT TARGET mbedtls)
 endif ()
 
 if (NOT TARGET oqs)
-    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib/oqs oqs)
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib/oqs)
 endif ()
 
 add_library(${PROJECT_NAME}
@@ -84,10 +84,18 @@ if (UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT_NAME} PRIVATE -luuid -lm)
 endif ()
 
+target_include_directories(oqs
+        PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/lib/oqs/include
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/sig/falcon
+        )
+
 target_include_directories(${PROJECT_NAME}
         PUBLIC ${${PROJECT_NAME}_INCLUDE_DIR}
-        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber
+        PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/lib/oqs/include
         PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/mbedtls/include
+        PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber
+        PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/sig/falcon
         )
 
 get_target_property(${PROJECT_NAME}_DEPS_TARGETS ${PROJECT_NAME} LINK_LIBRARIES)
