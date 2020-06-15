@@ -42,6 +42,7 @@ option(ENABLE_PROGRAMS "Build MbedTLS example programs." OFF)
 set(${PROJECT_NAME}_HEADERS
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/constants.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/types.h
+        ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/guid.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/util.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/decrypt.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/encrypt.h
@@ -51,6 +52,7 @@ set(${PROJECT_NAME}_HEADERS
 
 set(${PROJECT_NAME}_SOURCES
         ${CMAKE_CURRENT_LIST_DIR}/src/util.c
+        ${CMAKE_CURRENT_LIST_DIR}/src/guid.c
         ${CMAKE_CURRENT_LIST_DIR}/src/decrypt.c
         ${CMAKE_CURRENT_LIST_DIR}/src/encrypt.c
         ${CMAKE_CURRENT_LIST_DIR}/src/sign.c

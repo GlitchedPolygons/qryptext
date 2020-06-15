@@ -23,6 +23,7 @@
 #include <pqclean_kyber1024_clean/api.h>
 
 #include "qryptext/util.h"
+#include <qryptext/guid.h>
 #include "qryptext/encrypt.h"
 
 int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, const qryptext_kyber1024_public_key public_kyber1024_key)
@@ -52,7 +53,7 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
 
     unsigned char pers[256];
     qryptext_dev_urandom(pers, 128);
-    snprintf((char*)(pers + 128), 128, "qryptext_#!-$\\\"/.+@3#0%llu", qryptext_get_random_big_integer());
+    snprintf((char*)(pers + 128), 128, "qryptext_#!-$\\\"/.+@3#0%llu%s", qryptext_get_random_big_integer(), qryptext_new_guid(false, true).string);
 
     unsigned char aes256key[32];
     memset(aes256key, 0x00, sizeof(aes256key));
