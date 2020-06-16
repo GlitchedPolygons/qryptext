@@ -40,6 +40,7 @@ extern "C" {
 #include <bcrypt.h>
 #endif
 
+#include <mbedtls/base64.h>
 #include <oqs/kem_kyber.h>
 #include <pqclean_kyber1024_clean/api.h>
 
@@ -60,7 +61,9 @@ extern "C" {
  */
 static inline size_t qryptext_calc_ciphertext_length(const size_t plaintext_length)
 {
-    return plaintext_length + 32 - (plaintext_length % 16) + OQS_KEM_kyber_1024_length_ciphertext;
+    size_t r;
+    mbedtls_base64_encode(NULL, 0, &r, NULL, 16 + 32 + 16 + OQS_KEM_kyber_1024_length_ciphertext + plaintext_length);
+    return r;
 }
 
 /**
@@ -92,7 +95,7 @@ static inline void qryptext_dev_urandom(uint8_t* output_buffer, const size_t out
  * which only gives the advantage of having a slightly different per-app starting point for the seed (as stated in the MbedTLS documentation).
  * @return Random big number
  */
-static inline unsigned long long int qryptext_get_random_big_integer()
+static inline uint64_t qryptext_get_random_big_integer()
 {
     srand(time(NULL) * time(NULL));
     return rand() * rand() * rand() * rand();

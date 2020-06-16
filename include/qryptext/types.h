@@ -30,6 +30,7 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 #include <pqclean_kyber1024_clean/api.h>
+#include <pqclean_falcon-1024_clean/api.h>
 
 typedef struct qryptext_kyber1024_secret_key
 {
@@ -46,6 +47,25 @@ typedef struct qryptext_kyber1024_keypair
     qryptext_kyber1024_public_key public_key;
     qryptext_kyber1024_secret_key secret_key;
 } qryptext_kyber1024_keypair;
+
+typedef struct qryptext_falcon1024_secret_key
+{
+    uint8_t bytes[PQCLEAN_FALCON1024_CLEAN_CRYPTO_SECRETKEYBYTES];
+} qryptext_falcon1024_secret_key;
+
+typedef struct qryptext_falcon1024_public_key
+{
+    uint8_t bytes[PQCLEAN_FALCON1024_CLEAN_CRYPTO_PUBLICKEYBYTES];
+} qryptext_falcon1024_public_key;
+
+/**
+ * Falcon-1024 keypair for signing and verifying
+ */
+typedef struct qryptext_falcon1024_keypair
+{
+    qryptext_kyber1024_public_key public_key;
+    qryptext_kyber1024_secret_key secret_key;
+} qryptext_falcon1024_keypair;
 
 /**
  * @brief Struct containing the output from a call to the qryptext_new_guid() function. <p>

@@ -54,11 +54,11 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
     mbedtls_gcm_context aes_ctx;
     mbedtls_md_context_t md_ctx;
 
-    unsigned char pers[256];
+    uint8_t pers[256];
     qryptext_dev_urandom(pers, 128);
     snprintf((char*)(pers + 128), 128, "qryptext_#!-$\\\"/.+@3#0%llu%s", qryptext_get_random_big_integer(), qryptext_new_guid(false, true).string);
 
-    unsigned char aes256key[32];
+    uint8_t aes256key[32];
     memset(aes256key, 0x00, sizeof(aes256key));
 
     mbedtls_pk_init(&pk);
