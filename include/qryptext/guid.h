@@ -14,6 +14,12 @@
    limitations under the License.
 */
 
+/**
+ *  @file guid.h
+ *  @author Raphael Beck
+ *  @brief Mh! The smell of fresh GUIDs..
+ */
+
 #ifndef QRYPTEXT_GUID_H
 #define QRYPTEXT_GUID_H
 

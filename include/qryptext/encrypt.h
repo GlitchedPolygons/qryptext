@@ -14,8 +14,14 @@
    limitations under the License.
 */
 
-#ifndef QRYPTEXT_CONSTANTS_H
-#define QRYPTEXT_CONSTANTS_H
+/**
+ *  @file encrypt.h
+ *  @author Raphael Beck
+ *  @brief Encrypt data using Kyber1024 KEM + AES256-GCM.
+ */
+
+#ifndef QRYPTEXT_ENCRYPT_H
+#define QRYPTEXT_ENCRYPT_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,7 +42,7 @@ extern "C" {
  * Encrypts a given byte array of data using AES256-CBC, Kyber1024 and (optionally) RSA.
  * @param data The data to encrypt.
  * @param data_length Length of the data array.
- * @param output_buffer Where to write the encrypted ciphertext into (make sure that this is allocated sufficiently big!).
+ * @param output_buffer Where to write the encrypted ciphertext into. Make sure that this is allocated sufficiently big! If you're unsure about how much to allocate, you can use util.h's qryptext_calc_ciphertext_length() function.
  * @param output_buffer_size How big the output buffer is (use qryptext_calc_ciphertext_length() for allocation size guideline).
  * @param output_length Where to write the number of bytes written to the output buffer into (will be left untouched in case of a failure).
  * @param public_kyber1024_key The Kyber1024 public key with which to encrypt the AES key.
@@ -48,4 +54,4 @@ int qryptext_encrypt(const uint8_t* data, size_t data_length, uint8_t* output_bu
 } // extern "C"
 #endif
 
-#endif // QRYPTEXT_CONSTANTS_H
+#endif // QRYPTEXT_ENCRYPT_H

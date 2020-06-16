@@ -14,6 +14,12 @@
    limitations under the License.
 */
 
+/**
+ *  @file decrypt.h
+ *  @author Raphael Beck
+ *  @brief Decrypt data that was encrypted using qryptext_encrypt() (Kyber1024 KEM + AES256-GCM).
+ */
+
 #ifndef QRYPTEXT_DECRYPT_H
 #define QRYPTEXT_DECRYPT_H
 
@@ -23,6 +29,7 @@ extern "C" {
 
 #include <stdint.h>
 #include <stddef.h>
+#include "qryptext/types.h"
 
 #define QRYPTEXT_DECRYPTION_ERROR_NULL_ARG 2000
 #define QRYPTEXT_DECRYPTION_ERROR_INVALID_ARG 2001
@@ -33,18 +40,15 @@ extern "C" {
 
 /**
  * Decrypts a given byte array of data that was encrypted using qryptext_encrypt().
- * @param data The data to decrypt.
- * @param data_length Length of the data array.
+ * @param encrypted_data The data to decrypt.
+ * @param encrypted_data_length Length of the data array.
  * @param output_buffer Where to write the decrypted data into (make sure that this is allocated sufficiently big!).
- * @param output_buffer_size How big the output buffer is (usually the same size as the encrypted data length, since plaintext will be smaller in most cases).
+ * @param output_buffer_size How big the output buffer is (usually, when unsure, allocate the same size as the encrypted data length; that's guaranteed to be sufficiently big).
  * @param output_length Where to write the number of bytes written to the output buffer into (will be left untouched in case of a failure).
  * @param private_kyber1024_key The Kyber1024 private key with which to decrypt the AES key.
- * @param private_kyber1024_key_length The length of the private_kyber1024_key array.
- * @param private_rsa_key [OPTIONAL] RSA private key (PEM-formatted string) with which to decrypt the AES key (can be left <c>NULL</c> if the data was encrypted Kyber-only).
- * @param private_rsa_key_length [OPTIONAL] Length of the private_rsa_key string (this is ignored if private_rsa_key is <c>NULL</c>).
  * @return The status code: <c>0</c> for success, all other status codes can be found inside the various qryptext header files.
  */
-int qryptext_decrypt(uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, uint8_t* private_kyber1024_key, size_t private_kyber1024_key_length, uint8_t* private_rsa_key, size_t private_rsa_key_length);
+int qryptext_decrypt(uint8_t* encrypted_data, size_t encrypted_data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, qryptext_kyber1024_secret_key secret_kyber1024_key);
 
 #ifdef __cplusplus
 } // extern "C"

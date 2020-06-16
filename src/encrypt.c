@@ -17,6 +17,7 @@
 #include <string.h>
 #include <mbedtls/pk.h>
 #include <mbedtls/aes.h>
+#include <mbedtls/gcm.h>
 #include <mbedtls/entropy.h>
 #include <mbedtls/platform.h>
 #include <mbedtls/ctr_drbg.h>
@@ -26,7 +27,7 @@
 #include <qryptext/guid.h>
 #include "qryptext/encrypt.h"
 
-int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, const qryptext_kyber1024_public_key public_kyber1024_key)
+int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, const size_t output_buffer_size, size_t* output_length, const qryptext_kyber1024_public_key public_kyber1024_key)
 {
     int ret = 1;
 
@@ -50,6 +51,8 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
     mbedtls_pk_context pk;
     mbedtls_entropy_context entropy;
     mbedtls_ctr_drbg_context ctr_drbg;
+    mbedtls_gcm_context aes_ctx;
+    mbedtls_md_context_t md_ctx;
 
     unsigned char pers[256];
     qryptext_dev_urandom(pers, 128);
@@ -61,6 +64,8 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
     mbedtls_pk_init(&pk);
     mbedtls_entropy_init(&entropy);
     mbedtls_ctr_drbg_init(&ctr_drbg);
+    mbedtls_gcm_init(&aes_ctx);
+    mbedtls_md_init(&md_ctx);
 
     ret = mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy, pers, QRYPTEXT_MIN(sizeof(pers), (MBEDTLS_CTR_DRBG_MAX_SEED_INPUT - MBEDTLS_CTR_DRBG_ENTROPY_LEN - 1)));
     if (ret != 0)
@@ -70,8 +75,11 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
     }
 
 exit:
+    mbedtls_md_free(&md_ctx);
+    mbedtls_gcm_free(&aes_ctx);
     mbedtls_ctr_drbg_free(&ctr_drbg);
     mbedtls_entropy_free(&entropy);
+    mbedtls_pk_free(&pk);
 
     return (ret);
 }

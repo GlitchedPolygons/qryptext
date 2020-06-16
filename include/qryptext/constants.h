@@ -14,6 +14,12 @@
    limitations under the License.
 */
 
+/**
+ *  @file constants.h
+ *  @author Raphael Beck
+ *  @brief Qryptext constants.
+ */
+
 #ifndef QRYPTEXT_CONSTANTS_H
 #define QRYPTEXT_CONSTANTS_H
 

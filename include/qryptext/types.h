@@ -14,6 +14,12 @@
    limitations under the License.
 */
 
+/**
+ *  @file types.h
+ *  @author Raphael Beck
+ *  @brief Types (structs) user in qryptext.
+ */
+
 #ifndef QRYPTEXT_TYPES_H
 #define QRYPTEXT_TYPES_H
 

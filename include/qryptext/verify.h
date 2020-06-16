@@ -14,6 +14,12 @@
    limitations under the License.
 */
 
+/**
+ *  @file verify.h
+ *  @author Raphael Beck
+ *  @brief Verify signatures that were made using qryptext_sign() (SHA3-512 + Falcon1024).
+ */
+
 #ifndef QRYPTEXT_VERIFY_H
 #define QRYPTEXT_VERIFY_H
 

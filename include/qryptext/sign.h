@@ -14,6 +14,12 @@
    limitations under the License.
 */
 
+/**
+ *  @file sign.h
+ *  @author Raphael Beck
+ *  @brief Sign data using SHA3-512 + Falcon1024.
+ */
+
 #ifndef QRYPTEXT_SIGN_H
 #define QRYPTEXT_SIGN_H
 
