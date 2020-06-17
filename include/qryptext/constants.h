@@ -27,6 +27,10 @@
 extern "C" {
 #endif
 
+#define QRYPTEXT_ERROR_NULL_ARG 1000
+#define QRYPTEXT_ERROR_INVALID_ARG 1001
+#define QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE 1002
+
 #ifdef __cplusplus
 } // extern "C"
 #endif

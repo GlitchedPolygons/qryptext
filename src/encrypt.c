@@ -26,6 +26,7 @@
 #include "qryptext/util.h"
 #include <qryptext/guid.h>
 #include "qryptext/encrypt.h"
+#include "qryptext/constants.h"
 
 int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, const size_t output_buffer_size, size_t* output_length, const qryptext_kyber1024_public_key public_kyber1024_key)
 {
@@ -33,19 +34,19 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
 
     if (data == NULL || output_buffer == NULL || output_length == NULL)
     {
-        return QRYPTEXT_ENCRYPTION_ERROR_NULL_ARG;
+        return QRYPTEXT_ERROR_NULL_ARG;
     }
 
     if (data_length == 0)
     {
-        return QRYPTEXT_ENCRYPTION_ERROR_INVALID_ARG;
+        return QRYPTEXT_ERROR_INVALID_ARG;
     }
 
     const size_t ctlen = qryptext_calc_ciphertext_length(data_length);
 
     if (output_buffer_size < ctlen)
     {
-        return QRYPTEXT_ENCRYPTION_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE;
+        return QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE;
     }
 
     mbedtls_pk_context pk;
@@ -56,7 +57,7 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
 
     uint8_t pers[256];
     qryptext_dev_urandom(pers, 128);
-    snprintf((char*)(pers + 128), 128, "qryptext_#!-$\\\"/.+@3#0%llu%s", qryptext_get_random_big_integer(), qryptext_new_guid(false, true).string);
+    snprintf((char*)(pers + 128), 128, "qryptext_#!-7$\\\"/.+@34..#0%llu%s", qryptext_get_random_big_integer(), qryptext_new_guid(false, true).string);
 
     uint8_t aes256key[32];
     memset(aes256key, 0x00, sizeof(aes256key));

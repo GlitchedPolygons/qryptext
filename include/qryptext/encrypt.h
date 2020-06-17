@@ -31,13 +31,6 @@ extern "C" {
 #include <stddef.h>
 #include "qryptext/types.h"
 
-#define QRYPTEXT_ENCRYPTION_ERROR_NULL_ARG 1000
-#define QRYPTEXT_ENCRYPTION_ERROR_INVALID_ARG 1001
-#define QRYPTEXT_ENCRYPTION_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE 1002
-#define QRYPTEXT_ENCRYPTION_ERROR_INVALID_KYBER_KEY_FORMAT 1003
-#define QRYPTEXT_ENCRYPTION_ERROR_INVALID_RSA_KEY_FORMAT 1004
-#define QRYPTEXT_ENCRYPTION_ERROR_OUT_OF_MEMORY 1005
-
 /**
  * Encrypts a given byte array of data using AES256-CBC, Kyber1024 and (optionally) RSA.
  * @param data The data to encrypt.
