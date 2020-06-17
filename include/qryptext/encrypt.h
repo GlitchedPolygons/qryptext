@@ -29,19 +29,21 @@ extern "C" {
 
 #include <stdint.h>
 #include <stddef.h>
+#include <stdbool.h>
 #include "qryptext/types.h"
 
 /**
  * Encrypts a given byte array of data using AES256-CBC, Kyber1024 and (optionally) RSA.
  * @param data The data to encrypt.
  * @param data_length Length of the data array.
- * @param output_buffer Where to write the encrypted ciphertext into. Make sure that this is allocated sufficiently big! If you're unsure about how much to allocate, you can use util.h's qryptext_calc_ciphertext_length() function.
- * @param output_buffer_size How big the output buffer is (use qryptext_calc_ciphertext_length() for allocation size guideline).
+ * @param output_buffer Where to write the encrypted ciphertext into. Make sure that this is allocated sufficiently big! If you're unsure about how much to allocate, you can use util.h's qryptext_calc_encryption_output_length() function.
+ * @param output_buffer_size How big the output buffer is (use qryptext_calc_encryption_output_length() for allocation size guideline).
  * @param output_length Where to write the number of bytes written to the output buffer into (will be left untouched in case of a failure).
+ * @param output_base64 Should the encrypted output bytes be base64-encoded for easy transmission over e.g. email? If you decide to base64-encode the encrypted data buffer, please be aware that a NUL-terminator is appended at the end to allow usage as a C-string but it will not be counted in \p output_length.
  * @param public_kyber1024_key The Kyber1024 public key with which to encrypt the AES key.
  * @return The status code: <c>0</c> if encryption succeeded, all other status codes can be found inside the various qryptext header files.
  */
-int qryptext_encrypt(const uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, qryptext_kyber1024_public_key public_kyber1024_key);
+int qryptext_encrypt(const uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, bool output_base64, qryptext_kyber1024_public_key public_kyber1024_key);
 
 #ifdef __cplusplus
 } // extern "C"

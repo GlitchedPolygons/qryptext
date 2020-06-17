@@ -57,13 +57,14 @@ extern "C" {
 /**
  * Calculates the final output size of a ciphertext that would result from the qryptext_encrypt() function (based on a given plaintext length).
  * @param plaintext_length The amount of bytes to encrypt.
+ * @param base64 Should the encryption output be base64 encoded as well? (If so, the output length will be slightly bigger).
  * @return The final output size of the ciphertext if you encrypt data that is plaintext_length bytes long with qryptext_encrypt().
  */
-static inline size_t qryptext_calc_ciphertext_length(const size_t plaintext_length)
+static inline size_t qryptext_calc_encryption_output_length(const size_t plaintext_length, const bool base64)
 {
     size_t r;
-    mbedtls_base64_encode(NULL, 0, &r, NULL, 16 + 32 + 16 + OQS_KEM_kyber_1024_length_ciphertext + plaintext_length);
-    return r;
+    const size_t raw = 16 + 32 + 16 + OQS_KEM_kyber_1024_length_ciphertext + plaintext_length;
+    return base64 ? mbedtls_base64_encode(NULL, 0, &r, NULL, raw) ? 0 : r : raw;
 }
 
 /**
@@ -159,6 +160,38 @@ void qryptext_disable_fprintf();
 
 /** @private */
 #define qryptext_fprintf _qryptext_fprintf_fptr
+
+static const unsigned char empty32[32] = {
+    //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+};
+
+static const unsigned char empty64[64] = {
+    //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+    0x00, 0x00, 0x00, 0x00, //
+};
 
 #ifdef __cplusplus
 } // extern "C"

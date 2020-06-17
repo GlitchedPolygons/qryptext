@@ -99,12 +99,12 @@ $(function() {
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structqryptext__kyber1024__secret__key.html">   35</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structqryptext__kyber1024__secret__key.html">qryptext_kyber1024_secret_key</a></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    uint8_t bytes[PQCLEAN_KYBER1024_CLEAN_CRYPTO_SECRETKEYBYTES];</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">char</span> hexstring[(PQCLEAN_KYBER1024_CLEAN_CRYPTO_SECRETKEYBYTES * 2) + 1];</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;} <a class="code" href="structqryptext__kyber1024__secret__key.html">qryptext_kyber1024_secret_key</a>;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structqryptext__kyber1024__public__key.html">   40</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structqryptext__kyber1024__public__key.html">qryptext_kyber1024_public_key</a></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    uint8_t bytes[PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES];</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">char</span> hexstring[(PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES * 2) + 1];</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;} <a class="code" href="structqryptext__kyber1024__public__key.html">qryptext_kyber1024_public_key</a>;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structqryptext__kyber1024__keypair.html">   45</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structqryptext__kyber1024__keypair.html">qryptext_kyber1024_keypair</a></div>
@@ -115,18 +115,18 @@ $(function() {
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="structqryptext__falcon1024__secret__key.html">   51</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structqryptext__falcon1024__secret__key.html">qryptext_falcon1024_secret_key</a></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    uint8_t bytes[PQCLEAN_FALCON1024_CLEAN_CRYPTO_SECRETKEYBYTES];</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">char</span> hexstring[(PQCLEAN_FALCON1024_CLEAN_CRYPTO_SECRETKEYBYTES * 2) + 1];</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;} <a class="code" href="structqryptext__falcon1024__secret__key.html">qryptext_falcon1024_secret_key</a>;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="structqryptext__falcon1024__public__key.html">   56</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structqryptext__falcon1024__public__key.html">qryptext_falcon1024_public_key</a></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    uint8_t bytes[PQCLEAN_FALCON1024_CLEAN_CRYPTO_PUBLICKEYBYTES];</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">char</span> hexstring[(PQCLEAN_FALCON1024_CLEAN_CRYPTO_PUBLICKEYBYTES * 2) + 1];</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;} <a class="code" href="structqryptext__falcon1024__public__key.html">qryptext_falcon1024_public_key</a>;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="structqryptext__falcon1024__keypair.html">   64</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structqryptext__falcon1024__keypair.html">qryptext_falcon1024_keypair</a></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="structqryptext__kyber1024__public__key.html">qryptext_kyber1024_public_key</a> public_key;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="structqryptext__kyber1024__secret__key.html">qryptext_kyber1024_secret_key</a> secret_key;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="structqryptext__falcon1024__public__key.html">qryptext_falcon1024_public_key</a> public_key;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="structqryptext__falcon1024__secret__key.html">qryptext_falcon1024_secret_key</a> secret_key;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;} <a class="code" href="types_8h.html#a66596ef461600958fb3c1dc9c8b4c1f0">qryptext_falcon1024_keypair</a>;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="structqryptext__guid.html">   74</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structqryptext__guid.html">qryptext_guid</a></div>

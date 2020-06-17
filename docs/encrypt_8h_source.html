@@ -94,19 +94,20 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">qryptext/types.h</a>&quot;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">int</span> <a class="code" href="encrypt_8h.html#ac26a48bf784e4e24a48681b268983c13">qryptext_encrypt</a>(<span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> data_length, uint8_t* output_buffer, <span class="keywordtype">size_t</span> output_buffer_size, <span class="keywordtype">size_t</span>* output_length, <a class="code" href="structqryptext__kyber1024__public__key.html">qryptext_kyber1024_public_key</a> public_kyber1024_key);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;} <span class="comment">// extern &quot;C&quot;</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif // QRYPTEXT_ENCRYPT_H</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">qryptext/types.h</a>&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">int</span> <a class="code" href="encrypt_8h.html#a600f4e8ad04dfa604e98fde2a1cb8f14">qryptext_encrypt</a>(<span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> data_length, uint8_t* output_buffer, <span class="keywordtype">size_t</span> output_buffer_size, <span class="keywordtype">size_t</span>* output_length, <span class="keywordtype">bool</span> output_base64, <a class="code" href="structqryptext__kyber1024__public__key.html">qryptext_kyber1024_public_key</a> public_kyber1024_key);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <span class="comment">// extern &quot;C&quot;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif // QRYPTEXT_ENCRYPT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div><div class="ttdoc">Types (structs) user in qryptext.</div></div>
-<div class="ttc" id="aencrypt_8h_html_ac26a48bf784e4e24a48681b268983c13"><div class="ttname"><a href="encrypt_8h.html#ac26a48bf784e4e24a48681b268983c13">qryptext_encrypt</a></div><div class="ttdeci">int qryptext_encrypt(const uint8_t *data, size_t data_length, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, qryptext_kyber1024_public_key public_kyber1024_key)</div></div>
 <div class="ttc" id="astructqryptext__kyber1024__public__key_html"><div class="ttname"><a href="structqryptext__kyber1024__public__key.html">qryptext_kyber1024_public_key</a></div><div class="ttdef"><b>Definition:</b> types.h:40</div></div>
+<div class="ttc" id="aencrypt_8h_html_a600f4e8ad04dfa604e98fde2a1cb8f14"><div class="ttname"><a href="encrypt_8h.html#a600f4e8ad04dfa604e98fde2a1cb8f14">qryptext_encrypt</a></div><div class="ttdeci">int qryptext_encrypt(const uint8_t *data, size_t data_length, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, bool output_base64, qryptext_kyber1024_public_key public_kyber1024_key)</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

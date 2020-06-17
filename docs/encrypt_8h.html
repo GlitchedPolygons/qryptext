@@ -76,15 +76,17 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="types_8h_source.html">qryptext/types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for encrypt.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="encrypt_8h__incl.png" border="0" usemap="#include_2qryptext_2encrypt_8h" alt=""/></div>
 <map name="include_2qryptext_2encrypt_8h" id="include_2qryptext_2encrypt_8h">
-<area shape="rect" title="Encrypt data using Kyber1024 KEM + AES256&#45;GCM." alt="" coords="32,5,204,32"/>
+<area shape="rect" title="Encrypt data using Kyber1024 KEM + AES256&#45;GCM." alt="" coords="80,5,252,32"/>
 <area shape="rect" title=" " alt="" coords="5,162,71,189"/>
 <area shape="rect" title=" " alt="" coords="95,162,163,189"/>
+<area shape="rect" title=" " alt="" coords="297,80,371,107"/>
 <area shape="rect" href="types_8h.html" title="Types (structs) user in qryptext." alt="" coords="156,80,272,107"/>
 <area shape="rect" title=" " alt="" coords="187,155,359,196"/>
 <area shape="rect" title=" " alt="" coords="383,155,523,196"/>
@@ -95,15 +97,15 @@ Include dependency graph for encrypt.h:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac26a48bf784e4e24a48681b268983c13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encrypt_8h.html#ac26a48bf784e4e24a48681b268983c13">qryptext_encrypt</a> (const uint8_t *data, size_t data_length, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, <a class="el" href="structqryptext__kyber1024__public__key.html">qryptext_kyber1024_public_key</a> public_kyber1024_key)</td></tr>
-<tr class="separator:ac26a48bf784e4e24a48681b268983c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a600f4e8ad04dfa604e98fde2a1cb8f14"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encrypt_8h.html#a600f4e8ad04dfa604e98fde2a1cb8f14">qryptext_encrypt</a> (const uint8_t *data, size_t data_length, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, bool output_base64, <a class="el" href="structqryptext__kyber1024__public__key.html">qryptext_kyber1024_public_key</a> public_kyber1024_key)</td></tr>
+<tr class="separator:a600f4e8ad04dfa604e98fde2a1cb8f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Encrypt data using Kyber1024 KEM + AES256-GCM. </p>
 <dl class="section author"><dt>Author</dt><dd>Raphael Beck </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ac26a48bf784e4e24a48681b268983c13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac26a48bf784e4e24a48681b268983c13">&#9670;&nbsp;</a></span>qryptext_encrypt()</h2>
+<a id="a600f4e8ad04dfa604e98fde2a1cb8f14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a600f4e8ad04dfa604e98fde2a1cb8f14">&#9670;&nbsp;</a></span>qryptext_encrypt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,6 +143,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>output_base64</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="structqryptext__kyber1024__public__key.html">qryptext_kyber1024_public_key</a>&#160;</td>
           <td class="paramname"><em>public_kyber1024_key</em>&#160;</td>
         </tr>
@@ -155,9 +163,10 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">data</td><td>The data to encrypt. </td></tr>
     <tr><td class="paramname">data_length</td><td>Length of the data array. </td></tr>
-    <tr><td class="paramname">output_buffer</td><td>Where to write the encrypted ciphertext into. Make sure that this is allocated sufficiently big! If you're unsure about how much to allocate, you can use <a class="el" href="util_8h.html" title="Useful utility functions for qryptext.">util.h</a>'s <a class="el" href="util_8h.html#afe1dd4687ee66fa9bfc66bc969eb33a2">qryptext_calc_ciphertext_length()</a> function. </td></tr>
-    <tr><td class="paramname">output_buffer_size</td><td>How big the output buffer is (use <a class="el" href="util_8h.html#afe1dd4687ee66fa9bfc66bc969eb33a2">qryptext_calc_ciphertext_length()</a> for allocation size guideline). </td></tr>
+    <tr><td class="paramname">output_buffer</td><td>Where to write the encrypted ciphertext into. Make sure that this is allocated sufficiently big! If you're unsure about how much to allocate, you can use <a class="el" href="util_8h.html" title="Useful utility functions for qryptext.">util.h</a>'s <a class="el" href="util_8h.html#a2d3906820ebb1244bb2c02b5345ce37f">qryptext_calc_encryption_output_length()</a> function. </td></tr>
+    <tr><td class="paramname">output_buffer_size</td><td>How big the output buffer is (use <a class="el" href="util_8h.html#a2d3906820ebb1244bb2c02b5345ce37f">qryptext_calc_encryption_output_length()</a> for allocation size guideline). </td></tr>
     <tr><td class="paramname">output_length</td><td>Where to write the number of bytes written to the output buffer into (will be left untouched in case of a failure). </td></tr>
+    <tr><td class="paramname">output_base64</td><td>Should the encrypted output bytes be base64-encoded for easy transmission over e.g. email? If you decide to base64-encode the encrypted data buffer, please be aware that a NUL-terminator is appended at the end to allow usage as a C-string but it will not be counted in <code>output_length</code>. </td></tr>
     <tr><td class="paramname">public_kyber1024_key</td><td>The Kyber1024 public key with which to encrypt the AES key. </td></tr>
   </table>
   </dd>
