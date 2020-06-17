@@ -32,20 +32,16 @@ extern "C" {
 /**
  * Generates a fresh Kyber-1024 keypair to use for the KEM functionalities.
  * @param output qryptext_kyber1024_keypair instance into which to write the keypair.
- * @param additional_entropy [OPTIONAL] Additional entropy bytes for the CSPRNG. Can be set to <c>NULL</c> if you wish not to add custom entropy.
- * @param additional_entropy_length [OPTIONAL] Length of the \p additional_entropy array. If \p additional_entropy is <c>NULL</c>, this value is ignored.
  * @return
  */
-int qryptext_kyber1024_generate_keypair(qryptext_kyber1024_keypair* output, uint8_t* additional_entropy, size_t additional_entropy_length);
+int qryptext_kyber1024_generate_keypair(qryptext_kyber1024_keypair* output);
 
 /**
  * Generates a fresh Falcon-1024 keypair to use for signing and verifying.
  * @param output qryptext_kyber1024_keypair instance into which to write the keypair.
- * @param additional_entropy [OPTIONAL] Additional entropy bytes for the CSPRNG. Can be set to <c>NULL</c> if you wish not to add custom entropy.
- * @param additional_entropy_length [OPTIONAL] Length of the \p additional_entropy array. If \p additional_entropy is <c>NULL</c>, this value is ignored.
  * @return
  */
-int qryptext_falcon1024_generate_keypair(qryptext_falcon1024_keypair* output, uint8_t* additional_entropy, size_t additional_entropy_length);
+int qryptext_falcon1024_generate_keypair(qryptext_falcon1024_keypair* output);
 
 #ifdef __cplusplus
 } // extern "C"

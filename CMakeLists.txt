@@ -101,6 +101,10 @@ target_include_directories(${PROJECT_NAME}
 
 get_target_property(${PROJECT_NAME}_DEPS_TARGETS ${PROJECT_NAME} LINK_LIBRARIES)
 
+if (QRYPTEXT_ENABLE_EXAMPLES)
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/examples examples)
+endif ()
+
 if (QRYPTEXT_ENABLE_TESTS)
 
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib/cmocka cmocka)

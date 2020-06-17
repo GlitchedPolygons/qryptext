@@ -15,25 +15,22 @@
 */
 
 #include <stdio.h>
-#include "qryptext/util.h"
+#include <stdint.h>
+#include <string.h>
+#include <qryptext/util.h>
+#include <qryptext/keygen.h>
 
-static bool _qryptext_fprintf_enabled = true;
-
-bool qryptext_is_fprintf_enabled()
+int main(void)
 {
-    return _qryptext_fprintf_enabled;
-}
+    qryptext_enable_fprintf(); // Allow fprintf in case errors occur and need to be fprintf'ed.
+    printf("\n---- QRYPTEXT ----\n-- Example 01 --\n\n");
 
-int (*_qryptext_fprintf_fptr)(FILE* stream, const char* format, ...) = &fprintf;
+    // Generate a fresh Kyber-1024 keypair (on the stack) with the following instructions:
+    qryptext_kyber1024_keypair kyber1024_keypair;
+    qryptext_kyber1024_generate_keypair(&kyber1024_keypair);
 
-void qryptext_enable_fprintf()
-{
-    _qryptext_fprintf_enabled = true;
-    _qryptext_fprintf_fptr = &fprintf;
-}
-
-void qryptext_disable_fprintf()
-{
-    _qryptext_fprintf_enabled = false;
-    _qryptext_fprintf_fptr = &qryptext_printvoid;
+    // Cleanup:
+    memset(&kyber1024_keypair, 0x00, sizeof(qryptext_kyber1024_keypair));
+    qryptext_disable_fprintf();
+    return 0;
 }

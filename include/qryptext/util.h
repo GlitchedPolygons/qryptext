@@ -101,6 +101,40 @@ static inline uint64_t qryptext_get_random_big_integer()
     return rand() * rand() * rand() * rand();
 }
 
+/**
+ * Checks whether qryptext's fprintf is enabled (whether errors are fprintfed into stderr).
+ * @return Whether errors are fprintfed into stderr or not.
+ */
+bool cecies_is_fprintf_enabled();
+
+/**
+ * Like fprintf() except it doesn't do anything. Like printing into <c>/dev/null</c> :D lots of fun!
+ * @param stream [IGNORED]
+ * @param format [IGNORED]
+ * @param ... [IGNORED]
+ * @return <c>0</c>
+ */
+static inline int qryptext_printvoid(FILE* stream, const char* format, ...)
+{
+    return 0;
+}
+
+/** @private */
+extern int (*_qryptext_fprintf_fptr)(FILE* stream, const char* format, ...);
+
+/**
+ * Enables qryptext's use of fprintf().
+ */
+void qryptext_enable_fprintf();
+
+/**
+ * Disables qryptext's use of fprintf().
+ */
+void qryptext_disable_fprintf();
+
+/** @private */
+#define qryptext_fprintf _qryptext_fprintf_fptr
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
