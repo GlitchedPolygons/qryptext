@@ -46,7 +46,8 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
         return QRYPTEXT_ERROR_INVALID_ARG;
     }
 
-    size_t total_output_length = qryptext_calc_encryption_output_length(data_length, output_base64);
+    size_t olen = qryptext_calc_encryption_output_length(data_length);
+    size_t total_output_length = output_base64 ? qryptext_calc_base64_length(olen) : olen;
 
     if (output_buffer_size < total_output_length)
     {

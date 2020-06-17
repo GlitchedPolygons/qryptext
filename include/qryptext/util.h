@@ -57,14 +57,22 @@ extern "C" {
 /**
  * Calculates the final output size of a ciphertext that would result from the qryptext_encrypt() function (based on a given plaintext length).
  * @param plaintext_length The amount of bytes to encrypt.
- * @param base64 Should the encryption output be base64 encoded as well? (If so, the output length will be slightly bigger).
  * @return The final output size of the ciphertext if you encrypt data that is plaintext_length bytes long with qryptext_encrypt().
  */
-static inline size_t qryptext_calc_encryption_output_length(const size_t plaintext_length, const bool base64)
+static inline size_t qryptext_calc_encryption_output_length(const size_t plaintext_length)
+{
+    return 16 + 32 + 16 + OQS_KEM_kyber_1024_length_ciphertext + plaintext_length;
+}
+
+/**
+ * Calculates the output length in bytes after base64-encoding \p data_length bytes (includes +1 for a NUL-terminator character)..
+ * @param data_length The number of bytes you'd base64-encode.
+ * @return How much memory you should allocate if you were to encode \p data_length bytes.
+ */
+static inline size_t qryptext_calc_base64_length(const size_t data_length)
 {
     size_t r;
-    const size_t raw = 16 + 32 + 16 + OQS_KEM_kyber_1024_length_ciphertext + plaintext_length;
-    return base64 ? mbedtls_base64_encode(NULL, 0, &r, NULL, raw) ? 0 : r : raw;
+    return mbedtls_base64_encode(NULL, 0, &r, NULL, data_length) ? ((4 * data_length / 3 + 3) & ~(unsigned)3) + 1 : r;
 }
 
 /**
