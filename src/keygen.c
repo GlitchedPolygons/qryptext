@@ -30,18 +30,29 @@ int qryptext_kyber1024_generate_keypair(qryptext_kyber1024_keypair* output)
         return QRYPTEXT_ERROR_NULL_ARG;
     }
 
-    qryptext_kyber1024_public_key public_key;
-    qryptext_kyber1024_secret_key secret_key;
+    uint8_t public_key[PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES];
+    uint8_t secret_key[PQCLEAN_KYBER1024_CLEAN_CRYPTO_SECRETKEYBYTES];
 
-    int ret = OQS_KEM_kyber_1024_keypair(public_key.bytes, secret_key.bytes);
+    int ret = OQS_KEM_kyber_1024_keypair(public_key, secret_key);
     if (ret != 0)
     {
-        qryptext_fprintf(stderr, "\nqryptext: Kyber1024 key generation failed. \"OQS_KEM_kyber_1024_keypair\" returned %d\n", ret);
+        qryptext_fprintf(stderr, "\nqryptext: Kyber-1024 key generation failed. \"OQS_KEM_kyber_1024_keypair\" returned %d\n", ret);
         return ret;
     }
 
-    memcpy(&output->public_key, &public_key, sizeof(qryptext_kyber1024_public_key));
-    memcpy(&output->secret_key, &secret_key, sizeof(qryptext_kyber1024_secret_key));
+    ret = qryptext_bin2hexstr(public_key, sizeof(public_key), output->public_key.hexstring, sizeof(output->public_key.hexstring), NULL, false);
+    if (ret != 0)
+    {
+        qryptext_fprintf(stderr, "\nqryptext: Kyber-1024 key generation failed while encoding public key to hex-string. \"qryptext_bin2hexstr\" returned %d\n", ret);
+        return ret;
+    }
+
+    ret = qryptext_bin2hexstr(secret_key, sizeof(secret_key), output->secret_key.hexstring, sizeof(output->secret_key.hexstring), NULL, false);
+    if (ret != 0)
+    {
+        qryptext_fprintf(stderr, "\nqryptext: Kyber-1024 key generation failed while encoding secret key to hex-string. \"qryptext_bin2hexstr\" returned %d\n", ret);
+        return ret;
+    }
 
     return 0;
 }
@@ -54,18 +65,29 @@ int qryptext_falcon1024_generate_keypair(qryptext_falcon1024_keypair* output)
         return QRYPTEXT_ERROR_NULL_ARG;
     }
 
-    qryptext_falcon1024_public_key public_key;
-    qryptext_falcon1024_secret_key secret_key;
+    uint8_t public_key[PQCLEAN_FALCON1024_CLEAN_CRYPTO_PUBLICKEYBYTES];
+    uint8_t secret_key[PQCLEAN_FALCON1024_CLEAN_CRYPTO_SECRETKEYBYTES];
 
-    int ret = OQS_SIG_falcon_1024_keypair(public_key.bytes, secret_key.bytes);
+    int ret = OQS_SIG_falcon_1024_keypair(public_key, secret_key);
     if (ret != 0)
     {
-        qryptext_fprintf(stderr, "\nqryptext: Falcon1024 key generation failed. \"OQS_SIG_falcon_1024_keypair\" returned %d\n", ret);
+        qryptext_fprintf(stderr, "\nqryptext: Falcon-1024 key generation failed. \"OQS_SIG_falcon_1024_keypair\" returned %d\n", ret);
         return ret;
     }
 
-    memcpy(&output->public_key, &public_key, sizeof(qryptext_falcon1024_public_key));
-    memcpy(&output->secret_key, &secret_key, sizeof(qryptext_falcon1024_secret_key));
+    ret = qryptext_bin2hexstr(public_key, sizeof(public_key), output->public_key.hexstring, sizeof(output->public_key.hexstring), NULL, false);
+    if (ret != 0)
+    {
+        qryptext_fprintf(stderr, "\nqryptext: Falcon-1024 key generation failed while encoding public key to hex-string. \"qryptext_bin2hexstr\" returned %d\n", ret);
+        return ret;
+    }
+
+    ret = qryptext_bin2hexstr(secret_key, sizeof(secret_key), output->secret_key.hexstring, sizeof(output->secret_key.hexstring), NULL, false);
+    if (ret != 0)
+    {
+        qryptext_fprintf(stderr, "\nqryptext: Falcon-1024 key generation failed while encoding secret key to hex-string. \"qryptext_bin2hexstr\" returned %d\n", ret);
+        return ret;
+    }
 
     return 0;
 }

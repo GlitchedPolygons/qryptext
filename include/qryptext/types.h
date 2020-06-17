@@ -34,12 +34,12 @@ extern "C" {
 
 typedef struct qryptext_kyber1024_secret_key
 {
-    uint8_t bytes[PQCLEAN_KYBER1024_CLEAN_CRYPTO_SECRETKEYBYTES];
+    char hexstring[(PQCLEAN_KYBER1024_CLEAN_CRYPTO_SECRETKEYBYTES * 2) + 1];
 } qryptext_kyber1024_secret_key;
 
 typedef struct qryptext_kyber1024_public_key
 {
-    uint8_t bytes[PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES];
+    char hexstring[(PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES * 2) + 1];
 } qryptext_kyber1024_public_key;
 
 typedef struct qryptext_kyber1024_keypair
@@ -50,12 +50,12 @@ typedef struct qryptext_kyber1024_keypair
 
 typedef struct qryptext_falcon1024_secret_key
 {
-    uint8_t bytes[PQCLEAN_FALCON1024_CLEAN_CRYPTO_SECRETKEYBYTES];
+    char hexstring[(PQCLEAN_FALCON1024_CLEAN_CRYPTO_SECRETKEYBYTES * 2) + 1];
 } qryptext_falcon1024_secret_key;
 
 typedef struct qryptext_falcon1024_public_key
 {
-    uint8_t bytes[PQCLEAN_FALCON1024_CLEAN_CRYPTO_PUBLICKEYBYTES];
+    char hexstring[(PQCLEAN_FALCON1024_CLEAN_CRYPTO_PUBLICKEYBYTES * 2) + 1];
 } qryptext_falcon1024_public_key;
 
 /**
@@ -63,8 +63,8 @@ typedef struct qryptext_falcon1024_public_key
  */
 typedef struct qryptext_falcon1024_keypair
 {
-    qryptext_kyber1024_public_key public_key;
-    qryptext_kyber1024_secret_key secret_key;
+    qryptext_falcon1024_public_key public_key;
+    qryptext_falcon1024_secret_key secret_key;
 } qryptext_falcon1024_keypair;
 
 /**

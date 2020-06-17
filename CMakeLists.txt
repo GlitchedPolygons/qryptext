@@ -93,10 +93,10 @@ target_include_directories(oqs
 
 target_include_directories(${PROJECT_NAME}
         PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include
-        PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/lib/oqs/include
-        PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/mbedtls/include
-        PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber
-        PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/sig/falcon
+        PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/lib/oqs/include
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/mbedtls/include
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/sig/falcon
         )
 
 get_target_property(${PROJECT_NAME}_DEPS_TARGETS ${PROJECT_NAME} LINK_LIBRARIES)

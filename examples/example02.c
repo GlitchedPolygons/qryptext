@@ -23,22 +23,22 @@
 int main(void)
 {
     qryptext_enable_fprintf(); // Allow fprintf in case errors occur and need to be fprintf'ed.
-    printf("\n---- QRYPTEXT ----\n--  Example 01  --\n\n");
+    printf("\n---- QRYPTEXT ----\n--  Example 02  --\n\n");
 
-    // Generate a fresh Kyber-1024 keypair (on the stack) with the following instructions:
-    qryptext_kyber1024_keypair kyber1024_keypair;
-    int r = qryptext_kyber1024_generate_keypair(&kyber1024_keypair);
+    // Generate a fresh Falcon-1024 keypair (on the stack) with the following instructions:
+    qryptext_falcon1024_keypair falcon1024_keypair;
+    int r = qryptext_falcon1024_generate_keypair(&falcon1024_keypair);
     if (r != 0)
     {
-        printf("Kyber-1024 example key-pair generation failed!  \"qryptext_kyber1024_generate_keypair\" returned %d\n", r);
+        printf("Falcon-1024 example key-pair generation failed!  \"qryptext_falcon1024_generate_keypair\" returned %d\n", r);
         return r;
     }
 
     // Print it out.
-    printf("Successfully generated Kyber-1024 key-pair!\n\nSecret key:\n\n%s\n\nPublic key:\n\n%s\n\n", kyber1024_keypair.secret_key.hexstring, kyber1024_keypair.public_key.hexstring);
+    printf("Successfully generated Falcon-1024 key-pair!\n\nSecret key:\n\n%s\n\nPublic key:\n\n%s\n\n", falcon1024_keypair.secret_key.hexstring, falcon1024_keypair.public_key.hexstring);
 
     // Cleanup:
-    memset(&kyber1024_keypair, 0x00, sizeof(qryptext_kyber1024_keypair));
+    memset(&falcon1024_keypair, 0x00, sizeof(qryptext_falcon1024_keypair));
     qryptext_disable_fprintf();
     return 0;
 }

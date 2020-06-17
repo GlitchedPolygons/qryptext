@@ -67,6 +67,31 @@ static inline size_t qryptext_calc_ciphertext_length(const size_t plaintext_leng
 }
 
 /**
+ * Converts a hex string to binary array. <p>
+ * A NUL-terminator is appended at the end of the output buffer, so make sure to allocate at least <c>(hexstr_length / 2) + 1</c> bytes!
+ * @param hexstr The hex string to convert.
+ * @param hexstr_length Length of the \p hexstr
+ * @param output Where to write the converted binary data into.
+ * @param output_size Size of the output buffer (make sure to allocate at least <c>(hexstr_length / 2) + 1</c> bytes!).
+ * @param output_length [OPTIONAL] Where to write the output array length into. This is always gonna be <c>hexstr_length / 2</c>, but you can still choose to write it out just to be sure. If you want to omit this: no problem.. just pass <c>NULL</c>!
+ * @return <c>0</c> if conversion succeeded. <c>1</c> if one or more required arguments were <c>NULL</c> or invalid. <c>2</c> if the hexadecimal string is in an invalid format (e.g. not divisible by 2). <c>3</c> if output buffer size was insufficient (needs to be at least <c>(hexstr_length / 2) + 1</c> bytes).
+ */
+int qryptext_hexstr2bin(const char* hexstr, size_t hexstr_length, uint8_t* output, size_t output_size, size_t* output_length);
+
+/**
+ * Converts a byte array to a hex string. <p>
+ * A NUL-terminator is appended at the end of the output buffer, so make sure to allocate at least <c>(bin_length * 2) + 1</c> bytes!
+ * @param bin The binary data to convert into hex string.
+ * @param bin_length Length of the \p bin array.
+ * @param output Where to write the hex string into.
+ * @param output_size Maximum capacity of the \p output buffer. Make sure to allocate at least <c>(bin_length * 2) + 1</c> bytes!
+ * @param output_length [OPTIONAL] Where to write the output string length into. This is always gonna be <c>bin_length * 2</c>, but you can still choose to write it out just to be sure. If you want to omit this: no problem.. just pass <c>NULL</c>!
+ * @param uppercase Should the \p output string characters be UPPER- or lowercase?
+ * @return <c>0</c> if conversion succeeded. <c>1</c> if one or more required arguments were <c>NULL</c> or invalid. <c>2</c> if the output buffer size is insufficient: please allocate at least <c>(bin_length * 2) + 1</c> bytes!
+ */
+int qryptext_bin2hexstr(const uint8_t* bin, size_t bin_length, char* output, size_t output_size, size_t* output_length, bool uppercase);
+
+/**
  * (Tries to) read from <c>/dev/urandom</c> (or Windows equivalent, yeah...) filling the given \p output_buffer with \p output_buffer_size random bytes.
  * @param output_buffer Where to write the random bytes into.
  * @param output_buffer_size How many random bytes to write into \p output_buffer
@@ -105,7 +130,7 @@ static inline uint64_t qryptext_get_random_big_integer()
  * Checks whether qryptext's fprintf is enabled (whether errors are fprintfed into stderr).
  * @return Whether errors are fprintfed into stderr or not.
  */
-bool cecies_is_fprintf_enabled();
+bool qryptext_is_fprintf_enabled();
 
 /**
  * Like fprintf() except it doesn't do anything. Like printing into <c>/dev/null</c> :D lots of fun!
