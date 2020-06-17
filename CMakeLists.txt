@@ -40,6 +40,7 @@ option(ENABLE_TESTING "Build MbedTLS tests." OFF)
 option(ENABLE_PROGRAMS "Build MbedTLS example programs." OFF)
 
 set(${PROJECT_NAME}_HEADERS
+        ${CMAKE_CURRENT_LIST_DIR}/lib/keccak-tiny/keccak-tiny.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/constants.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/types.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/guid.h
@@ -52,6 +53,7 @@ set(${PROJECT_NAME}_HEADERS
         )
 
 set(${PROJECT_NAME}_SOURCES
+        ${CMAKE_CURRENT_LIST_DIR}/lib/keccak-tiny/keccak-tiny.c
         ${CMAKE_CURRENT_LIST_DIR}/src/util.c
         ${CMAKE_CURRENT_LIST_DIR}/src/guid.c
         ${CMAKE_CURRENT_LIST_DIR}/src/keygen.c
@@ -93,6 +95,7 @@ target_include_directories(oqs
 
 target_include_directories(${PROJECT_NAME}
         PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include
+        PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/keccak-tiny
         PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/lib/oqs/include
         PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/mbedtls/include
         PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber

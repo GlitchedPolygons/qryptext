@@ -4,3 +4,6 @@
 [submodule "lib/mbedtls"]
 	path = lib/mbedtls
 	url = https://github.com/ARMmbed/mbedtls
+[submodule "lib/keccak-tiny"]
+	path = lib/keccak-tiny
+	url = https://github.com/coruus/keccak-tiny.git

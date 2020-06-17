@@ -20,4 +20,5 @@
 	OQS_SHA3_sha3_512_inc_absorb(&state, msg0, 0);
 	OQS_SHA3_sha3_512_inc_finalize(hash, &state)*/
 
+#include <keccak-tiny.h>
 #include "qryptext/sign.h"
