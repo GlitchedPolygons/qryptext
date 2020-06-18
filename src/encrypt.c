@@ -36,7 +36,7 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
 {
     int ret = 1;
 
-    if (data == NULL || output_buffer == NULL || output_length == NULL)
+    if (data == NULL || output_buffer == NULL)
     {
         return QRYPTEXT_ERROR_NULL_ARG;
     }
