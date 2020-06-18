@@ -41,7 +41,7 @@ option(ENABLE_PROGRAMS "Build MbedTLS example programs." OFF)
 
 set(${PROJECT_NAME}_TARGET_INCLUDE_DIRS
         PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include
-        PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/keccak-tiny
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/keccak-tiny
         PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/lib/oqs/include
         PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/mbedtls/include
         PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber
@@ -62,7 +62,7 @@ set(${PROJECT_NAME}_HEADERS
         )
 
 set(${PROJECT_NAME}_SOURCES
-        ${CMAKE_CURRENT_LIST_DIR}/lib/keccak-tiny/keccak-tiny.c
+        ${CMAKE_CURRENT_LIST_DIR}/lib/keccak-tiny/keccak-tiny-unrolled.c
         ${CMAKE_CURRENT_LIST_DIR}/src/util.c
         ${CMAKE_CURRENT_LIST_DIR}/src/guid.c
         ${CMAKE_CURRENT_LIST_DIR}/src/keygen.c

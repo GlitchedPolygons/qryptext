@@ -19,7 +19,7 @@
 #include <string.h>
 #include <qryptext/util.h>
 #include <qryptext/keygen.h>
-
+#include <keccak-tiny.h>
 int main(void)
 {
     qryptext_enable_fprintf(); // Allow fprintf in case errors occur and need to be fprintf'ed.
@@ -34,6 +34,10 @@ int main(void)
         return r;
     }
 
+    uint8_t hash[1024];
+    memset(hash, 0x00, sizeof hash);
+    sha3_512(hash, sizeof(hash), (uint8_t*)"Successfully generated Kyber-1024 key-pair!", 43);
+    printf("%s", hash);
     // Print it out.
     printf("Successfully generated Kyber-1024 key-pair!\n\nSecret key:\n\n%s\n\nPublic key:\n\n%s\n\n", kyber1024_keypair.secret_key.hexstring, kyber1024_keypair.public_key.hexstring);
 
