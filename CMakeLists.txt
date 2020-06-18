@@ -39,6 +39,15 @@ endif ()
 option(ENABLE_TESTING "Build MbedTLS tests." OFF)
 option(ENABLE_PROGRAMS "Build MbedTLS example programs." OFF)
 
+set(${PROJECT_NAME}_TARGET_INCLUDE_DIRS
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include
+        PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/keccak-tiny
+        PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/lib/oqs/include
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/mbedtls/include
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber
+        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/sig/falcon
+        )
+
 set(${PROJECT_NAME}_HEADERS
         ${CMAKE_CURRENT_LIST_DIR}/lib/keccak-tiny/keccak-tiny.h
         ${CMAKE_CURRENT_LIST_DIR}/include/qryptext/constants.h
@@ -87,20 +96,17 @@ if (UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT_NAME} PRIVATE -luuid -lm)
 endif ()
 
+if (WIN32)
+    target_link_libraries(${PROJECT_NAME} PRIVATE -lbcrypt)
+endif ()
+
 target_include_directories(oqs
         PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/lib/oqs/include
         PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber
         PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/sig/falcon
         )
 
-target_include_directories(${PROJECT_NAME}
-        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include
-        PRIVATE ${CMAKE_CURRENT_LIST_DIR}/lib/keccak-tiny
-        PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/lib/oqs/include
-        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/mbedtls/include
-        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/kem/kyber
-        PUBLIC ${CMAKE_CURRENT_LIST_DIR}/lib/oqs/src/sig/falcon
-        )
+target_include_directories(${PROJECT_NAME} ${${PROJECT_NAME}_TARGET_INCLUDE_DIRS})
 
 get_target_property(${PROJECT_NAME}_DEPS_TARGETS ${PROJECT_NAME} LINK_LIBRARIES)
 
@@ -110,7 +116,7 @@ endif ()
 
 if (QRYPTEXT_ENABLE_TESTS)
 
-    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib/cmocka cmocka)
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib/cmocka-1.1.5 cmocka)
 
     add_executable(run_tests
             ${CMAKE_CURRENT_LIST_DIR}/tests/tests.c
@@ -120,7 +126,7 @@ if (QRYPTEXT_ENABLE_TESTS)
 
     target_include_directories(run_tests
             PUBLIC ${cmocka_INCLUDE_DIR}
-            PUBLIC ${${PROJECT_NAME}_INCLUDE_DIR}
+            ${${PROJECT_NAME}_TARGET_INCLUDE_DIRS}
             )
 
     target_link_libraries(run_tests
