@@ -80,5 +80,18 @@ int qryptext_decrypt(uint8_t* encrypted_data, const size_t encrypted_data_length
 
     uint8_t pers[256];
     qryptext_dev_urandom(pers, 128);
-    snprintf((char*)(pers + 128), 128, "qryptext_2**\"^£¨]#(.F?= _.@//*73,9-%llu%s", qryptext_get_random_big_integer(), qryptext_new_guid(false, true).string);
+    snprintf((char*)(pers + 128), 128, "qryptext_2**\"^£¨]8\\#(.F?= _.@//*73,9-%s%llu", qryptext_new_guid(false, true).string, qryptext_get_random_big_integer());
+
+exit:
+    memset(iv, 0x00, 16);
+    memset(tag, 0x00, 16);
+    memset(salt, 0x00, 32);
+    memset(aes_key, 0x00, 32);
+
+    if (encrypted_data_base64)
+    {
+        free(input);
+    }
+
+    return (ret);
 }

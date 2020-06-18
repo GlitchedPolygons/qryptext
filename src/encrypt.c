@@ -16,7 +16,6 @@
 
 #include <string.h>
 
-#include <mbedtls/pk.h>
 #include <mbedtls/aes.h>
 #include <mbedtls/gcm.h>
 #include <mbedtls/hkdf.h>
@@ -54,41 +53,33 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
         return QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE;
     }
 
-    mbedtls_pk_context pk;
-    mbedtls_entropy_context entropy;
-    mbedtls_ctr_drbg_context ctr_drbg;
     mbedtls_gcm_context aes_ctx;
     mbedtls_md_context_t md_ctx;
+    mbedtls_entropy_context entropy;
+    mbedtls_ctr_drbg_context ctr_drbg;
 
     uint8_t pers[256];
     qryptext_dev_urandom(pers, 128);
     snprintf((char*)(pers + 128), 128, "qryptext_#!-;7$\\\"/.+@3+¨49'..#!0%llu%s", qryptext_get_random_big_integer(), qryptext_new_guid(false, true).string);
 
-    uint8_t aes256key[32];
-    memset(aes256key, 0x00, sizeof(aes256key));
-
     uint8_t iv[16];
-    memset(iv, 0x00, sizeof(iv));
-
     uint8_t salt[32];
-    memset(salt, 0x00, sizeof(salt));
-
+    uint8_t aes_key[32];
     uint8_t ciphertext[PQCLEAN_KYBER1024_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-    memset(ciphertext, 0x00, sizeof(ciphertext));
-
     uint8_t public_key[PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES + 1];
-    memset(public_key, 0x00, sizeof(public_key));
-
     uint8_t shared_secret[PQCLEAN_KYBER1024_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+
+    memset(iv, 0x00, sizeof(iv));
+    memset(salt, 0x00, sizeof(salt));
+    memset(aes_key, 0x00, sizeof(aes_key));
+    memset(ciphertext, 0x00, sizeof(ciphertext));
+    memset(public_key, 0x00, sizeof(public_key));
     memset(shared_secret, 0x00, sizeof(shared_secret));
 
-    mbedtls_pk_init(&pk);
-    mbedtls_entropy_init(&entropy);
-    mbedtls_ctr_drbg_init(&ctr_drbg);
     mbedtls_gcm_init(&aes_ctx);
     mbedtls_md_init(&md_ctx);
-
-    const size_t ciphertext_length = sizeof(ciphertext);
+    mbedtls_entropy_init(&entropy);
+    mbedtls_ctr_drbg_init(&ctr_drbg);
 
     ret = mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy, pers, QRYPTEXT_MIN(sizeof(pers), (MBEDTLS_CTR_DRBG_MAX_SEED_INPUT - MBEDTLS_CTR_DRBG_ENTROPY_LEN - 1)));
     if (ret != 0)
@@ -132,20 +123,21 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
         goto exit;
     }
 
-    ret = mbedtls_hkdf(mbedtls_md_info_from_type(MBEDTLS_MD_SHA512), salt, 32, shared_secret, sizeof(shared_secret), NULL, 0, aes256key, 32);
-    if (ret != 0 || memcmp(aes256key, empty32, 32) == 0)
+    ret = mbedtls_hkdf(mbedtls_md_info_from_type(MBEDTLS_MD_SHA512), salt, 32, shared_secret, sizeof(shared_secret), NULL, 0, aes_key, 32);
+    if (ret != 0 || memcmp(aes_key, empty32, 32) == 0)
     {
         qryptext_fprintf(stderr, "qryptext: HKDF failed! mbedtls_hkdf returned %d\n", ret);
         goto exit;
     }
 
-    ret = mbedtls_gcm_setkey(&aes_ctx, MBEDTLS_CIPHER_ID_AES, aes256key, 256);
+    ret = mbedtls_gcm_setkey(&aes_ctx, MBEDTLS_CIPHER_ID_AES, aes_key, 256);
     if (ret != 0)
     {
         qryptext_fprintf(stderr, "qryptext: AES key setup failed! mbedtls_gcm_setkey returned %d\n", ret);
         goto exit;
     }
 
+    const size_t ciphertext_length = sizeof(ciphertext);
     uint8_t* o = output_buffer;
 
     memcpy(o, iv, 16);
@@ -194,13 +186,14 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
     }
 
 exit:
-    mbedtls_md_free(&md_ctx);
     mbedtls_gcm_free(&aes_ctx);
-    mbedtls_ctr_drbg_free(&ctr_drbg);
+    mbedtls_md_free(&md_ctx);
     mbedtls_entropy_free(&entropy);
-    mbedtls_pk_free(&pk);
+    mbedtls_ctr_drbg_free(&ctr_drbg);
 
-    memset(aes256key, 0x00, sizeof(aes256key));
+    memset(iv, 0x00, sizeof(iv));
+    memset(salt, 0x00, sizeof(salt));
+    memset(aes_key, 0x00, sizeof(aes_key));
     memset(ciphertext, 0x00, sizeof(ciphertext));
     memset(public_key, 0x00, sizeof(public_key));
     memset(shared_secret, 0x00, sizeof(shared_secret));
