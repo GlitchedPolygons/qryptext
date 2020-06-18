@@ -65,9 +65,9 @@ int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* out
     uint8_t iv[16];
     uint8_t salt[32];
     uint8_t aes_key[32];
-    uint8_t ciphertext[PQCLEAN_KYBER1024_CLEAN_CRYPTO_CIPHERTEXTBYTES];
-    uint8_t public_key[PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES + 1];
-    uint8_t shared_secret[PQCLEAN_KYBER1024_CLEAN_CRYPTO_CIPHERTEXTBYTES];
+    uint8_t ciphertext[OQS_KEM_kyber_1024_length_ciphertext];
+    uint8_t public_key[OQS_KEM_kyber_1024_length_public_key + 1];
+    uint8_t shared_secret[OQS_KEM_kyber_1024_length_shared_secret];
 
     memset(iv, 0x00, sizeof(iv));
     memset(salt, 0x00, sizeof(salt));

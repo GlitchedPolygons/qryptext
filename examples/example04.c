@@ -22,10 +22,10 @@
 #include <qryptext/encrypt.h>
 #include <qryptext/decrypt.h>
 
-static const char TEST_STRING[] = "Rise and shine, Mr. Freeman. Rise and shine. Not that I wish to imply you have been sleeping on the job. No one is more deserving of a rest. "
-                                  "And all the effort in the world would have gone to waste until... well, let's just say your hour has come again. "
-                                  "The right man in the wrong place can make all the difference in the world."
-                                  "So, wake up, Mr. Freeman. Wake up and smell the ashes!";
+static const char TEST_STRING[] = "You've done so well, in fact, that I've received some interesting offers for your services. "
+                                  "Ordinarily, I wouldn't contemplate them. But these are extraordinary times. "
+                                  "Rather than offer you the illusion of free choice, I will take the liberty of choosing for you... if and when your time comes around again. "
+                                  "I do apologize for what must seem to you an arbitrary imposition, Dr. Freeman. I trust it will all make sense to you in the course of... well...  I'm really not at liberty to say...";
 
 static const qryptext_kyber1024_secret_key TEST_SECRET_KEY = { .hexstring = "3361b3a5658da0a94cc510ab4834caec892a215a937febbbbf202b3c67187d1bbd38409851e6117a94c9cd65bff5aac0d32233897cb15b16c8808b04"
                                                                             "779bbc0d06424dbc2ab5a7c794c17bd4145b4c707ae2a53757da055800572ba0404d48ba6f2856bd8a1afcbc85fe6b23a8e301f6d98e02476fff9b61"
@@ -114,27 +114,21 @@ int main(void)
     qryptext_enable_fprintf(); // Allow fprintf in case errors occur and need to be fprintf'ed.
 
     int r = -1;
-    uint8_t* encrypted_string = NULL;
-    uint8_t* decrypted_string = NULL;
+
+    uint8_t encrypted_string[8192];
+    uint8_t decrypted_string[8192];
     size_t encrypted_string_length;
     size_t decrypted_string_length;
+
     const size_t TEST_STRING_LENGTH = sizeof(TEST_STRING); // Could also use strlen(TEST_STRING) + 1, but NEVER FORGET THE NUL-terminator char!
 
-    printf("\n---- QRYPTEXT ----\n--  Example 03  --\n\n");
+    printf("\n---- QRYPTEXT ----\n--  Example 04  --\n\n");
     printf("Encrypting the following string:\n\n%s\n\n", TEST_STRING);
 
-    // Here's how to encrypt a text message using qryptext's encrypt function.
+    // Here's how to encrypt a text message (allocating the input and output buffers on the stack) using qryptext's encrypt function.
 
-    encrypted_string_length = qryptext_calc_base64_length(qryptext_calc_encryption_output_length(TEST_STRING_LENGTH));
-    encrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
-    if (encrypted_string == NULL)
-    {
-        printf("ERROR: Encryption failed! Out of memory...");
-        goto exit;
-    }
-
-    // You can pass NULL to the output_length pointer argument, since you already calculated the size above.
-    r = qryptext_encrypt((uint8_t*)TEST_STRING, TEST_STRING_LENGTH, encrypted_string, encrypted_string_length, NULL, true, TEST_PUBLIC_KEY);
+    // When using stack-allocated buffers, don't forget to assign the output_length pointer to know how many bytes were written into the output_buffer.
+    r = qryptext_encrypt((uint8_t*)TEST_STRING, TEST_STRING_LENGTH, encrypted_string, sizeof(encrypted_string), &encrypted_string_length, true, TEST_PUBLIC_KEY);
 
     printf("Status code: %d\n\n", r);
 
@@ -146,15 +140,7 @@ int main(void)
 
     printf("Encrypted string >>> base64:\n\n%s\n\n", encrypted_string);
 
-    // When unsure, allocate the same amount as the input encrypted data buffer. That's guaranteed to work.
-    decrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
-    if (decrypted_string == NULL)
-    {
-        printf("ERROR: Decryption failed! Out of memory...");
-        goto exit;
-    }
-
-    r = qryptext_decrypt(encrypted_string, encrypted_string_length, true, decrypted_string, encrypted_string_length, &decrypted_string_length, TEST_SECRET_KEY);
+    r = qryptext_decrypt(encrypted_string, encrypted_string_length, true, decrypted_string, sizeof(decrypted_string), &decrypted_string_length, TEST_SECRET_KEY);
 
     printf("Status code: %d\n\n", r);
 
@@ -168,8 +154,6 @@ int main(void)
 
 exit:
     // Cleanup:
-    free(encrypted_string);
-    free(decrypted_string);
     qryptext_disable_fprintf();
     return r;
 }
