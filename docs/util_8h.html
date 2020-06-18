@@ -115,8 +115,10 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2d3906820ebb1244bb2c02b5345ce37f"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a2d3906820ebb1244bb2c02b5345ce37f">qryptext_calc_encryption_output_length</a> (const size_t plaintext_length, const bool base64)</td></tr>
-<tr class="separator:a2d3906820ebb1244bb2c02b5345ce37f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6802926d7156c4c1ae00deb4381a7a24"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a6802926d7156c4c1ae00deb4381a7a24">qryptext_calc_encryption_output_length</a> (const size_t plaintext_length)</td></tr>
+<tr class="separator:a6802926d7156c4c1ae00deb4381a7a24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83cbcb1ebb6b01d7986b4f3cbaf5a4e2"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a83cbcb1ebb6b01d7986b4f3cbaf5a4e2">qryptext_calc_base64_length</a> (const size_t data_length)</td></tr>
+<tr class="separator:a83cbcb1ebb6b01d7986b4f3cbaf5a4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e8d36073dcf0ea969b3b915b8c53c82"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a6e8d36073dcf0ea969b3b915b8c53c82">qryptext_hexstr2bin</a> (const char *hexstr, size_t hexstr_length, uint8_t *output, size_t output_size, size_t *output_length)</td></tr>
 <tr class="separator:a6e8d36073dcf0ea969b3b915b8c53c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37e1b66ce5aa217add31de5e4f1503c2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a37e1b66ce5aa217add31de5e4f1503c2">qryptext_bin2hexstr</a> (const uint8_t *bin, size_t bin_length, char *output, size_t output_size, size_t *output_length, bool uppercase)</td></tr>
@@ -269,8 +271,41 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a2d3906820ebb1244bb2c02b5345ce37f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d3906820ebb1244bb2c02b5345ce37f">&#9670;&nbsp;</a></span>qryptext_calc_encryption_output_length()</h2>
+<a id="a83cbcb1ebb6b01d7986b4f3cbaf5a4e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83cbcb1ebb6b01d7986b4f3cbaf5a4e2">&#9670;&nbsp;</a></span>qryptext_calc_base64_length()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static size_t qryptext_calc_base64_length </td>
+          <td>(</td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>data_length</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Calculates the output length in bytes after base64-encoding <code>data_length</code> bytes (includes +1 for a NUL-terminator character).. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data_length</td><td>The number of bytes you'd base64-encode. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>How much memory you should allocate if you were to encode <code>data_length</code> bytes. </dd></dl>
+
+</div>
+</div>
+<a id="a6802926d7156c4c1ae00deb4381a7a24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6802926d7156c4c1ae00deb4381a7a24">&#9670;&nbsp;</a></span>qryptext_calc_encryption_output_length()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -282,18 +317,8 @@ Variables</h2></td></tr>
           <td class="memname">static size_t qryptext_calc_encryption_output_length </td>
           <td>(</td>
           <td class="paramtype">const size_t&#160;</td>
-          <td class="paramname"><em>plaintext_length</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>plaintext_length</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>base64</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -305,7 +330,6 @@ Variables</h2></td></tr>
 <p>Calculates the final output size of a ciphertext that would result from the <a class="el" href="encrypt_8h.html#a600f4e8ad04dfa604e98fde2a1cb8f14">qryptext_encrypt()</a> function (based on a given plaintext length). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">plaintext_length</td><td>The amount of bytes to encrypt. </td></tr>
-    <tr><td class="paramname">base64</td><td>Should the encryption output be base64 encoded as well? (If so, the output length will be slightly bigger). </td></tr>
   </table>
   </dd>
 </dl>

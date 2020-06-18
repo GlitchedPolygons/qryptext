@@ -31,24 +31,18 @@ extern "C" {
 #include <stddef.h>
 #include "qryptext/types.h"
 
-#define QRYPTEXT_DECRYPTION_ERROR_NULL_ARG 2000
-#define QRYPTEXT_DECRYPTION_ERROR_INVALID_ARG 2001
-#define QRYPTEXT_DECRYPTION_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE 2002
-#define QRYPTEXT_DECRYPTION_ERROR_INVALID_KYBER_KEY_FORMAT 2003
-#define QRYPTEXT_DECRYPTION_ERROR_INVALID_RSA_KEY_FORMAT 2004
-#define QRYPTEXT_DECRYPTION_ERROR_OUT_OF_MEMORY 2005
-
 /**
  * Decrypts a given byte array of data that was encrypted using qryptext_encrypt().
  * @param encrypted_data The data to decrypt.
  * @param encrypted_data_length Length of the data array.
+ * @param encrypted_data_base64 Is the encrypted data a base64-encoded string?
  * @param output_buffer Where to write the decrypted data into (make sure that this is allocated sufficiently big!).
  * @param output_buffer_size How big the output buffer is (usually, when unsure, allocate the same size as the encrypted data length; that's guaranteed to be sufficiently big).
  * @param output_length Where to write the number of bytes written to the output buffer into (will be left untouched in case of a failure).
- * @param private_kyber1024_key The Kyber1024 private key with which to decrypt the AES key.
+ * @param secret_kyber1024_key The Kyber1024 private key with which to decrypt the AES key.
  * @return The status code: <c>0</c> for success, all other status codes can be found inside the various qryptext header files.
  */
-int qryptext_decrypt(uint8_t* encrypted_data, size_t encrypted_data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, qryptext_kyber1024_secret_key secret_kyber1024_key);
+int qryptext_decrypt(uint8_t* encrypted_data, size_t encrypted_data_length, bool encrypted_data_base64, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, qryptext_kyber1024_secret_key secret_kyber1024_key);
 
 #ifdef __cplusplus
 } // extern "C"

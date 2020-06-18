@@ -66,7 +66,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">decrypt.h File Reference</div>  </div>
@@ -94,38 +93,17 @@ Include dependency graph for decrypt.h:</div>
 </div>
 <p><a href="decrypt_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a89773788ee84ed57a7c72f0ffd0ed341"><td class="memItemLeft" align="right" valign="top"><a id="a89773788ee84ed57a7c72f0ffd0ed341"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QRYPTEXT_DECRYPTION_ERROR_NULL_ARG</b>&#160;&#160;&#160;2000</td></tr>
-<tr class="separator:a89773788ee84ed57a7c72f0ffd0ed341"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97e1702765674e72e7b0f9d1be0e8976"><td class="memItemLeft" align="right" valign="top"><a id="a97e1702765674e72e7b0f9d1be0e8976"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QRYPTEXT_DECRYPTION_ERROR_INVALID_ARG</b>&#160;&#160;&#160;2001</td></tr>
-<tr class="separator:a97e1702765674e72e7b0f9d1be0e8976"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9db412917b6c6098a63f6a01ff03d06d"><td class="memItemLeft" align="right" valign="top"><a id="a9db412917b6c6098a63f6a01ff03d06d"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QRYPTEXT_DECRYPTION_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE</b>&#160;&#160;&#160;2002</td></tr>
-<tr class="separator:a9db412917b6c6098a63f6a01ff03d06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61f0adb1310e479ec62b86db9973596e"><td class="memItemLeft" align="right" valign="top"><a id="a61f0adb1310e479ec62b86db9973596e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QRYPTEXT_DECRYPTION_ERROR_INVALID_KYBER_KEY_FORMAT</b>&#160;&#160;&#160;2003</td></tr>
-<tr class="separator:a61f0adb1310e479ec62b86db9973596e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a16fcddf00bdf15069cb13d99eeb0fa"><td class="memItemLeft" align="right" valign="top"><a id="a6a16fcddf00bdf15069cb13d99eeb0fa"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QRYPTEXT_DECRYPTION_ERROR_INVALID_RSA_KEY_FORMAT</b>&#160;&#160;&#160;2004</td></tr>
-<tr class="separator:a6a16fcddf00bdf15069cb13d99eeb0fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebcc63c090894f7ab0ca43e36502e691"><td class="memItemLeft" align="right" valign="top"><a id="aebcc63c090894f7ab0ca43e36502e691"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>QRYPTEXT_DECRYPTION_ERROR_OUT_OF_MEMORY</b>&#160;&#160;&#160;2005</td></tr>
-<tr class="separator:aebcc63c090894f7ab0ca43e36502e691"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af85f08c0459ab328a68a55a633ef2b8b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decrypt_8h.html#af85f08c0459ab328a68a55a633ef2b8b">qryptext_decrypt</a> (uint8_t *encrypted_data, size_t encrypted_data_length, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, <a class="el" href="structqryptext__kyber1024__secret__key.html">qryptext_kyber1024_secret_key</a> secret_kyber1024_key)</td></tr>
-<tr class="separator:af85f08c0459ab328a68a55a633ef2b8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f11dba4bbc05f721ec6cb1d4a3cfe05"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decrypt_8h.html#a6f11dba4bbc05f721ec6cb1d4a3cfe05">qryptext_decrypt</a> (uint8_t *encrypted_data, size_t encrypted_data_length, bool encrypted_data_base64, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, <a class="el" href="structqryptext__kyber1024__secret__key.html">qryptext_kyber1024_secret_key</a> secret_kyber1024_key)</td></tr>
+<tr class="separator:a6f11dba4bbc05f721ec6cb1d4a3cfe05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Decrypt data that was encrypted using <a class="el" href="encrypt_8h.html#a600f4e8ad04dfa604e98fde2a1cb8f14">qryptext_encrypt()</a> (Kyber1024 KEM + AES256-GCM). </p>
 <dl class="section author"><dt>Author</dt><dd>Raphael Beck </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="af85f08c0459ab328a68a55a633ef2b8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af85f08c0459ab328a68a55a633ef2b8b">&#9670;&nbsp;</a></span>qryptext_decrypt()</h2>
+<a id="a6f11dba4bbc05f721ec6cb1d4a3cfe05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f11dba4bbc05f721ec6cb1d4a3cfe05">&#9670;&nbsp;</a></span>qryptext_decrypt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,6 +119,12 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>encrypted_data_length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>encrypted_data_base64</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -177,10 +161,11 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">encrypted_data</td><td>The data to decrypt. </td></tr>
     <tr><td class="paramname">encrypted_data_length</td><td>Length of the data array. </td></tr>
+    <tr><td class="paramname">encrypted_data_base64</td><td>Is the encrypted data a base64-encoded string? </td></tr>
     <tr><td class="paramname">output_buffer</td><td>Where to write the decrypted data into (make sure that this is allocated sufficiently big!). </td></tr>
     <tr><td class="paramname">output_buffer_size</td><td>How big the output buffer is (usually, when unsure, allocate the same size as the encrypted data length; that's guaranteed to be sufficiently big). </td></tr>
     <tr><td class="paramname">output_length</td><td>Where to write the number of bytes written to the output buffer into (will be left untouched in case of a failure). </td></tr>
-    <tr><td class="paramname">private_kyber1024_key</td><td>The Kyber1024 private key with which to decrypt the AES key. </td></tr>
+    <tr><td class="paramname">secret_kyber1024_key</td><td>The Kyber1024 private key with which to decrypt the AES key. </td></tr>
   </table>
   </dd>
 </dl>

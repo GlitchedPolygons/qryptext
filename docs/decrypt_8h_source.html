@@ -96,23 +96,16 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">qryptext/types.h</a>&quot;</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#define QRYPTEXT_DECRYPTION_ERROR_NULL_ARG 2000</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#define QRYPTEXT_DECRYPTION_ERROR_INVALID_ARG 2001</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#define QRYPTEXT_DECRYPTION_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE 2002</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#define QRYPTEXT_DECRYPTION_ERROR_INVALID_KYBER_KEY_FORMAT 2003</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#define QRYPTEXT_DECRYPTION_ERROR_INVALID_RSA_KEY_FORMAT 2004</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#define QRYPTEXT_DECRYPTION_ERROR_OUT_OF_MEMORY 2005</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">int</span> <a class="code" href="decrypt_8h.html#af85f08c0459ab328a68a55a633ef2b8b">qryptext_decrypt</a>(uint8_t* encrypted_data, <span class="keywordtype">size_t</span> encrypted_data_length, uint8_t* output_buffer, <span class="keywordtype">size_t</span> output_buffer_size, <span class="keywordtype">size_t</span>* output_length, <a class="code" href="structqryptext__kyber1024__secret__key.html">qryptext_kyber1024_secret_key</a> secret_kyber1024_key);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;} <span class="comment">// extern &quot;C&quot;</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif // QRYPTEXT_DECRYPT_H</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">int</span> <a class="code" href="decrypt_8h.html#a6f11dba4bbc05f721ec6cb1d4a3cfe05">qryptext_decrypt</a>(uint8_t* encrypted_data, <span class="keywordtype">size_t</span> encrypted_data_length, <span class="keywordtype">bool</span> encrypted_data_base64, uint8_t* output_buffer, <span class="keywordtype">size_t</span> output_buffer_size, <span class="keywordtype">size_t</span>* output_length, <a class="code" href="structqryptext__kyber1024__secret__key.html">qryptext_kyber1024_secret_key</a> secret_kyber1024_key);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;} <span class="comment">// extern &quot;C&quot;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif // QRYPTEXT_DECRYPT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div><div class="ttdoc">Types (structs) user in qryptext.</div></div>
-<div class="ttc" id="adecrypt_8h_html_af85f08c0459ab328a68a55a633ef2b8b"><div class="ttname"><a href="decrypt_8h.html#af85f08c0459ab328a68a55a633ef2b8b">qryptext_decrypt</a></div><div class="ttdeci">int qryptext_decrypt(uint8_t *encrypted_data, size_t encrypted_data_length, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, qryptext_kyber1024_secret_key secret_kyber1024_key)</div></div>
+<div class="ttc" id="adecrypt_8h_html_a6f11dba4bbc05f721ec6cb1d4a3cfe05"><div class="ttname"><a href="decrypt_8h.html#a6f11dba4bbc05f721ec6cb1d4a3cfe05">qryptext_decrypt</a></div><div class="ttdeci">int qryptext_decrypt(uint8_t *encrypted_data, size_t encrypted_data_length, bool encrypted_data_base64, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, qryptext_kyber1024_secret_key secret_kyber1024_key)</div></div>
 <div class="ttc" id="astructqryptext__kyber1024__secret__key_html"><div class="ttname"><a href="structqryptext__kyber1024__secret__key.html">qryptext_kyber1024_secret_key</a></div><div class="ttdef"><b>Definition:</b> types.h:35</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
