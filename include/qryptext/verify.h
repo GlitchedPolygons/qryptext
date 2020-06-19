@@ -42,7 +42,7 @@ extern "C" {
  * @param public_falcon1024_key The public Falcon-1024 key with which to verify the signature.
  * @return <c>0</c> if the signature is valid and could be verified successfully; anything else if something failed (according to the return codes defined inside constants.h or directly by the involved OQS function).
  */
-int qryptext_verify(uint8_t* data, size_t data_length, uint8_t* signature, size_t signature_length, bool signature_base64, qryptext_falcon1024_public_key public_falcon1024_key);
+int qryptext_verify(const uint8_t* data, size_t data_length, const uint8_t* signature, size_t signature_length, bool signature_base64, qryptext_falcon1024_public_key public_falcon1024_key);
 
 #ifdef __cplusplus
 } // extern "C"

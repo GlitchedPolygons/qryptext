@@ -43,7 +43,7 @@ extern "C" {
  * @param secret_falcon1024_key The Falcon-1024 secret key to use for signing.
  * @return <c>0</c> on success; error codes as defined in constants.h otherwise.
  */
-int qryptext_sign(uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, bool output_base64, qryptext_falcon1024_secret_key secret_falcon1024_key);
+int qryptext_sign(const uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, bool output_base64, qryptext_falcon1024_secret_key secret_falcon1024_key);
 
 #ifdef __cplusplus
 } // extern "C"
