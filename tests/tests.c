@@ -21,6 +21,12 @@
 #include <stdbool.h>
 #include <setjmp.h>
 #include <cmocka.h>
+#include "qryptext/util.h"
+#include "qryptext/sign.h"
+#include "qryptext/verify.h"
+#include "qryptext/encrypt.h"
+#include "qryptext/decrypt.h"
+#include "qryptext/constants.h"
 
 /* A test case that does nothing and succeeds. */
 static void null_test_success(void** state)
