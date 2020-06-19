@@ -25,6 +25,6 @@ var searchData=
   ['qryptext_5fmin_27',['QRYPTEXT_MIN',['../util_8h.html#a94d5f0cbbf4a5feac2b47b9bb0152639',1,'util.h']]],
   ['qryptext_5fnew_5fguid_28',['qryptext_new_guid',['../guid_8h.html#a254720d6baf86d12a40427c8cf66b5c1',1,'guid.h']]],
   ['qryptext_5fprintvoid_29',['qryptext_printvoid',['../util_8h.html#ae17716366f3403278b83e6179519da8b',1,'util.h']]],
-  ['qryptext_5fsign_30',['qryptext_sign',['../sign_8h.html#abdfc307937cb7b7948edd9930f89bb0b',1,'sign.h']]],
-  ['qryptext_5fverify_31',['qryptext_verify',['../verify_8h.html#aeca5aaf8803a1d9a97916ed5ba1f4753',1,'verify.h']]]
+  ['qryptext_5fsign_30',['qryptext_sign',['../sign_8h.html#a10cda0eb198ffb0adfa730948885372b',1,'sign.h']]],
+  ['qryptext_5fverify_31',['qryptext_verify',['../verify_8h.html#a6f1ca2161acaec2b41034ff83047f282',1,'verify.h']]]
 ];

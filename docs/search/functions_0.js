@@ -16,6 +16,6 @@ var searchData=
   ['qryptext_5fkyber1024_5fgenerate_5fkeypair_66',['qryptext_kyber1024_generate_keypair',['../keygen_8h.html#a475218c2e86661f678708ea67b305d52',1,'keygen.h']]],
   ['qryptext_5fnew_5fguid_67',['qryptext_new_guid',['../guid_8h.html#a254720d6baf86d12a40427c8cf66b5c1',1,'guid.h']]],
   ['qryptext_5fprintvoid_68',['qryptext_printvoid',['../util_8h.html#ae17716366f3403278b83e6179519da8b',1,'util.h']]],
-  ['qryptext_5fsign_69',['qryptext_sign',['../sign_8h.html#abdfc307937cb7b7948edd9930f89bb0b',1,'sign.h']]],
-  ['qryptext_5fverify_70',['qryptext_verify',['../verify_8h.html#aeca5aaf8803a1d9a97916ed5ba1f4753',1,'verify.h']]]
+  ['qryptext_5fsign_69',['qryptext_sign',['../sign_8h.html#a10cda0eb198ffb0adfa730948885372b',1,'sign.h']]],
+  ['qryptext_5fverify_70',['qryptext_verify',['../verify_8h.html#a6f1ca2161acaec2b41034ff83047f282',1,'verify.h']]]
 ];

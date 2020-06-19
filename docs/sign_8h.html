@@ -77,15 +77,19 @@ $(function() {
 <div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">qryptext/types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for sign.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="sign_8h__incl.png" border="0" usemap="#include_2qryptext_2sign_8h" alt=""/></div>
 <map name="include_2qryptext_2sign_8h" id="include_2qryptext_2sign_8h">
-<area shape="rect" title="Sign data using Falcon1024 (which within OQS uses SHAKE256 hashing internally)." alt="" coords="53,5,207,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,73,107"/>
-<area shape="rect" title=" " alt="" coords="97,80,163,107"/>
-<area shape="rect" title=" " alt="" coords="187,80,262,107"/>
+<area shape="rect" title="Sign data using Falcon1024 (which within OQS uses SHAKE256 hashing internally)." alt="" coords="91,5,244,32"/>
+<area shape="rect" title=" " alt="" coords="5,162,73,189"/>
+<area shape="rect" title=" " alt="" coords="97,162,163,189"/>
+<area shape="rect" title=" " alt="" coords="298,80,373,107"/>
+<area shape="rect" href="types_8h.html" title="Types (structs) user in qryptext." alt="" coords="157,80,273,107"/>
+<area shape="rect" title=" " alt="" coords="187,155,359,196"/>
+<area shape="rect" title=" " alt="" coords="383,155,523,196"/>
 </map>
 </div>
 </div>
@@ -93,15 +97,15 @@ Include dependency graph for sign.h:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abdfc307937cb7b7948edd9930f89bb0b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sign_8h.html#abdfc307937cb7b7948edd9930f89bb0b">qryptext_sign</a> (uint8_t *data, size_t data_length, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, bool output_base64)</td></tr>
-<tr class="separator:abdfc307937cb7b7948edd9930f89bb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10cda0eb198ffb0adfa730948885372b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sign_8h.html#a10cda0eb198ffb0adfa730948885372b">qryptext_sign</a> (uint8_t *data, size_t data_length, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, bool output_base64, <a class="el" href="structqryptext__falcon1024__secret__key.html">qryptext_falcon1024_secret_key</a> secret_falcon1024_key)</td></tr>
+<tr class="separator:a10cda0eb198ffb0adfa730948885372b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sign data using Falcon1024 (which within OQS uses SHAKE256 hashing internally). </p>
 <dl class="section author"><dt>Author</dt><dd>Raphael Beck </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="abdfc307937cb7b7948edd9930f89bb0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abdfc307937cb7b7948edd9930f89bb0b">&#9670;&nbsp;</a></span>qryptext_sign()</h2>
+<a id="a10cda0eb198ffb0adfa730948885372b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10cda0eb198ffb0adfa730948885372b">&#9670;&nbsp;</a></span>qryptext_sign()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -140,7 +144,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>output_base64</em>&#160;</td>
+          <td class="paramname"><em>output_base64</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structqryptext__falcon1024__secret__key.html">qryptext_falcon1024_secret_key</a>&#160;</td>
+          <td class="paramname"><em>secret_falcon1024_key</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -155,8 +165,9 @@ Functions</h2></td></tr>
     <tr><td class="paramname">data_length</td><td>Length of the <code>data</code> array. </td></tr>
     <tr><td class="paramname">output_buffer</td><td>Where to write the signature into. </td></tr>
     <tr><td class="paramname">output_buffer_size</td><td>How big the signature output buffer is. Make sure to allocate at least <code>OQS_SIG_falcon_1024_length_signature</code> bytes! </td></tr>
-    <tr><td class="paramname">output_length</td><td>[OPTIONAL] How many bytes were written into the output buffer. If all went well, this is always gonna be <code>OQS_SIG_falcon_1024_length_signature</code>, so you can also omit this by passing <code>NULL</code>... </td></tr>
+    <tr><td class="paramname">output_length</td><td>How many bytes were written into the output buffer. </td></tr>
     <tr><td class="paramname">output_base64</td><td>Should the output signature bytes be base64-encoded for you? If you pass <code>true</code>, make sure to allocate at least qryptext_calc_base64_length(OQS_SIG_falcon_1024_length_signature) bytes! If you pass <code>false</code>, the raw signature bytes are written into the <code>output_buffer!</code> </td></tr>
+    <tr><td class="paramname">secret_falcon1024_key</td><td>The Falcon-1024 secret key to use for signing. </td></tr>
   </table>
   </dd>
 </dl>

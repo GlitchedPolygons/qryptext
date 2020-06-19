@@ -72,20 +72,24 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Verify signatures that were made using <a class="el" href="sign_8h.html#abdfc307937cb7b7948edd9930f89bb0b">qryptext_sign()</a> (Falcon1024).  
+<p>Verify signatures that were made using <a class="el" href="sign_8h.html#a10cda0eb198ffb0adfa730948885372b">qryptext_sign()</a> (Falcon1024).  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">qryptext/types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for verify.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="verify_8h__incl.png" border="0" usemap="#include_2qryptext_2verify_8h" alt=""/></div>
 <map name="include_2qryptext_2verify_8h" id="include_2qryptext_2verify_8h">
-<area shape="rect" title="Verify signatures that were made using qryptext_sign() (Falcon1024)." alt="" coords="51,5,209,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,73,107"/>
-<area shape="rect" title=" " alt="" coords="97,80,163,107"/>
-<area shape="rect" title=" " alt="" coords="187,80,262,107"/>
+<area shape="rect" title="Verify signatures that were made using qryptext_sign() (Falcon1024)." alt="" coords="88,5,247,32"/>
+<area shape="rect" title=" " alt="" coords="5,162,73,189"/>
+<area shape="rect" title=" " alt="" coords="97,162,163,189"/>
+<area shape="rect" title=" " alt="" coords="298,80,373,107"/>
+<area shape="rect" href="types_8h.html" title="Types (structs) user in qryptext." alt="" coords="157,80,273,107"/>
+<area shape="rect" title=" " alt="" coords="187,155,359,196"/>
+<area shape="rect" title=" " alt="" coords="383,155,523,196"/>
 </map>
 </div>
 </div>
@@ -93,15 +97,15 @@ Include dependency graph for verify.h:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aeca5aaf8803a1d9a97916ed5ba1f4753"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="verify_8h.html#aeca5aaf8803a1d9a97916ed5ba1f4753">qryptext_verify</a> (uint8_t *data, size_t data_length, uint8_t *signature, size_t signature_length, bool signature_base64)</td></tr>
-<tr class="separator:aeca5aaf8803a1d9a97916ed5ba1f4753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f1ca2161acaec2b41034ff83047f282"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="verify_8h.html#a6f1ca2161acaec2b41034ff83047f282">qryptext_verify</a> (uint8_t *data, size_t data_length, uint8_t *signature, size_t signature_length, bool signature_base64, <a class="el" href="structqryptext__falcon1024__public__key.html">qryptext_falcon1024_public_key</a> public_falcon1024_key)</td></tr>
+<tr class="separator:a6f1ca2161acaec2b41034ff83047f282"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Verify signatures that were made using <a class="el" href="sign_8h.html#abdfc307937cb7b7948edd9930f89bb0b">qryptext_sign()</a> (Falcon1024). </p>
+<div class="textblock"><p>Verify signatures that were made using <a class="el" href="sign_8h.html#a10cda0eb198ffb0adfa730948885372b">qryptext_sign()</a> (Falcon1024). </p>
 <dl class="section author"><dt>Author</dt><dd>Raphael Beck </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aeca5aaf8803a1d9a97916ed5ba1f4753"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeca5aaf8803a1d9a97916ed5ba1f4753">&#9670;&nbsp;</a></span>qryptext_verify()</h2>
+<a id="a6f1ca2161acaec2b41034ff83047f282"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f1ca2161acaec2b41034ff83047f282">&#9670;&nbsp;</a></span>qryptext_verify()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -134,7 +138,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>signature_base64</em>&#160;</td>
+          <td class="paramname"><em>signature_base64</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structqryptext__falcon1024__public__key.html">qryptext_falcon1024_public_key</a>&#160;</td>
+          <td class="paramname"><em>public_falcon1024_key</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -150,10 +160,11 @@ Functions</h2></td></tr>
     <tr><td class="paramname">signature</td><td>The signature to verify. Can be raw bytes or base64-encoded string. </td></tr>
     <tr><td class="paramname">signature_length</td><td>Length of the <code>signature</code> array. </td></tr>
     <tr><td class="paramname">signature_base64</td><td>Is the <code>signature</code> a base64-encoded string that needs to be decoded first before verification? </td></tr>
+    <tr><td class="paramname">public_falcon1024_key</td><td>The public Falcon-1024 key with which to verify the signature. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>0</code> if the signature is valid and could be verified successfully; anything else if something failed (according to the return codes defined inside <a class="el" href="constants_8h.html" title="Qryptext constants.">constants.h</a> or directly by the involved OQS function). </dd></dl>
 
 </div>
 </div>
