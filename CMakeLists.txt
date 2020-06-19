@@ -20,6 +20,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 # Qryptext Options
 option(QRYPTEXT_ENABLE_TESTS "Build qryptext tests." OFF)
+option(QRYPTEXT_ENABLE_PROGRAMS "Build qryptext CLI programs." OFF)
 
 # OQS Options
 option(OQS_USE_OPENSSL "Build OQS with OpenSSL support." OFF)
@@ -112,6 +113,10 @@ get_target_property(${PROJECT_NAME}_DEPS_TARGETS ${PROJECT_NAME} LINK_LIBRARIES)
 
 if (QRYPTEXT_ENABLE_EXAMPLES)
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/examples examples)
+endif ()
+
+if (QRYPTEXT_ENABLE_PROGRAMS)
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/programs programs)
 endif ()
 
 if (QRYPTEXT_ENABLE_TESTS)
