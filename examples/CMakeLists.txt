@@ -27,3 +27,6 @@ target_link_libraries(qryptext_example_03 PRIVATE qryptext)
 
 add_executable(qryptext_example_04 ${CMAKE_CURRENT_LIST_DIR}/example04.c)
 target_link_libraries(qryptext_example_04 PRIVATE qryptext)
+
+add_executable(qryptext_example_05 ${CMAKE_CURRENT_LIST_DIR}/example05.c)
+target_link_libraries(qryptext_example_05 PRIVATE qryptext)

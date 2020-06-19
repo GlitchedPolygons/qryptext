@@ -17,7 +17,7 @@
 /**
  *  @file verify.h
  *  @author Raphael Beck
- *  @brief Verify signatures that were made using qryptext_sign() (SHA3-512 + Falcon1024).
+ *  @brief Verify signatures that were made using qryptext_sign() (Falcon1024).
  */
 
 #ifndef QRYPTEXT_VERIFY_H
@@ -26,6 +26,21 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include <stddef.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+/**
+ * Verifies a data set's signature using Falcon-1024.
+ * @param data The data whose signature you want to verify.
+ * @param data_length Length of the \p data array.
+ * @param signature The signature to verify. Can be raw bytes or base64-encoded string.
+ * @param signature_length Length of the \p signature array.
+ * @param signature_base64 Is the \p signature a base64-encoded string that needs to be decoded first before verification?
+ * @return
+ */
+int qryptext_verify(uint8_t* data, size_t data_length, uint8_t* signature, size_t signature_length, bool signature_base64);
 
 #ifdef __cplusplus
 } // extern "C"

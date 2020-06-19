@@ -65,19 +65,99 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">verify.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Verify signatures that were made using qryptext_sign() (SHA3-512 + Falcon1024).  
+<p>Verify signatures that were made using <a class="el" href="sign_8h.html#abdfc307937cb7b7948edd9930f89bb0b">qryptext_sign()</a> (Falcon1024).  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for verify.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="verify_8h__incl.png" border="0" usemap="#include_2qryptext_2verify_8h" alt=""/></div>
+<map name="include_2qryptext_2verify_8h" id="include_2qryptext_2verify_8h">
+<area shape="rect" title="Verify signatures that were made using qryptext_sign() (Falcon1024)." alt="" coords="51,5,209,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,73,107"/>
+<area shape="rect" title=" " alt="" coords="97,80,163,107"/>
+<area shape="rect" title=" " alt="" coords="187,80,262,107"/>
+</map>
+</div>
+</div>
 <p><a href="verify_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aeca5aaf8803a1d9a97916ed5ba1f4753"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="verify_8h.html#aeca5aaf8803a1d9a97916ed5ba1f4753">qryptext_verify</a> (uint8_t *data, size_t data_length, uint8_t *signature, size_t signature_length, bool signature_base64)</td></tr>
+<tr class="separator:aeca5aaf8803a1d9a97916ed5ba1f4753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Verify signatures that were made using qryptext_sign() (SHA3-512 + Falcon1024). </p>
+<div class="textblock"><p>Verify signatures that were made using <a class="el" href="sign_8h.html#abdfc307937cb7b7948edd9930f89bb0b">qryptext_sign()</a> (Falcon1024). </p>
 <dl class="section author"><dt>Author</dt><dd>Raphael Beck </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="aeca5aaf8803a1d9a97916ed5ba1f4753"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeca5aaf8803a1d9a97916ed5ba1f4753">&#9670;&nbsp;</a></span>qryptext_verify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int qryptext_verify </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>data_length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>signature</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>signature_length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>signature_base64</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Verifies a data set's signature using Falcon-1024. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The data whose signature you want to verify. </td></tr>
+    <tr><td class="paramname">data_length</td><td>Length of the <code>data</code> array. </td></tr>
+    <tr><td class="paramname">signature</td><td>The signature to verify. Can be raw bytes or base64-encoded string. </td></tr>
+    <tr><td class="paramname">signature_length</td><td>Length of the <code>signature</code> array. </td></tr>
+    <tr><td class="paramname">signature_base64</td><td>Is the <code>signature</code> a base64-encoded string that needs to be decoded first before verification? </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
