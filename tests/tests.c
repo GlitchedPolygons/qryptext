@@ -126,11 +126,55 @@ void qryptext_encrypt_null_args_fails(void** state)
     assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_encrypt((uint8_t*)"TESTTESTTESTTEST", 16, NULL, 4096, &olen, false, TEST_PUBLIC_KEY));
 }
 
+void qryptext_encrypt_invalid_args_fails(void** state)
+{
+    size_t olen;
+    uint8_t tmp[4096];
+    assert_int_equal(QRYPTEXT_ERROR_INVALID_ARG, qryptext_encrypt((uint8_t*)"TESTTESTTESTTEST", 0, tmp, 4096, &olen, false, TEST_PUBLIC_KEY));
+}
+
+void qryptext_encrypt_insufficient_output_buffer_size_fails(void** state)
+{
+    size_t olen;
+    uint8_t tmp[512];
+    assert_int_equal(QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE, qryptext_encrypt((uint8_t*)"TESTTESTTESTTEST", 16, tmp, 512, &olen, false, TEST_PUBLIC_KEY));
+}
+
+void qryptext_decrypt_null_args_fails(void** state)
+{
+    size_t olen;
+    uint8_t tmp[4096];
+    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_decrypt((uint8_t*)"testtesttesttest", 16, false, NULL, 4096, &olen, TEST_SECRET_KEY));
+    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_decrypt(NULL, 16, false, tmp, 4096, &olen, TEST_SECRET_KEY));
+}
+
+void qryptext_decrypt_invalid_args_fails(void** state)
+{
+    size_t olen;
+    uint8_t tmp[4096];
+    assert_int_equal(QRYPTEXT_ERROR_INVALID_ARG, qryptext_decrypt((uint8_t*)"testtesttesttest", 16, false, tmp, 4096, &olen, TEST_SECRET_KEY));
+    assert_int_equal(QRYPTEXT_ERROR_INVALID_ARG, qryptext_decrypt((uint8_t*)"testtesttesttest", 4096, false, tmp, 0, &olen, TEST_SECRET_KEY));
+}
+
+void qryptext_decrypt_insufficient_output_buffer_size_fails(void** state)
+{
+    size_t olen;
+    uint8_t tmp[512];
+    assert_int_equal(QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE, qryptext_decrypt((uint8_t*)"testtesttesttest", 4096, false, tmp, 16, &olen, TEST_SECRET_KEY));
+}
+
 int main(void)
 {
+    qryptext_disable_fprintf();
+
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(null_test_success),
         cmocka_unit_test(qryptext_encrypt_null_args_fails),
+        cmocka_unit_test(qryptext_encrypt_invalid_args_fails),
+        cmocka_unit_test(qryptext_encrypt_insufficient_output_buffer_size_fails),
+        cmocka_unit_test(qryptext_decrypt_null_args_fails),
+        cmocka_unit_test(qryptext_decrypt_invalid_args_fails),
+        cmocka_unit_test(qryptext_decrypt_insufficient_output_buffer_size_fails),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
