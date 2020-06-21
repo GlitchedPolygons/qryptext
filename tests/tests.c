@@ -25,6 +25,7 @@
 #include "qryptext/util.h"
 #include "qryptext/sign.h"
 #include "qryptext/verify.h"
+#include "qryptext/keygen.h"
 #include "qryptext/encrypt.h"
 #include "qryptext/decrypt.h"
 #include "qryptext/constants.h"
@@ -118,6 +119,8 @@ static const qryptext_kyber1024_public_key TEST_PUBLIC_KEY = { .hexstring = "211
                                                                             "e0389e7e248cacd91985044fd11bc975b71c3fc70ab9cb620ac70f5ba80ac60b6264dc33c7ec2896589230a2ca46d82468471c26884e80e02bf6d385"
                                                                             "585a8bb8c3136aacc400006b2688ba0842437d9b260215981f6b38846298e0018d0dfb75c8a3fe6b3d6e2aa53643b4dd49fd444b88091dc4fa3d71ca"
                                                                             "da128ad7a8cb94bb" };
+
+static const char TEST_STRING[] = "Zwei Dinge sind unendlich, das Universum und die menschliche Dummheit, aber beim Universum bin ich mir noch nicht ganz sicher.   - Albert Einstein";
 
 void qryptext_encrypt_null_args_fails(void** state)
 {
@@ -272,6 +275,79 @@ static void qryptext_bin2hexstr_success_returns_0(void** state)
     assert_int_equal(sizeof(bin) * 2, hexstr_length);
 }
 
+static void qryptext_generate_kyber1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG(void** state)
+{
+    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_kyber1024_generate_keypair(NULL));
+}
+
+static void qryptext_generate_falcon1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG(void** state)
+{
+    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_falcon1024_generate_keypair(NULL));
+}
+
+static void qryptext_encrypt_raw_binary_decrypts_successfully(void** state)
+{
+    int r;
+    uint8_t* encrypted_string = NULL;
+    uint8_t* decrypted_string = NULL;
+    size_t encrypted_string_length;
+    size_t decrypted_string_length;
+
+    //
+
+    const size_t TEST_STRING_LENGTH = sizeof(TEST_STRING);
+
+    encrypted_string_length = qryptext_calc_encryption_output_length(TEST_STRING_LENGTH);
+    encrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
+
+    r = qryptext_encrypt((uint8_t*)TEST_STRING, TEST_STRING_LENGTH, encrypted_string, encrypted_string_length, NULL, false, TEST_PUBLIC_KEY);
+    assert_int_equal(0, r);
+    assert_int_not_equal(0, memcmp(TEST_STRING, encrypted_string, TEST_STRING_LENGTH));
+
+    decrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
+    r = qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, TEST_SECRET_KEY);
+    assert_int_equal(0, r);
+
+    assert_int_equal(0, memcmp(TEST_STRING, decrypted_string, TEST_STRING_LENGTH));
+    assert_int_equal(TEST_STRING_LENGTH, decrypted_string_length);
+
+    //
+
+    free(encrypted_string);
+    free(decrypted_string);
+}
+
+static void qryptext_encrypt_base64_decrypts_successfully(void** state)
+{
+    int r;
+    uint8_t* encrypted_string = NULL;
+    uint8_t* decrypted_string = NULL;
+    size_t encrypted_string_length;
+    size_t decrypted_string_length;
+
+    //
+
+    const size_t TEST_STRING_LENGTH = sizeof(TEST_STRING);
+
+    encrypted_string_length = qryptext_calc_base64_length(qryptext_calc_encryption_output_length(TEST_STRING_LENGTH));
+    encrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
+
+    r = qryptext_encrypt((uint8_t*)TEST_STRING, TEST_STRING_LENGTH, encrypted_string, encrypted_string_length, NULL, true, TEST_PUBLIC_KEY);
+    assert_int_equal(0, r);
+
+    decrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
+    r = qryptext_decrypt(encrypted_string, encrypted_string_length, true, decrypted_string, encrypted_string_length, &decrypted_string_length, TEST_SECRET_KEY);
+    assert_int_equal(0, r);
+
+    assert_int_equal(0, memcmp(TEST_STRING, decrypted_string, TEST_STRING_LENGTH));
+    assert_int_equal(TEST_STRING_LENGTH, decrypted_string_length);
+
+    //
+
+    free(encrypted_string);
+    free(decrypted_string);
+}
+
 int main(void)
 {
     qryptext_disable_fprintf();
@@ -292,6 +368,10 @@ int main(void)
         cmocka_unit_test(qryptext_bin2hexstr_null_or_invalid_args_fails_returns_1),
         cmocka_unit_test(qryptext_bin2hexstr_insufficient_output_buffer_size_returns_2),
         cmocka_unit_test(qryptext_bin2hexstr_success_returns_0),
+        cmocka_unit_test(qryptext_generate_kyber1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG),
+        cmocka_unit_test(qryptext_generate_falcon1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG),
+        cmocka_unit_test(qryptext_encrypt_raw_binary_decrypts_successfully),
+        cmocka_unit_test(qryptext_encrypt_base64_decrypts_successfully),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
