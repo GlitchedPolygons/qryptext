@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:18
+      - image: ubuntu:20.04
 
     steps:
       - checkout
