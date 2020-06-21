@@ -2,7 +2,7 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/1a3b28b8f9004abbb1ee105d6eece676)](https://www.codacy.com/manual/GlitchedPolygons/qryptext?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GlitchedPolygons/qryptext&amp;utm_campaign=Badge_Grade)
 [![Codecov](https://codecov.io/gh/GlitchedPolygons/qryptext/branch/master/graph/badge.svg)](https://codecov.io/gh/GlitchedPolygons/qryptext)
-[![CircleCI](https://circleci.com/gh/GlitchedPolygons/qryptext/tree/master.svg?style=shield)](https://circleci.com/gh/GlitchedPolygons/qryptext/tree/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/d04dku5k34u4oi62/branch/master?svg=true)](https://ci.appveyor.com/project/GlitchedPolygons/qryptext/branch/master)
 [![License Shield](https://img.shields.io/badge/license-Apache--2.0-orange)](https://github.com/GlitchedPolygons/qryptext/blob/master/LICENSE)
 [![API Docs](https://img.shields.io/badge/api-docs-informational.svg)](https://glitchedpolygons.github.io/qryptext/files.html)
 
