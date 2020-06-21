@@ -14,6 +14,8 @@
    limitations under the License.
 */
 
+#include <string.h>
+
 #include <oqs/oqs.h>
 #include <pqclean_falcon-1024_clean/api.h>
 

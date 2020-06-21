@@ -14,6 +14,8 @@
    limitations under the License.
 */
 
+#include <string.h>
+
 #include <mbedtls/md.h>
 #include <mbedtls/gcm.h>
 #include <mbedtls/hkdf.h>

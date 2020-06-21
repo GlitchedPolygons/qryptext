@@ -15,6 +15,7 @@
 */
 
 #include <stdio.h>
+#include <string.h>
 #include "qryptext/util.h"
 
 static bool _qryptext_fprintf_enabled = true;
