@@ -21,3 +21,15 @@ target_link_libraries(qryptext_kyber1024_keygen PRIVATE qryptext)
 
 add_executable(qryptext_falcon1024_keygen ${CMAKE_CURRENT_LIST_DIR}/qryptext_falcon1024_keygen.c)
 target_link_libraries(qryptext_falcon1024_keygen PRIVATE qryptext)
+
+add_executable(qryptext_encrypt ${CMAKE_CURRENT_LIST_DIR}/qryptext_encrypt.c)
+target_link_libraries(qryptext_encrypt PRIVATE qryptext)
+
+add_executable(qryptext_decrypt ${CMAKE_CURRENT_LIST_DIR}/qryptext_decrypt.c)
+target_link_libraries(qryptext_decrypt PRIVATE qryptext)
+
+add_executable(qryptext_sign ${CMAKE_CURRENT_LIST_DIR}/qryptext_sign.c)
+target_link_libraries(qryptext_sign PRIVATE qryptext)
+
+add_executable(qryptext_verify ${CMAKE_CURRENT_LIST_DIR}/qryptext_verify.c)
+target_link_libraries(qryptext_verify PRIVATE qryptext)
