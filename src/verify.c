@@ -31,7 +31,7 @@ int qryptext_verify(const uint8_t* data, const size_t data_length, const uint8_t
         return QRYPTEXT_ERROR_NULL_ARG;
     }
 
-    if (data_length == 0 || signature_length < OQS_SIG_falcon_1024_length_signature)
+    if (data_length == 0)
     {
         qryptext_fprintf(stderr, "qryptext: signature verification failed due to the data_length parameter having value zero OR invalid signature length.\n");
         return QRYPTEXT_ERROR_INVALID_ARG;
@@ -52,7 +52,7 @@ int qryptext_verify(const uint8_t* data, const size_t data_length, const uint8_t
     }
     else
     {
-        memcpy(signature_bin, signature, OQS_SIG_falcon_1024_length_signature);
+        memcpy(signature_bin, signature, signature_bin_length = signature_length);
     }
 
     uint8_t public_key[OQS_SIG_falcon_1024_length_public_key + 1];
