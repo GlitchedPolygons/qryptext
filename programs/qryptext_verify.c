@@ -18,7 +18,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <qryptext/util.h>
-#include <qryptext/encrypt.h>
+#include <qryptext/verify.h>
 
 int main(const int argc, const char* argv[])
 {
