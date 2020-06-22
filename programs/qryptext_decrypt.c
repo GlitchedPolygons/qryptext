@@ -58,6 +58,7 @@ int main(const int argc, const char* argv[])
     if (o == NULL)
     {
         fprintf(stderr, "qryptext_decrypt: OUT OF MEMORY!\n");
+        memset(&secret_key, 0x00, sizeof(qryptext_kyber1024_secret_key));
         return -3;
     }
 
@@ -65,11 +66,13 @@ int main(const int argc, const char* argv[])
     if (r != 0)
     {
         free(o);
+        memset(&secret_key, 0x00, sizeof(qryptext_kyber1024_secret_key));
         return -4;
     }
 
     fprintf(stdout, "%s", o);
 
     free(o);
+    memset(&secret_key, 0x00, sizeof(qryptext_kyber1024_secret_key));
     return 0;
 }
