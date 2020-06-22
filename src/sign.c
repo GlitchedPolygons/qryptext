@@ -74,8 +74,8 @@ int qryptext_sign(const uint8_t* data, const size_t data_length, uint8_t* output
     }
     else
     {
-        memcpy(output_buffer, signature, signature_length);
-        *output_length = signature_length;
+        memcpy(output_buffer, signature, OQS_SIG_falcon_1024_length_signature);
+        *output_length = OQS_SIG_falcon_1024_length_signature;
     }
 
     return ret;
