@@ -60,5 +60,6 @@ int main(const int argc, const char* argv[])
         return -3;
     }
 
+    fprintf(stdout, "qryptext_verify: signature valid!\n");
     return 0;
 }
