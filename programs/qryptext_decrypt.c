@@ -65,14 +65,16 @@ int main(const int argc, const char* argv[])
     int r = qryptext_decrypt((uint8_t*)message, message_len, true, o, message_len, &olen, secret_key);
     if (r != 0)
     {
-        free(o);
+        memset(o, 0x00, message_len);
         memset(&secret_key, 0x00, sizeof(qryptext_kyber1024_secret_key));
+        free(o);
         return -4;
     }
 
     fprintf(stdout, "%s", o);
 
-    free(o);
+    memset(o, 0x00, message_len);
     memset(&secret_key, 0x00, sizeof(qryptext_kyber1024_secret_key));
+    free(o);
     return 0;
 }
