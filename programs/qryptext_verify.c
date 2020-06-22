@@ -20,7 +20,7 @@
 #include <qryptext/util.h>
 #include <qryptext/encrypt.h>
 
-int main(int argc, const char* argv[])
+int main(const int argc, const char* argv[])
 {
     return 0;
 }
