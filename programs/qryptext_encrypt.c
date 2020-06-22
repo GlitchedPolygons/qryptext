@@ -26,7 +26,7 @@ int main(const int argc, const char* argv[])
 
     if (argc == 1 || (argc == 2 && strcmp(argv[1], "--help") == 0))
     {
-        // TODO: print help here
+        fprintf(stdout, "qryptext_encrypt:  Encrypt a string using a Kyber1024 public key. Call this program using exactly 2 arguments;  the first one being the public key (hex-string) and the second the string to encrypt.\n");
         return 0;
     }
 
