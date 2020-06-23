@@ -30,7 +30,7 @@ int main(void)
         return r;
     }
 
-    fprintf(stdout, "{\"kyber1024_secret_key\":\"%s\",\"kyber1024_public_key\":\"%s\"}", kyber1024_keypair.secret_key.hexstring, kyber1024_keypair.public_key.hexstring);
+    fprintf(stdout, "{\"kyber1024_secret_key\":\"%s\",\"kyber1024_public_key\":\"%s\"}\n", kyber1024_keypair.secret_key.hexstring, kyber1024_keypair.public_key.hexstring);
 
     // Cleanup:
     memset(&kyber1024_keypair, 0x00, sizeof(qryptext_kyber1024_keypair));

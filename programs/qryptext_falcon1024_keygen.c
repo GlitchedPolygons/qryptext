@@ -30,7 +30,7 @@ int main(void)
         return r;
     }
 
-    fprintf(stdout, "{\"falcon1024_secret_key\":\"%s\",\"falcon1024_public_key\":\"%s\"}", falcon1024_keypair.secret_key.hexstring, falcon1024_keypair.public_key.hexstring);
+    fprintf(stdout, "{\"falcon1024_secret_key\":\"%s\",\"falcon1024_public_key\":\"%s\"}\n", falcon1024_keypair.secret_key.hexstring, falcon1024_keypair.public_key.hexstring);
 
     // Cleanup:
     memset(&falcon1024_keypair, 0x00, sizeof(qryptext_falcon1024_keypair));

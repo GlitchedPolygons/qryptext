@@ -71,7 +71,7 @@ int main(const int argc, const char* argv[])
         return -4;
     }
 
-    fprintf(stdout, "%s", o);
+    fprintf(stdout, "%s\n", o);
 
     memset(o, 0x00, message_len);
     memset(&secret_key, 0x00, sizeof(qryptext_kyber1024_secret_key));
