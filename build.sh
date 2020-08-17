@@ -14,17 +14,19 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-if [ "$EUID" -e 0 ]
-  then echo "  Please don't run as root/using sudo..."
+if [ "$(whoami)" == "root" ]; then
+  echo "  Please don't run as root/using sudo..."
   exit
 fi
 
 REPO=$(dirname "$0")
 rm -rf "$REPO"/out
 rm -rf "$REPO"/build
-mkdir -p "$REPO"/build && cd "$REPO"/build || exit
+mkdir -p "$REPO"/build/include && cd "$REPO"/build || exit
 cmake -DBUILD_SHARED_LIBS=Off -DUSE_SHARED_MBEDTLS_LIBRARY=Off -DCMAKE_BUILD_TYPE=Release ..
 make
+cp -r ../include .
+tar -czvf qryptext.tar.gz qryptext_* *.a include/*
 cd "$REPO" || exit
 echo "  Done. Exported build into $REPO/build"
-echo "  Check out the files in there! "
+echo "  Check out the qryptext.tar.gz file in there! "
