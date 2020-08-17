@@ -15,6 +15,7 @@
 */
 
 #include <string.h>
+#include <mbedtls/platform_util.h>
 
 #include <oqs/oqs.h>
 #include <pqclean_falcon-1024_clean/api.h>
@@ -56,7 +57,7 @@ int qryptext_verify(const uint8_t* data, const size_t data_length, const uint8_t
     }
 
     uint8_t public_key[OQS_SIG_falcon_1024_length_public_key + 1];
-    memset(public_key, 0x00, sizeof(public_key));
+    mbedtls_platform_zeroize(public_key, sizeof(public_key));
     ret = qryptext_hexstr2bin(public_falcon1024_key.hexstring, sizeof(public_falcon1024_key.hexstring), public_key, sizeof(public_key), NULL);
     if (ret != 0)
     {
@@ -71,7 +72,7 @@ int qryptext_verify(const uint8_t* data, const size_t data_length, const uint8_t
         return ret;
     }
 
-    memset(public_key, 0x00, sizeof(public_key));
-    memset(signature_bin, 0x00, sizeof(signature_bin));
+    mbedtls_platform_zeroize(public_key, sizeof(public_key));
+    mbedtls_platform_zeroize(signature_bin, sizeof(signature_bin));
     return ret;
 }

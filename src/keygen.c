@@ -17,6 +17,8 @@
 #include <string.h>
 
 #include <oqs/oqs.h>
+#include <mbedtls/platform_util.h>
+
 #include "qryptext/util.h"
 #include "qryptext/guid.h"
 #include "qryptext/keygen.h"
@@ -54,6 +56,9 @@ int qryptext_kyber1024_generate_keypair(qryptext_kyber1024_keypair* output)
         return ret;
     }
 
+    mbedtls_platform_zeroize(public_key, sizeof(public_key));
+    mbedtls_platform_zeroize(secret_key, sizeof(secret_key));
+
     return 0;
 }
 
@@ -88,6 +93,9 @@ int qryptext_falcon1024_generate_keypair(qryptext_falcon1024_keypair* output)
         qryptext_fprintf(stderr, "\nqryptext: Falcon-1024 key generation failed while encoding secret key to hex-string. \"qryptext_bin2hexstr\" returned %d\n", ret);
         return ret;
     }
+
+    mbedtls_platform_zeroize(public_key, sizeof(public_key));
+    mbedtls_platform_zeroize(secret_key, sizeof(secret_key));
 
     return 0;
 }

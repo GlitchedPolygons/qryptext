@@ -54,6 +54,41 @@ extern "C" {
  */
 #define QRYPTEXT_MAX(x, y) (((x) > (y)) ? (x) : (y))
 
+
+/**
+ * Checks whether qryptext's fprintf is enabled (whether errors are fprintfed into stderr).
+ * @return Whether errors are fprintfed into stderr or not.
+ */
+bool qryptext_is_fprintf_enabled();
+
+/**
+ * Like fprintf() except it doesn't do anything. Like printing into <c>/dev/null</c> :D lots of fun!
+ * @param stream [IGNORED]
+ * @param format [IGNORED]
+ * @param ... [IGNORED]
+ * @return <c>0</c>
+ */
+static inline int qryptext_printvoid(FILE* stream, const char* format, ...)
+{
+    return 0;
+}
+
+/** @private */
+extern int (*_qryptext_fprintf_fptr)(FILE* stream, const char* format, ...);
+
+/**
+ * Enables qryptext's use of fprintf().
+ */
+void qryptext_enable_fprintf();
+
+/**
+ * Disables qryptext's use of fprintf().
+ */
+void qryptext_disable_fprintf();
+
+/** @private */
+#define qryptext_fprintf _qryptext_fprintf_fptr
+
 /**
  * Calculates the final output size of a ciphertext that would result from the qryptext_encrypt() function (based on a given plaintext length).
  * @param plaintext_length The amount of bytes to encrypt.
@@ -112,10 +147,14 @@ static inline void qryptext_dev_urandom(uint8_t* output_buffer, const size_t out
 #ifdef _WIN32
         BCryptGenRandom(NULL, output_buffer, output_buffer_size, BCRYPT_USE_SYSTEM_PREFERRED_RNG);
 #else
-        FILE* rnd = fopen("/dev/urandom", "r");
+        FILE* rnd = fopen("/dev/urandom", "rb");
         if (rnd != NULL)
         {
-            fread(output_buffer, sizeof(uint8_t), output_buffer_size, rnd);
+            const size_t n = fread(output_buffer, sizeof(uint8_t), output_buffer_size, rnd);
+            if (n != output_buffer_size)
+            {
+                qryptext_fprintf(stderr, "qryptext: Warning! Only %zu bytes out of %zu have been read from /dev/urandom\n", n, output_buffer_size);
+            }
             fclose(rnd);
         }
 #endif
@@ -134,40 +173,6 @@ static inline uint64_t qryptext_get_random_big_integer()
     srand(time(NULL) * time(NULL));
     return rand() * rand() * rand() * rand();
 }
-
-/**
- * Checks whether qryptext's fprintf is enabled (whether errors are fprintfed into stderr).
- * @return Whether errors are fprintfed into stderr or not.
- */
-bool qryptext_is_fprintf_enabled();
-
-/**
- * Like fprintf() except it doesn't do anything. Like printing into <c>/dev/null</c> :D lots of fun!
- * @param stream [IGNORED]
- * @param format [IGNORED]
- * @param ... [IGNORED]
- * @return <c>0</c>
- */
-static inline int qryptext_printvoid(FILE* stream, const char* format, ...)
-{
-    return 0;
-}
-
-/** @private */
-extern int (*_qryptext_fprintf_fptr)(FILE* stream, const char* format, ...);
-
-/**
- * Enables qryptext's use of fprintf().
- */
-void qryptext_enable_fprintf();
-
-/**
- * Disables qryptext's use of fprintf().
- */
-void qryptext_disable_fprintf();
-
-/** @private */
-#define qryptext_fprintf _qryptext_fprintf_fptr
 
 static const unsigned char empty32[32] = {
     //

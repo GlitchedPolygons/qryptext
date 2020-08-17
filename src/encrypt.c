@@ -191,12 +191,12 @@ exit:
     mbedtls_entropy_free(&entropy);
     mbedtls_ctr_drbg_free(&ctr_drbg);
 
-    memset(iv, 0x00, sizeof(iv));
-    memset(salt, 0x00, sizeof(salt));
-    memset(aes_key, 0x00, sizeof(aes_key));
-    memset(ciphertext, 0x00, sizeof(ciphertext));
-    memset(public_key, 0x00, sizeof(public_key));
-    memset(shared_secret, 0x00, sizeof(shared_secret));
+    mbedtls_platform_zeroize(iv, sizeof(iv));
+    mbedtls_platform_zeroize(salt, sizeof(salt));
+    mbedtls_platform_zeroize(aes_key, sizeof(aes_key));
+    mbedtls_platform_zeroize(ciphertext, sizeof(ciphertext));
+    mbedtls_platform_zeroize(public_key, sizeof(public_key));
+    mbedtls_platform_zeroize(shared_secret, sizeof(shared_secret));
 
     return (ret);
 }

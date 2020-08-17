@@ -143,13 +143,13 @@ exit:
     mbedtls_gcm_free(&aes_ctx);
     mbedtls_md_free(&md_ctx);
 
-    memset(iv, 0x00, 16);
-    memset(tag, 0x00, 16);
-    memset(salt, 0x00, 32);
-    memset(aes_key, 0x00, 32);
-    memset(ciphertext, 0x00, sizeof(ciphertext));
-    memset(secret_key, 0x00, sizeof(secret_key));
-    memset(shared_secret, 0x00, sizeof(shared_secret));
+    mbedtls_platform_zeroize(iv, sizeof(iv));
+    mbedtls_platform_zeroize(tag, sizeof(tag));
+    mbedtls_platform_zeroize(salt, sizeof(salt));
+    mbedtls_platform_zeroize(aes_key, sizeof(aes_key));
+    mbedtls_platform_zeroize(ciphertext, sizeof(ciphertext));
+    mbedtls_platform_zeroize(secret_key, sizeof(secret_key));
+    mbedtls_platform_zeroize(shared_secret, sizeof(shared_secret));
 
     if (encrypted_data_base64)
     {
