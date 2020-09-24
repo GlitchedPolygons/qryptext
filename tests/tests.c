@@ -352,6 +352,8 @@ static const qryptext_falcon1024_public_key TEST_PUBLIC_KEY_FALCON1024_ALT = { .
 
 static const char TEST_STRING[] = "Zwei Dinge sind unendlich, das Universum und die menschliche Dummheit, aber beim Universum bin ich mir noch nicht ganz sicher.   - Albert Einstein";
 
+#define TEST_STRING_LENGTH sizeof(TEST_STRING)
+
 static void qryptext_fprintf_enables_and_disables_correctly()
 {
     qryptext_disable_fprintf();
@@ -538,7 +540,7 @@ static void qryptext_encrypt_raw_binary_decrypts_successfully()
 
     //
 
-    const size_t TEST_STRING_LENGTH = sizeof(TEST_STRING);
+    
 
     encrypted_string_length = qryptext_calc_encryption_output_length(TEST_STRING_LENGTH);
     encrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
@@ -570,7 +572,7 @@ static void qryptext_encrypt_base64_decrypts_successfully()
 
     //
 
-    const size_t TEST_STRING_LENGTH = sizeof(TEST_STRING);
+    
 
     encrypted_string_length = qryptext_calc_base64_length(qryptext_calc_encryption_output_length(TEST_STRING_LENGTH));
     encrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
@@ -612,7 +614,7 @@ static void qryptext_encrypt_bin_decrypt_with_invalid_key_fails()
     memset(decrypted_string, 0x00, encrypted_string_length);
 
     TEST_CHECK(0 != qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, INVALID_KEY));
-    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
+    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, TEST_STRING_LENGTH));
     //
 
     free(encrypted_string);
@@ -666,7 +668,7 @@ static void qryptext_encrypt_bin_decrypt_with_invalid_key_2_fails()
     memset(decrypted_string, 0x00, encrypted_string_length);
 
     TEST_CHECK(0 != qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, INVALID_KEY2));
-    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
+    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, TEST_STRING_LENGTH));
     //
 
     free(encrypted_string);
@@ -692,14 +694,14 @@ static void qryptext_encrypt_bin_decrypt_with_wrong_key_fails()
     memset(decrypted_string, 0x00, encrypted_string_length);
 
     TEST_CHECK(0 != qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, TEST_SECRET_KEY_KYBER1024_ALT));
-    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
+    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, TEST_STRING_LENGTH));
 
     qryptext_kyber1024_keypair kyber1024_keypair;
     int r = qryptext_kyber1024_generate_keypair(&kyber1024_keypair);
     TEST_CHECK(r == 0);
 
     TEST_CHECK(0 != qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, kyber1024_keypair.secret_key));
-    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
+    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, TEST_STRING_LENGTH));
 
     //
 
@@ -849,3 +851,5 @@ TEST_LIST = {
     // -----------------------------------------------------------
     { NULL, NULL } //
 };
+
+#undef TEST_STRING_LENGTH
