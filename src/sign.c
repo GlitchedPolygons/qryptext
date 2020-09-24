@@ -19,6 +19,8 @@
 #include <oqs/oqs.h>
 #include <pqclean_falcon-1024_clean/api.h>
 
+#include <mbedtls/base64.h>
+
 #include "qryptext/constants.h"
 #include "qryptext/util.h"
 #include "qryptext/sign.h"

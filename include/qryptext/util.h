@@ -46,7 +46,6 @@ extern "C" {
  */
 #define QRYPTEXT_MAX(x, y) (((x) > (y)) ? (x) : (y))
 
-
 /**
  * Checks whether qryptext's fprintf is enabled (whether errors are fprintfed into stderr).
  * @return Whether errors are fprintfed into stderr or not.
@@ -137,7 +136,7 @@ QRYPTEXT_API void qryptext_dev_urandom(uint8_t* output_buffer, size_t output_buf
 static inline uint64_t qryptext_get_random_big_integer()
 {
     srand(time(NULL) * time(NULL));
-    return rand() * rand() * rand() * rand();
+    return (uint64_t)rand() * (uint64_t)rand() * (uint64_t)rand() * (uint64_t)rand();
 }
 
 static const unsigned char empty32[32] = {

@@ -30,7 +30,7 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "qryptext/types.h"
+#include "types.h"
 
 /**
  * Verifies a data set's signature using Falcon-1024.

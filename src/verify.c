@@ -15,6 +15,7 @@
 */
 
 #include <string.h>
+#include <mbedtls/base64.h>
 #include <mbedtls/platform_util.h>
 
 #include <oqs/oqs.h>

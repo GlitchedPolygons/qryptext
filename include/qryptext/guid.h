@@ -30,7 +30,7 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include <qryptext/types.h>
+#include "types.h"
 
 /**
  * @private

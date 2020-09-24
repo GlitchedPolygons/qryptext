@@ -16,7 +16,11 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include "qryptext/util.h"
+
+#include <oqs/oqs.h>
+#include <pqclean_falcon-1024_clean/api.h>
 
 #ifdef _WIN32
 #define WIN32_NO_STATUS
@@ -26,8 +30,6 @@
 #endif
 
 #include <mbedtls/base64.h>
-#include <oqs/kem_kyber.h>
-#include <pqclean_kyber1024_clean/api.h>
 
 static bool _qryptext_fprintf_enabled = true;
 
@@ -55,7 +57,7 @@ void qryptext_dev_urandom(uint8_t* output_buffer, const size_t output_buffer_siz
     if (output_buffer != NULL && output_buffer_size > 0)
     {
 #ifdef _WIN32
-        BCryptGenRandom(NULL, output_buffer, output_buffer_size, BCRYPT_USE_SYSTEM_PREFERRED_RNG);
+        BCryptGenRandom(NULL, output_buffer, (ULONG)output_buffer_size, BCRYPT_USE_SYSTEM_PREFERRED_RNG);
 #else
         FILE* rnd = fopen("/dev/urandom", "rb");
         if (rnd != NULL)

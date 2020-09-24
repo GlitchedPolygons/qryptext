@@ -17,6 +17,9 @@
 #include <string.h>
 
 #include <oqs/oqs.h>
+#include <pqclean_kyber1024_clean/api.h>
+#include <pqclean_falcon-1024_clean/api.h>
+
 #include <mbedtls/platform_util.h>
 
 #include "qryptext/util.h"

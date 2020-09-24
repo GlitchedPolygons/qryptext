@@ -19,6 +19,7 @@
 #include <mbedtls/aes.h>
 #include <mbedtls/gcm.h>
 #include <mbedtls/hkdf.h>
+#include <mbedtls/base64.h>
 #include <mbedtls/entropy.h>
 #include <mbedtls/platform.h>
 #include <mbedtls/ctr_drbg.h>

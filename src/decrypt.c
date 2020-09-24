@@ -19,6 +19,10 @@
 #include <mbedtls/md.h>
 #include <mbedtls/gcm.h>
 #include <mbedtls/hkdf.h>
+#include <mbedtls/base64.h>
+
+#include <oqs/oqs.h>
+#include <pqclean_kyber1024_clean/api.h>
 
 #include "qryptext/util.h"
 #include "qryptext/guid.h"
@@ -156,5 +160,5 @@ exit:
         free(input);
     }
 
-    return (ret);
+    return ret;
 }

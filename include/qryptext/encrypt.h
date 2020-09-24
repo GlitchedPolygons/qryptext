@@ -30,7 +30,7 @@ extern "C" {
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include "qryptext/types.h"
+#include "types.h"
 
 /**
  * Encrypts a given byte array of data using AES256-CBC, Kyber1024 and (optionally) RSA.

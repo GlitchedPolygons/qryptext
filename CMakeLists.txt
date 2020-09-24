@@ -88,6 +88,17 @@ set(${PROJECT_NAME}_SOURCES
         ${CMAKE_CURRENT_LIST_DIR}/src/verify.c
         )
 
+set(${PROJECT_NAME}_PREV_BUILD_SHARED_LIBS BUILD_SHARED_LIBS)
+
+add_library(${PROJECT_NAME}
+        ${${PROJECT_NAME}_HEADERS}
+        ${${PROJECT_NAME}_SOURCES}
+        )
+
+if (BUILD_SHARED_LIBS)
+    set(BUILD_SHARED_LIBS Off)
+endif ()
+
 if (NOT TARGET mbedtls)
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib/mbedtls mbedtls)
 endif ()
@@ -95,11 +106,6 @@ endif ()
 if (NOT TARGET oqs)
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib/oqs)
 endif ()
-
-add_library(${PROJECT_NAME}
-        ${${PROJECT_NAME}_HEADERS}
-        ${${PROJECT_NAME}_SOURCES}
-        )
 
 if (${${PROJECT_NAME}_BUILD_DLL} OR BUILD_SHARED_LIBS)
     set_property(TARGET oqs PROPERTY POSITION_INDEPENDENT_CODE ON)
@@ -205,3 +211,5 @@ if (${${PROJECT_NAME}_ENABLE_TESTS})
         coverage_evaluate()
     endif ()
 endif ()
+
+set(BUILD_SHARED_LIBS ${${PROJECT_NAME}_PREV_BUILD_SHARED_LIBS})

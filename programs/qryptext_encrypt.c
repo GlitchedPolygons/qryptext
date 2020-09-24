@@ -19,6 +19,7 @@
 #include <string.h>
 #include <qryptext/util.h>
 #include <qryptext/encrypt.h>
+#include <pqclean_kyber1024_clean/api.h>
 
 int main(const int argc, const char* argv[])
 {

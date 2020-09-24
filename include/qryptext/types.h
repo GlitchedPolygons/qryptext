@@ -39,8 +39,7 @@ extern "C" {
 
 #include <stddef.h>
 #include <stdint.h>
-#include <pqclean_kyber1024_clean/api.h>
-#include <pqclean_falcon-1024_clean/api.h>
+#include "constants.h"
 
 typedef struct qryptext_kyber1024_secret_key
 {

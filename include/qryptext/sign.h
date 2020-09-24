@@ -30,7 +30,7 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "qryptext/types.h"
+#include "types.h"
 
 /**
  * Signs a given byte array (message) using Falcon-1024 (which within OQS uses SHAKE256 hashing internally).

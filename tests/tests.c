@@ -31,6 +31,8 @@
 #include "qryptext/decrypt.h"
 #include "qryptext/constants.h"
 
+#include <oqs/oqs.h>
+
 #define TEST_INIT qryptext_disable_fprintf()
 #include <acutest.h>
 
@@ -843,5 +845,7 @@ TEST_LIST = {
     { "qryptext_sign_INVALID_arg_fails", qryptext_sign_INVALID_arg_fails }, //
     { "qryptext_sign_insufficient_output_buffer_size_fails", qryptext_sign_insufficient_output_buffer_size_fails }, //
     { "qryptext_verify_signature_NULL_arg_fails", qryptext_verify_signature_NULL_arg_fails }, //
-    { "qryptext_verify_signature_INVALID_arg_fails", qryptext_verify_signature_INVALID_arg_fails } //
+    { "qryptext_verify_signature_INVALID_arg_fails", qryptext_verify_signature_INVALID_arg_fails }, //
+    // -----------------------------------------------------------
+    { NULL, NULL } //
 };

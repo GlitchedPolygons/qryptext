@@ -29,7 +29,7 @@ extern "C" {
 
 #include <stdint.h>
 #include <stddef.h>
-#include "qryptext/types.h"
+#include "types.h"
 
 /**
  * Decrypts a given byte array of data that was encrypted using qryptext_encrypt().

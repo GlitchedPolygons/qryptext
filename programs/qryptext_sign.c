@@ -19,6 +19,8 @@
 #include <string.h>
 #include <qryptext/util.h>
 #include <qryptext/sign.h>
+#include <oqs/oqs.h>
+#include <pqclean_falcon-1024_clean/api.h>
 
 int main(const int argc, const char* argv[])
 {

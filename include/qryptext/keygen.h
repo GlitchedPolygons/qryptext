@@ -27,7 +27,7 @@
 extern "C" {
 #endif
 
-#include "qryptext/types.h"
+#include "types.h"
 
 /**
  * Generates a fresh Kyber-1024 keypair to use for the KEM functionalities.
