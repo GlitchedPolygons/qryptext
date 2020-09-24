@@ -19,7 +19,7 @@ cov=Off
 if [ "$1" = "cov" ]; then cov=On; fi
 rm -rf "$REPO"/build
 mkdir -p "$REPO"/build && cd "$REPO"/build || exit
-cmake -DBUILD_SHARED_LIBS=Off -DUSE_SHARED_MBEDTLS_LIBRARY=Off -DQRYPTEXT_ENABLE_TESTS=On -DENABLE_COVERAGE="${cov}" -DCMAKE_BUILD_TYPE=Debug ..
-cmake --build . --config Debug
-./run_tests || ./Debug/run_tests.exe
+cmake -DBUILD_SHARED_LIBS=Off -DUSE_SHARED_MBEDTLS_LIBRARY=Off -Dqryptext_ENABLE_TESTS=On -DENABLE_COVERAGE="${cov}" -DCMAKE_BUILD_TYPE=Debug ..
+cmake --build . --config Debug || exit
+./run_tests || ./Debug/run_tests.exe || exit
 cd "$REPO" || exit
