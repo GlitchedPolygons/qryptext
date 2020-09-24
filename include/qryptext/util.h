@@ -32,17 +32,8 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
-
-#ifdef _WIN32
-#define WIN32_NO_STATUS
-#include <windows.h>
-#undef WIN32_NO_STATUS
-#include <bcrypt.h>
-#endif
-
-#include <mbedtls/base64.h>
-#include <oqs/kem_kyber.h>
-#include <pqclean_kyber1024_clean/api.h>
+#include <stdbool.h>
+#include "types.h"
 
 /**
  * <c>x < y ? x : y</c>
@@ -59,7 +50,7 @@ extern "C" {
  * Checks whether qryptext's fprintf is enabled (whether errors are fprintfed into stderr).
  * @return Whether errors are fprintfed into stderr or not.
  */
-bool qryptext_is_fprintf_enabled();
+QRYPTEXT_API bool qryptext_is_fprintf_enabled();
 
 /**
  * Like fprintf() except it doesn't do anything. Like printing into <c>/dev/null</c> :D lots of fun!
@@ -79,12 +70,12 @@ extern int (*_qryptext_fprintf_fptr)(FILE* stream, const char* format, ...);
 /**
  * Enables qryptext's use of fprintf().
  */
-void qryptext_enable_fprintf();
+QRYPTEXT_API void qryptext_enable_fprintf();
 
 /**
  * Disables qryptext's use of fprintf().
  */
-void qryptext_disable_fprintf();
+QRYPTEXT_API void qryptext_disable_fprintf();
 
 /** @private */
 #define qryptext_fprintf _qryptext_fprintf_fptr
@@ -94,21 +85,14 @@ void qryptext_disable_fprintf();
  * @param plaintext_length The amount of bytes to encrypt.
  * @return The final output size of the ciphertext if you encrypt data that is plaintext_length bytes long with qryptext_encrypt().
  */
-static inline size_t qryptext_calc_encryption_output_length(const size_t plaintext_length)
-{
-    return 16 + 32 + 16 + OQS_KEM_kyber_1024_length_ciphertext + plaintext_length;
-}
+QRYPTEXT_API size_t qryptext_calc_encryption_output_length(size_t plaintext_length);
 
 /**
  * Calculates the output length in bytes after base64-encoding \p data_length bytes (includes +1 for a NUL-terminator character)..
  * @param data_length The number of bytes you'd base64-encode.
  * @return How much memory you should allocate if you were to encode \p data_length bytes.
  */
-static inline size_t qryptext_calc_base64_length(const size_t data_length)
-{
-    size_t r;
-    return mbedtls_base64_encode(NULL, 0, &r, NULL, data_length) ? ((4 * data_length / 3 + 3) & ~(unsigned)3) + 1 : r;
-}
+QRYPTEXT_API size_t qryptext_calc_base64_length(size_t data_length);
 
 /**
  * Converts a hex string to binary array. <p>
@@ -120,7 +104,7 @@ static inline size_t qryptext_calc_base64_length(const size_t data_length)
  * @param output_length [OPTIONAL] Where to write the output array length into. This is always gonna be <c>hexstr_length / 2</c>, but you can still choose to write it out just to be sure. If you want to omit this: no problem.. just pass <c>NULL</c>!
  * @return <c>0</c> if conversion succeeded. <c>1</c> if one or more required arguments were <c>NULL</c> or invalid. <c>2</c> if the hexadecimal string is in an invalid format (e.g. not divisible by 2). <c>3</c> if output buffer size was insufficient (needs to be at least <c>(hexstr_length / 2) + 1</c> bytes).
  */
-int qryptext_hexstr2bin(const char* hexstr, size_t hexstr_length, uint8_t* output, size_t output_size, size_t* output_length);
+QRYPTEXT_API int qryptext_hexstr2bin(const char* hexstr, size_t hexstr_length, uint8_t* output, size_t output_size, size_t* output_length);
 
 /**
  * Converts a byte array to a hex string. <p>
@@ -133,33 +117,14 @@ int qryptext_hexstr2bin(const char* hexstr, size_t hexstr_length, uint8_t* outpu
  * @param uppercase Should the \p output string characters be UPPER- or lowercase?
  * @return <c>0</c> if conversion succeeded. <c>1</c> if one or more required arguments were <c>NULL</c> or invalid. <c>2</c> if the output buffer size is insufficient: please allocate at least <c>(bin_length * 2) + 1</c> bytes!
  */
-int qryptext_bin2hexstr(const uint8_t* bin, size_t bin_length, char* output, size_t output_size, size_t* output_length, bool uppercase);
+QRYPTEXT_API int qryptext_bin2hexstr(const uint8_t* bin, size_t bin_length, char* output, size_t output_size, size_t* output_length, bool uppercase);
 
 /**
  * (Tries to) read from <c>/dev/urandom</c> (or Windows equivalent, yeah...) filling the given \p output_buffer with \p output_buffer_size random bytes.
  * @param output_buffer Where to write the random bytes into.
  * @param output_buffer_size How many random bytes to write into \p output_buffer
  */
-static inline void qryptext_dev_urandom(uint8_t* output_buffer, const size_t output_buffer_size)
-{
-    if (output_buffer != NULL && output_buffer_size > 0)
-    {
-#ifdef _WIN32
-        BCryptGenRandom(NULL, output_buffer, output_buffer_size, BCRYPT_USE_SYSTEM_PREFERRED_RNG);
-#else
-        FILE* rnd = fopen("/dev/urandom", "rb");
-        if (rnd != NULL)
-        {
-            const size_t n = fread(output_buffer, sizeof(uint8_t), output_buffer_size, rnd);
-            if (n != output_buffer_size)
-            {
-                qryptext_fprintf(stderr, "qryptext: Warning! Only %zu bytes out of %zu have been read from /dev/urandom\n", n, output_buffer_size);
-            }
-            fclose(rnd);
-        }
-#endif
-    }
-}
+QRYPTEXT_API void qryptext_dev_urandom(uint8_t* output_buffer, size_t output_buffer_size);
 
 /**
  * Gets a random big integer. This only features very limited randomness due to usage of <c>rand()</c>! <p>

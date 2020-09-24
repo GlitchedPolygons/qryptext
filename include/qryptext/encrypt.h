@@ -43,7 +43,7 @@ extern "C" {
  * @param public_kyber1024_key The Kyber1024 public key with which to encrypt the AES key.
  * @return The status code: <c>0</c> if encryption succeeded, all other status codes can be found inside the various qryptext header files.
  */
-int qryptext_encrypt(const uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, bool output_base64, qryptext_kyber1024_public_key public_kyber1024_key);
+QRYPTEXT_API int qryptext_encrypt(const uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, bool output_base64, qryptext_kyber1024_public_key public_kyber1024_key);
 
 #ifdef __cplusplus
 } // extern "C"

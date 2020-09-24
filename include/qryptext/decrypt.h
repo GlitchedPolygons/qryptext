@@ -42,7 +42,7 @@ extern "C" {
  * @param secret_kyber1024_key The Kyber1024 private key with which to decrypt the AES key.
  * @return The status code: <c>0</c> for success, all other status codes can be found inside the various qryptext header files.
  */
-int qryptext_decrypt(uint8_t* encrypted_data, size_t encrypted_data_length, bool encrypted_data_base64, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, qryptext_kyber1024_secret_key secret_kyber1024_key);
+QRYPTEXT_API int qryptext_decrypt(uint8_t* encrypted_data, size_t encrypted_data_length, bool encrypted_data_base64, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, qryptext_kyber1024_secret_key secret_kyber1024_key);
 
 #ifdef __cplusplus
 } // extern "C"

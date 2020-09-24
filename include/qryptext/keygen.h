@@ -34,14 +34,14 @@ extern "C" {
  * @param output qryptext_kyber1024_keypair instance into which to write the keypair.
  * @return
  */
-int qryptext_kyber1024_generate_keypair(qryptext_kyber1024_keypair* output);
+QRYPTEXT_API int qryptext_kyber1024_generate_keypair(qryptext_kyber1024_keypair* output);
 
 /**
  * Generates a fresh Falcon-1024 keypair to use for signing and verifying.
  * @param output qryptext_kyber1024_keypair instance into which to write the keypair.
  * @return
  */
-int qryptext_falcon1024_generate_keypair(qryptext_falcon1024_keypair* output);
+QRYPTEXT_API int qryptext_falcon1024_generate_keypair(qryptext_falcon1024_keypair* output);
 
 #ifdef __cplusplus
 } // extern "C"

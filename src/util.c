@@ -18,6 +18,17 @@
 #include <string.h>
 #include "qryptext/util.h"
 
+#ifdef _WIN32
+#define WIN32_NO_STATUS
+#include <windows.h>
+#undef WIN32_NO_STATUS
+#include <bcrypt.h>
+#endif
+
+#include <mbedtls/base64.h>
+#include <oqs/kem_kyber.h>
+#include <pqclean_kyber1024_clean/api.h>
+
 static bool _qryptext_fprintf_enabled = true;
 
 bool qryptext_is_fprintf_enabled()
@@ -39,6 +50,37 @@ void qryptext_disable_fprintf()
     _qryptext_fprintf_fptr = &qryptext_printvoid;
 }
 
+void qryptext_dev_urandom(uint8_t* output_buffer, const size_t output_buffer_size)
+{
+    if (output_buffer != NULL && output_buffer_size > 0)
+    {
+#ifdef _WIN32
+        BCryptGenRandom(NULL, output_buffer, output_buffer_size, BCRYPT_USE_SYSTEM_PREFERRED_RNG);
+#else
+        FILE* rnd = fopen("/dev/urandom", "rb");
+        if (rnd != NULL)
+        {
+            const size_t n = fread(output_buffer, sizeof(uint8_t), output_buffer_size, rnd);
+            if (n != output_buffer_size)
+            {
+                qryptext_fprintf(stderr, "qryptext: Warning! Only %zu bytes out of %zu have been read from /dev/urandom\n", n, output_buffer_size);
+            }
+            fclose(rnd);
+        }
+#endif
+    }
+}
+
+size_t qryptext_calc_encryption_output_length(const size_t plaintext_length)
+{
+    return 16 + 32 + 16 + OQS_KEM_kyber_1024_length_ciphertext + plaintext_length;
+}
+
+size_t qryptext_calc_base64_length(const size_t data_length)
+{
+    size_t r;
+    return mbedtls_base64_encode(NULL, 0, &r, NULL, data_length) ? ((4 * data_length / 3 + 3) & ~(unsigned)3) + 1 : r;
+}
 
 int qryptext_hexstr2bin(const char* hexstr, const size_t hexstr_length, unsigned char* output, const size_t output_size, size_t* output_length)
 {

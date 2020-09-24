@@ -52,7 +52,7 @@ static inline qryptext_guid qryptext_empty_guid()
  * @param hyphens Should the GUID contain hyphen separators?
  * @return The qryptext_guid
  */
-qryptext_guid qryptext_new_guid(bool lowercase, bool hyphens);
+QRYPTEXT_API qryptext_guid qryptext_new_guid(bool lowercase, bool hyphens);
 
 #ifdef __cplusplus
 } // extern "C"

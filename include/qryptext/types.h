@@ -27,6 +27,16 @@
 extern "C" {
 #endif
 
+#if defined(_WIN32) && defined(QRYPTEXT_DLL)
+#ifdef QRYPTEXT_BUILD_DLL
+#define QRYPTEXT_API __declspec(dllexport)
+#else
+#define QRYPTEXT_API __declspec(dllimport)
+#endif
+#else
+#define QRYPTEXT_API
+#endif
+
 #include <stddef.h>
 #include <stdint.h>
 #include <pqclean_kyber1024_clean/api.h>
