@@ -3,6 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>GlitchedPolygons.QryptextSharp</AssemblyName>
+    <RootNamespace>GlitchedPolygons.QryptextSharp</RootNamespace>
   </PropertyGroup>
 
 </Project>
