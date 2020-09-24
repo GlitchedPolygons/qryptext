@@ -21,19 +21,23 @@
 #include <string.h>
 #include <stdbool.h>
 #include <setjmp.h>
-#include <cmocka.h>
+
 #include "qryptext/util.h"
 #include "qryptext/sign.h"
+#include "qryptext/types.h"
 #include "qryptext/verify.h"
 #include "qryptext/keygen.h"
 #include "qryptext/encrypt.h"
 #include "qryptext/decrypt.h"
 #include "qryptext/constants.h"
 
+#define TEST_INIT qryptext_disable_fprintf()
+#include <acutest.h>
+
 /* A test case that does nothing and succeeds. */
-static void null_test_success(void** state)
+static void null_test_success()
 {
-    (void)state;
+    (void)0;
 }
 
 // --------------------------------------------------------------------------------------------------------------
@@ -346,52 +350,65 @@ static const qryptext_falcon1024_public_key TEST_PUBLIC_KEY_FALCON1024_ALT = { .
 
 static const char TEST_STRING[] = "Zwei Dinge sind unendlich, das Universum und die menschliche Dummheit, aber beim Universum bin ich mir noch nicht ganz sicher.   - Albert Einstein";
 
-void qryptext_encrypt_null_args_fails(void** state)
+static void qryptext_fprintf_enables_and_disables_correctly()
+{
+    qryptext_disable_fprintf();
+    TEST_CHECK(!qryptext_is_fprintf_enabled());
+    TEST_CHECK(memcmp(_qryptext_fprintf_fptr, &fprintf, sizeof(&fprintf)) != 0);
+
+    qryptext_enable_fprintf();
+    TEST_CHECK(qryptext_is_fprintf_enabled());
+    TEST_CHECK(memcmp(_qryptext_fprintf_fptr, &fprintf, sizeof(&fprintf)) == 0);
+
+    qryptext_disable_fprintf();
+}
+
+static void qryptext_encrypt_null_args_fails()
 {
     size_t olen;
     uint8_t tmp[4096];
-    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_encrypt(NULL, 16, tmp, 4096, &olen, false, TEST_PUBLIC_KEY_KYBER1024));
-    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_encrypt((uint8_t*)"TESTTESTTESTTEST", 16, NULL, 4096, &olen, false, TEST_PUBLIC_KEY_KYBER1024));
+    TEST_CHECK(QRYPTEXT_ERROR_NULL_ARG == qryptext_encrypt(NULL, 16, tmp, 4096, &olen, false, TEST_PUBLIC_KEY_KYBER1024));
+    TEST_CHECK(QRYPTEXT_ERROR_NULL_ARG == qryptext_encrypt((uint8_t*)"TESTTESTTESTTEST", 16, NULL, 4096, &olen, false, TEST_PUBLIC_KEY_KYBER1024));
 }
 
-void qryptext_encrypt_invalid_args_fails(void** state)
+static void qryptext_encrypt_invalid_args_fails()
 {
     size_t olen;
     uint8_t tmp[4096];
-    assert_int_equal(QRYPTEXT_ERROR_INVALID_ARG, qryptext_encrypt((uint8_t*)"TESTTESTTESTTEST", 0, tmp, 4096, &olen, false, TEST_PUBLIC_KEY_KYBER1024));
+    TEST_CHECK(QRYPTEXT_ERROR_INVALID_ARG == qryptext_encrypt((uint8_t*)"TESTTESTTESTTEST", 0, tmp, 4096, &olen, false, TEST_PUBLIC_KEY_KYBER1024));
 }
 
-void qryptext_encrypt_insufficient_output_buffer_size_fails(void** state)
+static void qryptext_encrypt_insufficient_output_buffer_size_fails()
 {
     size_t olen;
     uint8_t tmp[512];
-    assert_int_equal(QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE, qryptext_encrypt((uint8_t*)"TESTTESTTESTTEST", 16, tmp, 512, &olen, false, TEST_PUBLIC_KEY_KYBER1024));
+    TEST_CHECK(QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE == qryptext_encrypt((uint8_t*)"TESTTESTTESTTEST", 16, tmp, 512, &olen, false, TEST_PUBLIC_KEY_KYBER1024));
 }
 
-void qryptext_decrypt_null_args_fails(void** state)
+static void qryptext_decrypt_null_args_fails()
 {
     size_t olen;
     uint8_t tmp[4096];
-    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_decrypt((uint8_t*)"testtesttesttest", 16, false, NULL, 4096, &olen, TEST_SECRET_KEY_KYBER1024));
-    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_decrypt(NULL, 16, false, tmp, 4096, &olen, TEST_SECRET_KEY_KYBER1024));
+    TEST_CHECK(QRYPTEXT_ERROR_NULL_ARG == qryptext_decrypt((uint8_t*)"testtesttesttest", 16, false, NULL, 4096, &olen, TEST_SECRET_KEY_KYBER1024));
+    TEST_CHECK(QRYPTEXT_ERROR_NULL_ARG == qryptext_decrypt(NULL, 16, false, tmp, 4096, &olen, TEST_SECRET_KEY_KYBER1024));
 }
 
-void qryptext_decrypt_invalid_args_fails(void** state)
+static void qryptext_decrypt_invalid_args_fails()
 {
     size_t olen;
     uint8_t tmp[4096];
-    assert_int_equal(QRYPTEXT_ERROR_INVALID_ARG, qryptext_decrypt((uint8_t*)"testtesttesttest", 16, false, tmp, 4096, &olen, TEST_SECRET_KEY_KYBER1024));
-    assert_int_equal(QRYPTEXT_ERROR_INVALID_ARG, qryptext_decrypt((uint8_t*)"testtesttesttest", 4096, false, tmp, 0, &olen, TEST_SECRET_KEY_KYBER1024));
+    TEST_CHECK(QRYPTEXT_ERROR_INVALID_ARG == qryptext_decrypt((uint8_t*)"testtesttesttest", 16, false, tmp, 4096, &olen, TEST_SECRET_KEY_KYBER1024));
+    TEST_CHECK(QRYPTEXT_ERROR_INVALID_ARG == qryptext_decrypt((uint8_t*)"testtesttesttest", 4096, false, tmp, 0, &olen, TEST_SECRET_KEY_KYBER1024));
 }
 
-void qryptext_decrypt_insufficient_output_buffer_size_fails(void** state)
+static void qryptext_decrypt_insufficient_output_buffer_size_fails()
 {
     size_t olen;
     uint8_t tmp[512];
-    assert_int_equal(QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE, qryptext_decrypt((uint8_t*)"testtesttesttest", 4096, false, tmp, 16, &olen, TEST_SECRET_KEY_KYBER1024));
+    TEST_CHECK(QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE == qryptext_decrypt((uint8_t*)"testtesttesttest", 4096, false, tmp, 16, &olen, TEST_SECRET_KEY_KYBER1024));
 }
 
-static void qryptext_hexstr2bin_invalid_args_returns_1(void** state)
+static void qryptext_hexstr2bin_invalid_args_returns_1()
 {
     char hex[] = "90b008b752871710f032e58396eb75ead53b4abd83e074a855e8ca4c5fef4de7bb5e6a191cc10132466dbaee16a031c0046ce38535b8f922b93edd5e"
                  "429bcae7d715820107304e8e62818280cf643434e307d85dd659245e9a5588d93c5b62f34713e00b22d5c531f544de2b81879248b3d4e9b1160a60b9"
@@ -402,114 +419,114 @@ static void qryptext_hexstr2bin_invalid_args_returns_1(void** state)
     unsigned char bin[1024];
     size_t binlen;
 
-    assert_int_equal(1, qryptext_hexstr2bin(NULL, 0, NULL, 0, NULL));
-    assert_int_equal(1, qryptext_hexstr2bin(hex, 0, bin, sizeof(bin), NULL));
-    assert_int_equal(1, qryptext_hexstr2bin(NULL, 20, bin, sizeof(bin), NULL));
-    assert_int_equal(1, qryptext_hexstr2bin(hex, sizeof(hex), NULL, 0, &binlen));
+    TEST_CHECK(1 == qryptext_hexstr2bin(NULL, 0, NULL, 0, NULL));
+    TEST_CHECK(1 == qryptext_hexstr2bin(hex, 0, bin, sizeof(bin), NULL));
+    TEST_CHECK(1 == qryptext_hexstr2bin(NULL, 20, bin, sizeof(bin), NULL));
+    TEST_CHECK(1 == qryptext_hexstr2bin(hex, sizeof(hex), NULL, 0, &binlen));
 }
 
-static void qryptext_hexstr2bin_hexlen_odd_number_fails_returns_2(void** state)
+static void qryptext_hexstr2bin_hexlen_odd_number_fails_returns_2()
 {
     char hex[] = "f5c2351c941cbba29313771c84693dacb80f21be8bcb07406217ee3a07143e2a8fdbccd083d045a2818858c2faf72e58ec7e006a1386361c";
 
     unsigned char bin[128];
     size_t binlen;
 
-    assert_int_equal(2, qryptext_hexstr2bin(hex, strlen(hex) - 1, bin, sizeof(bin), &binlen));
-    assert_int_equal(2, qryptext_hexstr2bin(hex, sizeof(hex) - 2, bin, sizeof(bin), &binlen));
+    TEST_CHECK(2 == qryptext_hexstr2bin(hex, strlen(hex) - 1, bin, sizeof(bin), &binlen));
+    TEST_CHECK(2 == qryptext_hexstr2bin(hex, sizeof(hex) - 2, bin, sizeof(bin), &binlen));
 }
 
-static void qryptext_hexstr2bin_insufficient_output_buffer_size_fails_returns_3(void** state)
+static void qryptext_hexstr2bin_insufficient_output_buffer_size_fails_returns_3()
 {
     char hex[] = "f5c2351c941cbba29313771c84693dacb80f21be8bcb07406217ee3a07143e2a8fdbccd083d045a2818858c2faf72e58ec7e006a1386361c";
 
     unsigned char bin[1024];
     size_t binlen;
 
-    assert_int_equal(3, qryptext_hexstr2bin(hex, strlen(hex), bin, 32, &binlen));
-    assert_int_equal(3, qryptext_hexstr2bin(hex, strlen(hex), bin, strlen(hex) / 2, &binlen));
+    TEST_CHECK(3 == qryptext_hexstr2bin(hex, strlen(hex), bin, 32, &binlen));
+    TEST_CHECK(3 == qryptext_hexstr2bin(hex, strlen(hex), bin, strlen(hex) / 2, &binlen));
 }
 
-static void qryptext_hexstr2bin_succeeds_both_with_and_without_nul_terminator(void** state)
+static void qryptext_hexstr2bin_succeeds_both_with_and_without_nul_terminator()
 {
     char hex[] = "f5c2351c941cbba29313771c84693dacb80f21be8bcb07406217ee3a07143e2a8fdbccd083d045a2818858c2faf72e58ec7e006a1386361c";
 
     unsigned char bin[1024];
     size_t binlen;
 
-    assert_int_equal(0, qryptext_hexstr2bin(hex, 112, bin, sizeof(bin), &binlen));
-    assert_int_equal(0, qryptext_hexstr2bin(hex, 113, bin, sizeof(bin), &binlen));
+    TEST_CHECK(0 == qryptext_hexstr2bin(hex, 112, bin, sizeof(bin), &binlen));
+    TEST_CHECK(0 == qryptext_hexstr2bin(hex, 113, bin, sizeof(bin), &binlen));
 }
 
-static void qryptext_bin2hexstr_succeeds_output_length_double_the_input_length(void** state)
+static void qryptext_bin2hexstr_succeeds_output_length_double_the_input_length()
 {
     unsigned char bin[] = { 0x0001, 0x0A, 0xB3, 0x71, 0x99, 0x4F, 0x8A, 0x11 };
 
     char hexstr[128];
     size_t hexstr_length;
 
-    assert_int_equal(0, qryptext_bin2hexstr(bin, sizeof(bin), hexstr, sizeof(hexstr), &hexstr_length, true));
-    assert_int_equal(hexstr_length, sizeof(bin) * 2);
-    assert_int_equal(hexstr[hexstr_length], '\0');
+    TEST_CHECK(0 == qryptext_bin2hexstr(bin, sizeof(bin), hexstr, sizeof(hexstr), &hexstr_length, true));
+    TEST_CHECK(hexstr_length == sizeof(bin) * 2);
+    TEST_CHECK(hexstr[hexstr_length] == '\0');
 }
 
-static void qryptext_bin2hexstr_null_or_invalid_args_fails_returns_1(void** state)
+static void qryptext_bin2hexstr_null_or_invalid_args_fails_returns_1()
 {
     unsigned char bin[] = { 0x0001, 0x0A, 0xB3, 0x71, 0x99, 0x4F, 0x8A, 0x11 };
 
     char hexstr[128];
     size_t hexstr_length;
 
-    assert_int_equal(1, qryptext_bin2hexstr(NULL, sizeof(bin), hexstr, sizeof(hexstr), &hexstr_length, true));
-    assert_int_equal(1, qryptext_bin2hexstr(bin, 0, hexstr, sizeof(hexstr), &hexstr_length, true));
-    assert_int_equal(1, qryptext_bin2hexstr(bin, sizeof(bin), NULL, sizeof(hexstr), &hexstr_length, true));
+    TEST_CHECK(1 == qryptext_bin2hexstr(NULL, sizeof(bin), hexstr, sizeof(hexstr), &hexstr_length, true));
+    TEST_CHECK(1 == qryptext_bin2hexstr(bin, 0, hexstr, sizeof(hexstr), &hexstr_length, true));
+    TEST_CHECK(1 == qryptext_bin2hexstr(bin, sizeof(bin), NULL, sizeof(hexstr), &hexstr_length, true));
 }
 
-static void qryptext_bin2hexstr_insufficient_output_buffer_size_returns_2(void** state)
+static void qryptext_bin2hexstr_insufficient_output_buffer_size_returns_2()
 {
     unsigned char bin[] = { 0x0001, 0x0A, 0xB3, 0x71, 0x99, 0x4F, 0x8A, 0x11 };
 
     char hexstr[128];
     size_t hexstr_length;
 
-    assert_int_equal(2, qryptext_bin2hexstr(bin, sizeof(bin), hexstr, 6, &hexstr_length, true));
+    TEST_CHECK(2 == qryptext_bin2hexstr(bin, sizeof(bin), hexstr, 6, &hexstr_length, true));
 
     // Double the size of the binary array should actually be enough,
     // but it's actually 1 byte too short: never forget to allocate +1 to allow for the NUL-terminator to fit in there!
-    assert_int_equal(2, qryptext_bin2hexstr(bin, sizeof(bin), hexstr, sizeof(bin) * 2, &hexstr_length, true));
+    TEST_CHECK(2 == qryptext_bin2hexstr(bin, sizeof(bin), hexstr, sizeof(bin) * 2, &hexstr_length, true));
 }
 
-static void qryptext_bin2hexstr_success_returns_0(void** state)
+static void qryptext_bin2hexstr_success_returns_0()
 {
     unsigned char bin[] = { 0x0001, 0x0A, 0xB3, 0x71, 0x99, 0x4F, 0x8A, 0x11 };
 
     char hexstr[128];
     size_t hexstr_length = 0;
 
-    assert_int_equal(0, qryptext_bin2hexstr(bin, sizeof(bin), hexstr, sizeof(hexstr), NULL, true));
+    TEST_CHECK(0 == qryptext_bin2hexstr(bin, sizeof(bin), hexstr, sizeof(hexstr), NULL, true));
 
     // If output length pointer arg is omitted (passed NULL), the variable should be left untouched indeed!
-    assert_int_equal(hexstr_length, 0);
+    TEST_CHECK(hexstr_length == 0);
 
-    assert_int_equal(0, qryptext_bin2hexstr(bin, sizeof(bin), hexstr, (sizeof(bin) * 2) + 1, &hexstr_length, true));
+    TEST_CHECK(0 == qryptext_bin2hexstr(bin, sizeof(bin), hexstr, (sizeof(bin) * 2) + 1, &hexstr_length, true));
 
     // output string is NUL-terminated (which is why (sizeof(bin) * 2) + 1 bytes need to be allocated), but the NUL-terminator is not counted in the output length.
     // The output length of a binary array converted to hex string is always sizeof(bin) * 2
 
-    assert_int_equal(sizeof(bin) * 2, hexstr_length);
+    TEST_CHECK(sizeof(bin) * 2 == hexstr_length);
 }
 
-static void qryptext_generate_kyber1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG(void** state)
+static void qryptext_generate_kyber1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG()
 {
-    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_kyber1024_generate_keypair(NULL));
+    TEST_CHECK(QRYPTEXT_ERROR_NULL_ARG == qryptext_kyber1024_generate_keypair(NULL));
 }
 
-static void qryptext_generate_falcon1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG(void** state)
+static void qryptext_generate_falcon1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG()
 {
-    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_falcon1024_generate_keypair(NULL));
+    TEST_CHECK(QRYPTEXT_ERROR_NULL_ARG == qryptext_falcon1024_generate_keypair(NULL));
 }
 
-static void qryptext_encrypt_raw_binary_decrypts_successfully(void** state)
+static void qryptext_encrypt_raw_binary_decrypts_successfully()
 {
     int r;
     uint8_t* encrypted_string = NULL;
@@ -525,15 +542,15 @@ static void qryptext_encrypt_raw_binary_decrypts_successfully(void** state)
     encrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
 
     r = qryptext_encrypt((uint8_t*)TEST_STRING, TEST_STRING_LENGTH, encrypted_string, encrypted_string_length, NULL, false, TEST_PUBLIC_KEY_KYBER1024);
-    assert_int_equal(0, r);
-    assert_int_not_equal(0, memcmp(TEST_STRING, encrypted_string, TEST_STRING_LENGTH));
+    TEST_CHECK(0 == r);
+    TEST_CHECK(0 != memcmp(TEST_STRING, encrypted_string, TEST_STRING_LENGTH));
 
     decrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
     r = qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, TEST_SECRET_KEY_KYBER1024);
-    assert_int_equal(0, r);
+    TEST_CHECK(0 == r);
 
-    assert_int_equal(0, memcmp(TEST_STRING, decrypted_string, TEST_STRING_LENGTH));
-    assert_int_equal(TEST_STRING_LENGTH, decrypted_string_length);
+    TEST_CHECK(0 == memcmp(TEST_STRING, decrypted_string, TEST_STRING_LENGTH));
+    TEST_CHECK(TEST_STRING_LENGTH == decrypted_string_length);
 
     //
 
@@ -541,7 +558,7 @@ static void qryptext_encrypt_raw_binary_decrypts_successfully(void** state)
     free(decrypted_string);
 }
 
-static void qryptext_encrypt_base64_decrypts_successfully(void** state)
+static void qryptext_encrypt_base64_decrypts_successfully()
 {
     int r;
     uint8_t* encrypted_string = NULL;
@@ -557,14 +574,14 @@ static void qryptext_encrypt_base64_decrypts_successfully(void** state)
     encrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
 
     r = qryptext_encrypt((uint8_t*)TEST_STRING, TEST_STRING_LENGTH, encrypted_string, encrypted_string_length, NULL, true, TEST_PUBLIC_KEY_KYBER1024);
-    assert_int_equal(0, r);
+    TEST_CHECK(0 == r);
 
     decrypted_string = calloc(encrypted_string_length, sizeof(uint8_t));
     r = qryptext_decrypt(encrypted_string, encrypted_string_length, true, decrypted_string, encrypted_string_length, &decrypted_string_length, TEST_SECRET_KEY_KYBER1024);
-    assert_int_equal(0, r);
+    TEST_CHECK(0 == r);
 
-    assert_int_equal(0, memcmp(TEST_STRING, decrypted_string, TEST_STRING_LENGTH));
-    assert_int_equal(TEST_STRING_LENGTH, decrypted_string_length);
+    TEST_CHECK(0 == memcmp(TEST_STRING, decrypted_string, TEST_STRING_LENGTH));
+    TEST_CHECK(TEST_STRING_LENGTH == decrypted_string_length);
 
     //
 
@@ -574,7 +591,7 @@ static void qryptext_encrypt_base64_decrypts_successfully(void** state)
 
 static const qryptext_kyber1024_secret_key INVALID_KEY = { .hexstring = "Just something that isn't quite a key..." };
 
-static void qryptext_encrypt_bin_decrypt_with_invalid_key_fails(void** state)
+static void qryptext_encrypt_bin_decrypt_with_invalid_key_fails()
 {
     unsigned char* encrypted_string = NULL;
     unsigned char* decrypted_string = NULL;
@@ -587,13 +604,13 @@ static void qryptext_encrypt_bin_decrypt_with_invalid_key_fails(void** state)
     encrypted_string = malloc(encrypted_string_length);
     memset(encrypted_string, 0x00, encrypted_string_length);
 
-    assert_int_equal(0, qryptext_encrypt((unsigned char*)TEST_STRING, strlen(TEST_STRING), encrypted_string, encrypted_string_length, &encrypted_string_length, false, TEST_PUBLIC_KEY_KYBER1024));
+    TEST_CHECK(0 == qryptext_encrypt((unsigned char*)TEST_STRING, strlen(TEST_STRING), encrypted_string, encrypted_string_length, &encrypted_string_length, false, TEST_PUBLIC_KEY_KYBER1024));
 
     decrypted_string = malloc(encrypted_string_length);
     memset(decrypted_string, 0x00, encrypted_string_length);
 
-    assert_int_not_equal(0, qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, INVALID_KEY));
-    assert_int_not_equal(0, memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
+    TEST_CHECK(0 != qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, INVALID_KEY));
+    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
     //
 
     free(encrypted_string);
@@ -628,7 +645,7 @@ static const qryptext_kyber1024_secret_key INVALID_KEY2 = { .hexstring = "¨^$#%
                                                                          "585a8bb8c3136aacc400006b2688ba0842437d9b260215981f6b38846298e0018d0dfb75c8a3fe6b3d6e2aa53643b4dd49fd444b88091dc4fa3d71ca"
                                                                          "da128ad7a8cb94bb" };
 
-static void qryptext_encrypt_bin_decrypt_with_invalid_key_2_fails(void** state)
+static void qryptext_encrypt_bin_decrypt_with_invalid_key_2_fails()
 {
     unsigned char* encrypted_string = NULL;
     unsigned char* decrypted_string = NULL;
@@ -641,20 +658,20 @@ static void qryptext_encrypt_bin_decrypt_with_invalid_key_2_fails(void** state)
     encrypted_string = malloc(encrypted_string_length);
     memset(encrypted_string, 0x00, encrypted_string_length);
 
-    assert_int_equal(0, qryptext_encrypt((unsigned char*)TEST_STRING, strlen(TEST_STRING), encrypted_string, encrypted_string_length, NULL, false, TEST_PUBLIC_KEY_KYBER1024));
+    TEST_CHECK(0 == qryptext_encrypt((unsigned char*)TEST_STRING, strlen(TEST_STRING), encrypted_string, encrypted_string_length, NULL, false, TEST_PUBLIC_KEY_KYBER1024));
 
     decrypted_string = malloc(encrypted_string_length);
     memset(decrypted_string, 0x00, encrypted_string_length);
 
-    assert_int_not_equal(0, qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, INVALID_KEY2));
-    assert_int_not_equal(0, memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
+    TEST_CHECK(0 != qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, INVALID_KEY2));
+    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
     //
 
     free(encrypted_string);
     free(decrypted_string);
 }
 
-static void qryptext_encrypt_bin_decrypt_with_wrong_key_fails(void** state)
+static void qryptext_encrypt_bin_decrypt_with_wrong_key_fails()
 {
     unsigned char* encrypted_string = NULL;
     unsigned char* decrypted_string = NULL;
@@ -667,20 +684,20 @@ static void qryptext_encrypt_bin_decrypt_with_wrong_key_fails(void** state)
     encrypted_string = malloc(encrypted_string_length);
     memset(encrypted_string, 0x00, encrypted_string_length);
 
-    assert_int_equal(0, qryptext_encrypt((unsigned char*)TEST_STRING, strlen(TEST_STRING), encrypted_string, encrypted_string_length, NULL, false, TEST_PUBLIC_KEY_KYBER1024));
+    TEST_CHECK(0 == qryptext_encrypt((unsigned char*)TEST_STRING, strlen(TEST_STRING), encrypted_string, encrypted_string_length, NULL, false, TEST_PUBLIC_KEY_KYBER1024));
 
     decrypted_string = malloc(encrypted_string_length);
     memset(decrypted_string, 0x00, encrypted_string_length);
 
-    assert_int_not_equal(0, qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, TEST_SECRET_KEY_KYBER1024_ALT));
-    assert_int_not_equal(0, memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
+    TEST_CHECK(0 != qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, TEST_SECRET_KEY_KYBER1024_ALT));
+    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
 
     qryptext_kyber1024_keypair kyber1024_keypair;
     int r = qryptext_kyber1024_generate_keypair(&kyber1024_keypair);
-    assert_int_equal(r, 0);
+    TEST_CHECK(r == 0);
 
-    assert_int_not_equal(0, qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, kyber1024_keypair.secret_key));
-    assert_int_not_equal(0, memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
+    TEST_CHECK(0 != qryptext_decrypt(encrypted_string, encrypted_string_length, false, decrypted_string, encrypted_string_length, &decrypted_string_length, kyber1024_keypair.secret_key));
+    TEST_CHECK(0 != memcmp(TEST_STRING, decrypted_string, decrypted_string_length));
 
     //
 
@@ -688,148 +705,143 @@ static void qryptext_encrypt_bin_decrypt_with_wrong_key_fails(void** state)
     free(decrypted_string);
 }
 
-static void qryptext_sign_verify_signature_base64_successful(void** state)
+static void qryptext_sign_verify_signature_base64_successful()
 {
     uint8_t signature[4096];
     size_t signature_length;
 
     int r = qryptext_sign((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, 4096, &signature_length, true, TEST_SECRET_KEY_FALCON1024);
-    assert_int_equal(r, 0);
+    TEST_CHECK(r == 0);
 
     r = qryptext_verify((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, signature_length, true, TEST_PUBLIC_KEY_FALCON1024);
-    assert_int_equal(r, 0);
+    TEST_CHECK(r == 0);
 }
 
-static void qryptext_sign_verify_signature_base64_wrong_key_fails(void** state)
+static void qryptext_sign_verify_signature_base64_wrong_key_fails()
 {
     uint8_t signature[4096];
     size_t signature_length;
 
     int r = qryptext_sign((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, 4096, &signature_length, true, TEST_SECRET_KEY_FALCON1024);
-    assert_int_equal(r, 0);
+    TEST_CHECK(r == 0);
 
     r = qryptext_verify((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, signature_length, true, TEST_PUBLIC_KEY_FALCON1024_ALT);
-    assert_int_not_equal(r, 0);
+    TEST_CHECK(r != 0);
 }
 
-static void qryptext_sign_verify_signature_bin_successful(void** state)
+static void qryptext_sign_verify_signature_bin_successful()
 {
     uint8_t signature[4096];
     size_t signature_length;
 
     int r = qryptext_sign((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, 4096, &signature_length, false, TEST_SECRET_KEY_FALCON1024);
-    assert_int_equal(r, 0);
+    TEST_CHECK(r == 0);
 
     r = qryptext_verify((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, signature_length, false, TEST_PUBLIC_KEY_FALCON1024);
-    assert_int_equal(r, 0);
+    TEST_CHECK(r == 0);
 }
 
-static void qryptext_sign_verify_signature_bin_wrong_key_fails(void** state)
+static void qryptext_sign_verify_signature_bin_wrong_key_fails()
 {
     uint8_t signature[4096];
     size_t signature_length;
 
     int r = qryptext_sign((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, 4096, &signature_length, false, TEST_SECRET_KEY_FALCON1024);
-    assert_int_equal(r, 0);
+    TEST_CHECK(r == 0);
 
     r = qryptext_verify((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, signature_length, false, TEST_PUBLIC_KEY_FALCON1024_ALT);
-    assert_int_not_equal(r, 0);
+    TEST_CHECK(r != 0);
 
     r = qryptext_sign((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, 4096, &signature_length, false, TEST_SECRET_KEY_FALCON1024_ALT);
-    assert_int_equal(r, 0);
+    TEST_CHECK(r == 0);
 
     qryptext_falcon1024_keypair falcon1024_keypair;
     r = qryptext_falcon1024_generate_keypair(&falcon1024_keypair);
-    assert_int_equal(r, 0);
+    TEST_CHECK(r == 0);
 
     r = qryptext_verify((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, signature_length, false, falcon1024_keypair.public_key);
-    assert_int_not_equal(r, 0);
+    TEST_CHECK(r != 0);
 }
 
-static void qryptext_sign_NULL_arg_fails(void** state)
+static void qryptext_sign_NULL_arg_fails()
 {
     uint8_t signature[4096];
     size_t signature_length;
-    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_sign(NULL, 16, signature, sizeof signature, &signature_length, false, TEST_SECRET_KEY_FALCON1024));
-    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_sign((uint8_t*)"testtesttesttest", 16, NULL, sizeof signature, &signature_length, false, TEST_SECRET_KEY_FALCON1024));
-    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_sign((uint8_t*)"testtesttesttest", 16, signature, sizeof signature, NULL, false, TEST_SECRET_KEY_FALCON1024));
+    TEST_CHECK(QRYPTEXT_ERROR_NULL_ARG == qryptext_sign(NULL, 16, signature, sizeof signature, &signature_length, false, TEST_SECRET_KEY_FALCON1024));
+    TEST_CHECK(QRYPTEXT_ERROR_NULL_ARG == qryptext_sign((uint8_t*)"testtesttesttest", 16, NULL, sizeof signature, &signature_length, false, TEST_SECRET_KEY_FALCON1024));
+    TEST_CHECK(QRYPTEXT_ERROR_NULL_ARG == qryptext_sign((uint8_t*)"testtesttesttest", 16, signature, sizeof signature, NULL, false, TEST_SECRET_KEY_FALCON1024));
 }
 
-static void qryptext_sign_INVALID_arg_fails(void** state)
+static void qryptext_sign_INVALID_arg_fails()
 {
     uint8_t signature[4096];
     size_t signature_length;
-    assert_int_equal(QRYPTEXT_ERROR_INVALID_ARG, qryptext_sign((uint8_t*)"testtesttesttest", 0, signature, sizeof signature, &signature_length, false, TEST_SECRET_KEY_FALCON1024));
+    TEST_CHECK(QRYPTEXT_ERROR_INVALID_ARG == qryptext_sign((uint8_t*)"testtesttesttest", 0, signature, sizeof signature, &signature_length, false, TEST_SECRET_KEY_FALCON1024));
 }
 
-static void qryptext_sign_insufficient_output_buffer_size_fails(void** state)
+static void qryptext_sign_insufficient_output_buffer_size_fails()
 {
     uint8_t signature[4096];
     size_t signature_length;
-    assert_int_equal(QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE, qryptext_sign((uint8_t*)"testtesttesttest", 16, signature, 16, &signature_length, false, TEST_SECRET_KEY_FALCON1024));
-    assert_int_equal(QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE, qryptext_sign((uint8_t*)"testtesttesttest", 16, signature, OQS_SIG_falcon_1024_length_signature, &signature_length, true, TEST_SECRET_KEY_FALCON1024));
+    TEST_CHECK(QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE == qryptext_sign((uint8_t*)"testtesttesttest", 16, signature, 16, &signature_length, false, TEST_SECRET_KEY_FALCON1024));
+    TEST_CHECK(QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE == qryptext_sign((uint8_t*)"testtesttesttest", 16, signature, OQS_SIG_falcon_1024_length_signature, &signature_length, true, TEST_SECRET_KEY_FALCON1024));
 }
 
-static void qryptext_verify_signature_NULL_arg_fails(void** state)
-{
-    uint8_t signature[4096];
-    size_t signature_length;
-
-    int r = qryptext_sign((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, 4096, &signature_length, false, TEST_SECRET_KEY_FALCON1024);
-    assert_int_equal(r, 0);
-
-    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_verify(NULL, strlen(TEST_STRING), signature, signature_length, false, TEST_PUBLIC_KEY_FALCON1024));
-    assert_int_equal(QRYPTEXT_ERROR_NULL_ARG, qryptext_verify((uint8_t*)TEST_STRING, strlen(TEST_STRING), NULL, signature_length, false, TEST_PUBLIC_KEY_FALCON1024));
-}
-
-static void qryptext_verify_signature_INVALID_arg_fails(void** state)
+static void qryptext_verify_signature_NULL_arg_fails()
 {
     uint8_t signature[4096];
     size_t signature_length;
 
     int r = qryptext_sign((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, 4096, &signature_length, false, TEST_SECRET_KEY_FALCON1024);
-    assert_int_equal(r, 0);
+    TEST_CHECK(r == 0);
 
-    assert_int_equal(QRYPTEXT_ERROR_INVALID_ARG, qryptext_verify((uint8_t*)TEST_STRING, 0, signature, signature_length, false, TEST_PUBLIC_KEY_FALCON1024));
+    TEST_CHECK(QRYPTEXT_ERROR_NULL_ARG == qryptext_verify(NULL, strlen(TEST_STRING), signature, signature_length, false, TEST_PUBLIC_KEY_FALCON1024));
+    TEST_CHECK(QRYPTEXT_ERROR_NULL_ARG == qryptext_verify((uint8_t*)TEST_STRING, strlen(TEST_STRING), NULL, signature_length, false, TEST_PUBLIC_KEY_FALCON1024));
 }
 
-int main(void)
+static void qryptext_verify_signature_INVALID_arg_fails()
 {
-    qryptext_disable_fprintf();
+    uint8_t signature[4096];
+    size_t signature_length;
 
-    const struct CMUnitTest tests[] = {
-        cmocka_unit_test(null_test_success),
-        cmocka_unit_test(qryptext_encrypt_null_args_fails),
-        cmocka_unit_test(qryptext_encrypt_invalid_args_fails),
-        cmocka_unit_test(qryptext_encrypt_insufficient_output_buffer_size_fails),
-        cmocka_unit_test(qryptext_decrypt_null_args_fails),
-        cmocka_unit_test(qryptext_decrypt_invalid_args_fails),
-        cmocka_unit_test(qryptext_decrypt_insufficient_output_buffer_size_fails),
-        cmocka_unit_test(qryptext_hexstr2bin_invalid_args_returns_1),
-        cmocka_unit_test(qryptext_hexstr2bin_hexlen_odd_number_fails_returns_2),
-        cmocka_unit_test(qryptext_hexstr2bin_insufficient_output_buffer_size_fails_returns_3),
-        cmocka_unit_test(qryptext_hexstr2bin_succeeds_both_with_and_without_nul_terminator),
-        cmocka_unit_test(qryptext_bin2hexstr_succeeds_output_length_double_the_input_length),
-        cmocka_unit_test(qryptext_bin2hexstr_null_or_invalid_args_fails_returns_1),
-        cmocka_unit_test(qryptext_bin2hexstr_insufficient_output_buffer_size_returns_2),
-        cmocka_unit_test(qryptext_bin2hexstr_success_returns_0),
-        cmocka_unit_test(qryptext_generate_kyber1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG),
-        cmocka_unit_test(qryptext_generate_falcon1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG),
-        cmocka_unit_test(qryptext_encrypt_raw_binary_decrypts_successfully),
-        cmocka_unit_test(qryptext_encrypt_base64_decrypts_successfully),
-        cmocka_unit_test(qryptext_encrypt_bin_decrypt_with_invalid_key_fails),
-        cmocka_unit_test(qryptext_encrypt_bin_decrypt_with_invalid_key_2_fails),
-        cmocka_unit_test(qryptext_sign_verify_signature_base64_successful),
-        cmocka_unit_test(qryptext_sign_verify_signature_base64_wrong_key_fails),
-        cmocka_unit_test(qryptext_sign_verify_signature_bin_successful),
-        cmocka_unit_test(qryptext_sign_verify_signature_bin_wrong_key_fails),
-        cmocka_unit_test(qryptext_encrypt_bin_decrypt_with_wrong_key_fails),
-        cmocka_unit_test(qryptext_sign_NULL_arg_fails),
-        cmocka_unit_test(qryptext_sign_INVALID_arg_fails),
-        cmocka_unit_test(qryptext_sign_insufficient_output_buffer_size_fails),
-        cmocka_unit_test(qryptext_verify_signature_NULL_arg_fails),
-        cmocka_unit_test(qryptext_verify_signature_INVALID_arg_fails),
-    };
+    int r = qryptext_sign((uint8_t*)TEST_STRING, strlen(TEST_STRING), signature, 4096, &signature_length, false, TEST_SECRET_KEY_FALCON1024);
+    TEST_CHECK(r == 0);
 
-    return cmocka_run_group_tests(tests, NULL, NULL);
+    TEST_CHECK(QRYPTEXT_ERROR_INVALID_ARG == qryptext_verify((uint8_t*)TEST_STRING, 0, signature, signature_length, false, TEST_PUBLIC_KEY_FALCON1024));
 }
+
+TEST_LIST = {
+    { "null_test_success", null_test_success }, //
+    // -----------------------------------------------------------
+    { "qryptext_encrypt_null_args_fails", qryptext_encrypt_null_args_fails }, //
+    { "qryptext_fprintf_enables_and_disables_correctly", qryptext_fprintf_enables_and_disables_correctly }, //
+    { "qryptext_encrypt_invalid_args_fails", qryptext_encrypt_invalid_args_fails }, //
+    { "qryptext_encrypt_insufficient_output_buffer_size_fails", qryptext_encrypt_insufficient_output_buffer_size_fails }, //
+    { "qryptext_decrypt_null_args_fails", qryptext_decrypt_null_args_fails }, //
+    { "qryptext_decrypt_invalid_args_fails", qryptext_decrypt_invalid_args_fails }, //
+    { "qryptext_decrypt_insufficient_output_buffer_size_fails", qryptext_decrypt_insufficient_output_buffer_size_fails }, //
+    { "qryptext_hexstr2bin_invalid_args_returns_1", qryptext_hexstr2bin_invalid_args_returns_1 }, //
+    { "qryptext_hexstr2bin_hexlen_odd_number_fails_returns_2", qryptext_hexstr2bin_hexlen_odd_number_fails_returns_2 }, //
+    { "qryptext_hexstr2bin_insufficient_output_buffer_size_fails_returns_3", qryptext_hexstr2bin_insufficient_output_buffer_size_fails_returns_3 }, //
+    { "qryptext_hexstr2bin_succeeds_both_with_and_without_nul_terminator", qryptext_hexstr2bin_succeeds_both_with_and_without_nul_terminator }, //
+    { "qryptext_bin2hexstr_succeeds_output_length_double_the_input_length", qryptext_bin2hexstr_succeeds_output_length_double_the_input_length }, //
+    { "qryptext_bin2hexstr_null_or_invalid_args_fails_returns_1", qryptext_bin2hexstr_null_or_invalid_args_fails_returns_1 }, //
+    { "qryptext_bin2hexstr_insufficient_output_buffer_size_returns_2", qryptext_bin2hexstr_insufficient_output_buffer_size_returns_2 }, //
+    { "qryptext_bin2hexstr_success_returns_0", qryptext_bin2hexstr_success_returns_0 }, //
+    { "qryptext_generate_kyber1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG", qryptext_generate_kyber1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG }, //
+    { "qryptext_generate_falcon1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG", qryptext_generate_falcon1024_keypair_NULL_args_returns_QRYPTEXT_ERROR_NULL_ARG }, //
+    { "qryptext_encrypt_raw_binary_decrypts_successfully", qryptext_encrypt_raw_binary_decrypts_successfully }, //
+    { "qryptext_encrypt_base64_decrypts_successfully", qryptext_encrypt_base64_decrypts_successfully }, //
+    { "qryptext_encrypt_bin_decrypt_with_invalid_key_fails", qryptext_encrypt_bin_decrypt_with_invalid_key_fails }, //
+    { "qryptext_encrypt_bin_decrypt_with_invalid_key_2_fails", qryptext_encrypt_bin_decrypt_with_invalid_key_2_fails }, //
+    { "qryptext_sign_verify_signature_base64_successful", qryptext_sign_verify_signature_base64_successful }, //
+    { "qryptext_sign_verify_signature_base64_wrong_key_fails", qryptext_sign_verify_signature_base64_wrong_key_fails }, //
+    { "qryptext_sign_verify_signature_bin_successful", qryptext_sign_verify_signature_bin_successful }, //
+    { "qryptext_sign_verify_signature_bin_wrong_key_fails", qryptext_sign_verify_signature_bin_wrong_key_fails }, //
+    { "qryptext_encrypt_bin_decrypt_with_wrong_key_fails", qryptext_encrypt_bin_decrypt_with_wrong_key_fails }, //
+    { "qryptext_sign_NULL_arg_fails", qryptext_sign_NULL_arg_fails }, //
+    { "qryptext_sign_INVALID_arg_fails", qryptext_sign_INVALID_arg_fails }, //
+    { "qryptext_sign_insufficient_output_buffer_size_fails", qryptext_sign_insufficient_output_buffer_size_fails }, //
+    { "qryptext_verify_signature_NULL_arg_fails", qryptext_verify_signature_NULL_arg_fails }, //
+    { "qryptext_verify_signature_INVALID_arg_fails", qryptext_verify_signature_INVALID_arg_fails } //
+};
