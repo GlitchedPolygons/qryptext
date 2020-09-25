@@ -81,23 +81,20 @@ $(function() {
 <code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;mbedtls/base64.h&gt;</code><br />
-<code>#include &lt;oqs/kem_kyber.h&gt;</code><br />
-<code>#include &lt;pqclean_kyber1024_clean/api.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for util.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="util_8h__incl.png" border="0" usemap="#include_2qryptext_2util_8h" alt=""/></div>
 <map name="include_2qryptext_2util_8h" id="include_2qryptext_2util_8h">
-<area shape="rect" title="Useful utility functions for qryptext." alt="" coords="269,5,416,32"/>
-<area shape="rect" title=" " alt="" coords="5,87,64,114"/>
-<area shape="rect" title=" " alt="" coords="88,87,149,114"/>
-<area shape="rect" title=" " alt="" coords="174,87,242,114"/>
-<area shape="rect" title=" " alt="" coords="266,87,331,114"/>
-<area shape="rect" title=" " alt="" coords="356,87,420,114"/>
-<area shape="rect" title=" " alt="" coords="444,87,569,114"/>
-<area shape="rect" title=" " alt="" coords="593,87,716,114"/>
-<area shape="rect" title=" " alt="" coords="741,80,913,121"/>
+<area shape="rect" title="Useful utility functions for qryptext." alt="" coords="148,5,295,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,64,107"/>
+<area shape="rect" title=" " alt="" coords="88,80,149,107"/>
+<area shape="rect" title=" " alt="" coords="119,155,187,181"/>
+<area shape="rect" title=" " alt="" coords="327,155,393,181"/>
+<area shape="rect" title=" " alt="" coords="365,80,429,107"/>
+<area shape="rect" href="types_8h.html" title="Types (structs) user in qryptext." alt="" coords="225,80,290,107"/>
+<area shape="rect" href="constants_8h.html" title="Qryptext constants." alt="" coords="212,155,303,181"/>
 </map>
 </div>
 </div>
@@ -110,38 +107,42 @@ Macros</h2></td></tr>
 <tr class="memitem:a193deb6e0de05f6d9a6763b88df6aced"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a193deb6e0de05f6d9a6763b88df6aced">QRYPTEXT_MAX</a>(x,  y)&#160;&#160;&#160;(((x) &gt; (y)) ? (x) : (y))</td></tr>
 <tr class="separator:a193deb6e0de05f6d9a6763b88df6aced"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87ece041b43c6a644bc110d52054ce5f"><td class="memItemLeft" align="right" valign="top"><a id="a87ece041b43c6a644bc110d52054ce5f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>qryptext_fprintf</b>&#160;&#160;&#160;_qryptext_fprintf_fptr</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>qryptext_fprintf</b>&#160;&#160;&#160;qryptext_fprintf_fptr</td></tr>
 <tr class="separator:a87ece041b43c6a644bc110d52054ce5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6802926d7156c4c1ae00deb4381a7a24"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a6802926d7156c4c1ae00deb4381a7a24">qryptext_calc_encryption_output_length</a> (const size_t plaintext_length)</td></tr>
-<tr class="separator:a6802926d7156c4c1ae00deb4381a7a24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83cbcb1ebb6b01d7986b4f3cbaf5a4e2"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a83cbcb1ebb6b01d7986b4f3cbaf5a4e2">qryptext_calc_base64_length</a> (const size_t data_length)</td></tr>
-<tr class="separator:a83cbcb1ebb6b01d7986b4f3cbaf5a4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e8d36073dcf0ea969b3b915b8c53c82"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a6e8d36073dcf0ea969b3b915b8c53c82">qryptext_hexstr2bin</a> (const char *hexstr, size_t hexstr_length, uint8_t *output, size_t output_size, size_t *output_length)</td></tr>
-<tr class="separator:a6e8d36073dcf0ea969b3b915b8c53c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37e1b66ce5aa217add31de5e4f1503c2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a37e1b66ce5aa217add31de5e4f1503c2">qryptext_bin2hexstr</a> (const uint8_t *bin, size_t bin_length, char *output, size_t output_size, size_t *output_length, bool uppercase)</td></tr>
-<tr class="separator:a37e1b66ce5aa217add31de5e4f1503c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a276351d08d31f5c5279a6640888e6f45"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a276351d08d31f5c5279a6640888e6f45">qryptext_dev_urandom</a> (uint8_t *output_buffer, const size_t output_buffer_size)</td></tr>
-<tr class="separator:a276351d08d31f5c5279a6640888e6f45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a031cac0eb77a4b28a1a08899d92a5fe8"><td class="memItemLeft" align="right" valign="top">static uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a031cac0eb77a4b28a1a08899d92a5fe8">qryptext_get_random_big_integer</a> ()</td></tr>
-<tr class="separator:a031cac0eb77a4b28a1a08899d92a5fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0140f1883fcdd81388051873e77620e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#ae0140f1883fcdd81388051873e77620e">qryptext_is_fprintf_enabled</a> ()</td></tr>
-<tr class="separator:ae0140f1883fcdd81388051873e77620e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2c69093e083283387b0c4b297287c56"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#ae2c69093e083283387b0c4b297287c56">qryptext_is_fprintf_enabled</a> ()</td></tr>
+<tr class="separator:ae2c69093e083283387b0c4b297287c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae17716366f3403278b83e6179519da8b"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#ae17716366f3403278b83e6179519da8b">qryptext_printvoid</a> (FILE *stream, const char *format,...)</td></tr>
 <tr class="separator:ae17716366f3403278b83e6179519da8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9dd0fc4bf430d1773ece58bd3138265"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#af9dd0fc4bf430d1773ece58bd3138265">qryptext_enable_fprintf</a> ()</td></tr>
-<tr class="separator:af9dd0fc4bf430d1773ece58bd3138265"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1caa6b26cd42c0fdc15576cc47dbe6f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a1caa6b26cd42c0fdc15576cc47dbe6f6">qryptext_disable_fprintf</a> ()</td></tr>
-<tr class="separator:a1caa6b26cd42c0fdc15576cc47dbe6f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8319f7516c01faf601442f8e799ce679"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a8319f7516c01faf601442f8e799ce679">qryptext_enable_fprintf</a> ()</td></tr>
+<tr class="separator:a8319f7516c01faf601442f8e799ce679"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a117915493b16665242906424f7c5eea9"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a117915493b16665242906424f7c5eea9">qryptext_disable_fprintf</a> ()</td></tr>
+<tr class="separator:a117915493b16665242906424f7c5eea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b905447b5fd83f9a2a7a7a73e7ca353"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a1b905447b5fd83f9a2a7a7a73e7ca353">qryptext_calc_encryption_output_length</a> (size_t plaintext_length)</td></tr>
+<tr class="separator:a1b905447b5fd83f9a2a7a7a73e7ca353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b3b8420b50ab240b03fdc54ed80aa63"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a8b3b8420b50ab240b03fdc54ed80aa63">qryptext_calc_base64_length</a> (size_t data_length)</td></tr>
+<tr class="separator:a8b3b8420b50ab240b03fdc54ed80aa63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90fa049b2e5adb7703fd25518b09d920"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a90fa049b2e5adb7703fd25518b09d920">qryptext_get_version_number</a> ()</td></tr>
+<tr class="separator:a90fa049b2e5adb7703fd25518b09d920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89ae79ae01a59b1d30438b33bd517a7"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#aa89ae79ae01a59b1d30438b33bd517a7">qryptext_get_version_number_string</a> ()</td></tr>
+<tr class="separator:aa89ae79ae01a59b1d30438b33bd517a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b812af45e714292b6ef7f2e3998794"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a96b812af45e714292b6ef7f2e3998794">qryptext_hexstr2bin</a> (const char *hexstr, size_t hexstr_length, uint8_t *output, size_t output_size, size_t *output_length)</td></tr>
+<tr class="separator:a96b812af45e714292b6ef7f2e3998794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a293b13b655546e9f9c0a7d0d5a635fac"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a293b13b655546e9f9c0a7d0d5a635fac">qryptext_bin2hexstr</a> (const uint8_t *bin, size_t bin_length, char *output, size_t output_size, size_t *output_length, uint8_t uppercase)</td></tr>
+<tr class="separator:a293b13b655546e9f9c0a7d0d5a635fac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a080e67e05300e24bb594457ef13b722b"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a080e67e05300e24bb594457ef13b722b">qryptext_dev_urandom</a> (uint8_t *output_buffer, size_t output_buffer_size)</td></tr>
+<tr class="separator:a080e67e05300e24bb594457ef13b722b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a031cac0eb77a4b28a1a08899d92a5fe8"><td class="memItemLeft" align="right" valign="top">static uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8h.html#a031cac0eb77a4b28a1a08899d92a5fe8">qryptext_get_random_big_integer</a> ()</td></tr>
+<tr class="separator:a031cac0eb77a4b28a1a08899d92a5fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a6e029ca711d467cec6c1dde04be91228"><td class="memItemLeft" align="right" valign="top">static const unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>empty32</b> [32]</td></tr>
-<tr class="separator:a6e029ca711d467cec6c1dde04be91228"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a065e72301221b809831106b92143a428"><td class="memItemLeft" align="right" valign="top">static const unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>empty64</b> [64]</td></tr>
-<tr class="separator:a065e72301221b809831106b92143a428"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40af7315921a6f9798c0c46e0f40158f"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>empty32</b> [32]</td></tr>
+<tr class="separator:a40af7315921a6f9798c0c46e0f40158f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3110689fb8003fe88ca3661098a9ddda"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>empty64</b> [64]</td></tr>
+<tr class="separator:a3110689fb8003fe88ca3661098a9ddda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Useful utility functions for qryptext. </p>
@@ -206,14 +207,14 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a37e1b66ce5aa217add31de5e4f1503c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37e1b66ce5aa217add31de5e4f1503c2">&#9670;&nbsp;</a></span>qryptext_bin2hexstr()</h2>
+<a id="a293b13b655546e9f9c0a7d0d5a635fac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a293b13b655546e9f9c0a7d0d5a635fac">&#9670;&nbsp;</a></span>qryptext_bin2hexstr()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int qryptext_bin2hexstr </td>
+          <td class="memname">QRYPTEXT_API int qryptext_bin2hexstr </td>
           <td>(</td>
           <td class="paramtype">const uint8_t *&#160;</td>
           <td class="paramname"><em>bin</em>, </td>
@@ -245,7 +246,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
+          <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>uppercase</em>&#160;</td>
         </tr>
         <tr>
@@ -263,7 +264,7 @@ Variables</h2></td></tr>
     <tr><td class="paramname">output</td><td>Where to write the hex string into. </td></tr>
     <tr><td class="paramname">output_size</td><td>Maximum capacity of the <code>output</code> buffer. Make sure to allocate at least <code>(bin_length * 2) + 1</code> bytes! </td></tr>
     <tr><td class="paramname">output_length</td><td>[OPTIONAL] Where to write the output string length into. This is always gonna be <code>bin_length * 2</code>, but you can still choose to write it out just to be sure. If you want to omit this: no problem.. just pass <code>NULL</code>! </td></tr>
-    <tr><td class="paramname">uppercase</td><td>Should the <code>output</code> string characters be UPPER- or lowercase? </td></tr>
+    <tr><td class="paramname">uppercase</td><td>Should the <code>output</code> string characters be UPPER- or lowercase? <code>0 == false; anything else == true</code> </td></tr>
   </table>
   </dd>
 </dl>
@@ -271,28 +272,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a83cbcb1ebb6b01d7986b4f3cbaf5a4e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83cbcb1ebb6b01d7986b4f3cbaf5a4e2">&#9670;&nbsp;</a></span>qryptext_calc_base64_length()</h2>
+<a id="a8b3b8420b50ab240b03fdc54ed80aa63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b3b8420b50ab240b03fdc54ed80aa63">&#9670;&nbsp;</a></span>qryptext_calc_base64_length()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static size_t qryptext_calc_base64_length </td>
+          <td class="memname">QRYPTEXT_API size_t qryptext_calc_base64_length </td>
           <td>(</td>
-          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>data_length</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Calculates the output length in bytes after base64-encoding <code>data_length</code> bytes (includes +1 for a NUL-terminator character).. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -304,50 +297,39 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a6802926d7156c4c1ae00deb4381a7a24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6802926d7156c4c1ae00deb4381a7a24">&#9670;&nbsp;</a></span>qryptext_calc_encryption_output_length()</h2>
+<a id="a1b905447b5fd83f9a2a7a7a73e7ca353"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b905447b5fd83f9a2a7a7a73e7ca353">&#9670;&nbsp;</a></span>qryptext_calc_encryption_output_length()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static size_t qryptext_calc_encryption_output_length </td>
+          <td class="memname">QRYPTEXT_API size_t qryptext_calc_encryption_output_length </td>
           <td>(</td>
-          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>plaintext_length</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-<p>Calculates the final output size of a ciphertext that would result from the <a class="el" href="encrypt_8h.html#a600f4e8ad04dfa604e98fde2a1cb8f14">qryptext_encrypt()</a> function (based on a given plaintext length). </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Calculates the final output size of a ciphertext that would result from the <a class="el" href="encrypt_8h.html#a5aedab2040d2df1473e107173decb85b">qryptext_encrypt()</a> function (based on a given plaintext length). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">plaintext_length</td><td>The amount of bytes to encrypt. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The final output size of the ciphertext if you encrypt data that is plaintext_length bytes long with <a class="el" href="encrypt_8h.html#a600f4e8ad04dfa604e98fde2a1cb8f14">qryptext_encrypt()</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The final output size of the ciphertext if you encrypt data that is plaintext_length bytes long with <a class="el" href="encrypt_8h.html#a5aedab2040d2df1473e107173decb85b">qryptext_encrypt()</a>. </dd></dl>
 
 </div>
 </div>
-<a id="a276351d08d31f5c5279a6640888e6f45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a276351d08d31f5c5279a6640888e6f45">&#9670;&nbsp;</a></span>qryptext_dev_urandom()</h2>
+<a id="a080e67e05300e24bb594457ef13b722b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a080e67e05300e24bb594457ef13b722b">&#9670;&nbsp;</a></span>qryptext_dev_urandom()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void qryptext_dev_urandom </td>
+          <td class="memname">QRYPTEXT_API void qryptext_dev_urandom </td>
           <td>(</td>
           <td class="paramtype">uint8_t *&#160;</td>
           <td class="paramname"><em>output_buffer</em>, </td>
@@ -355,7 +337,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>output_buffer_size</em>&#160;</td>
         </tr>
         <tr>
@@ -364,11 +346,6 @@ Variables</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>(Tries to) read from <code>/dev/urandom</code> (or Windows equivalent, yeah...) filling the given <code>output_buffer</code> with <code>output_buffer_size</code> random bytes. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -380,14 +357,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a1caa6b26cd42c0fdc15576cc47dbe6f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1caa6b26cd42c0fdc15576cc47dbe6f6">&#9670;&nbsp;</a></span>qryptext_disable_fprintf()</h2>
+<a id="a117915493b16665242906424f7c5eea9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a117915493b16665242906424f7c5eea9">&#9670;&nbsp;</a></span>qryptext_disable_fprintf()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void qryptext_disable_fprintf </td>
+          <td class="memname">QRYPTEXT_API void qryptext_disable_fprintf </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -398,14 +375,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="af9dd0fc4bf430d1773ece58bd3138265"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9dd0fc4bf430d1773ece58bd3138265">&#9670;&nbsp;</a></span>qryptext_enable_fprintf()</h2>
+<a id="a8319f7516c01faf601442f8e799ce679"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8319f7516c01faf601442f8e799ce679">&#9670;&nbsp;</a></span>qryptext_enable_fprintf()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void qryptext_enable_fprintf </td>
+          <td class="memname">QRYPTEXT_API void qryptext_enable_fprintf </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -444,14 +421,50 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a6e8d36073dcf0ea969b3b915b8c53c82"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e8d36073dcf0ea969b3b915b8c53c82">&#9670;&nbsp;</a></span>qryptext_hexstr2bin()</h2>
+<a id="a90fa049b2e5adb7703fd25518b09d920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90fa049b2e5adb7703fd25518b09d920">&#9670;&nbsp;</a></span>qryptext_get_version_number()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int qryptext_hexstr2bin </td>
+          <td class="memname">QRYPTEXT_API uint64_t qryptext_get_version_number </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the current qryptext version number (as an unsigned integer). </p><dl class="section return"><dt>Returns</dt><dd>Current qryptext version number. </dd></dl>
+
+</div>
+</div>
+<a id="aa89ae79ae01a59b1d30438b33bd517a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa89ae79ae01a59b1d30438b33bd517a7">&#9670;&nbsp;</a></span>qryptext_get_version_number_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QRYPTEXT_API char* qryptext_get_version_number_string </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the current qryptext version number as a nicely formatted, human-readable string. </p><dl class="section return"><dt>Returns</dt><dd>The current qryptext version number as a nicely formatted, human-readable string. </dd></dl>
+
+</div>
+</div>
+<a id="a96b812af45e714292b6ef7f2e3998794"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96b812af45e714292b6ef7f2e3998794">&#9670;&nbsp;</a></span>qryptext_hexstr2bin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QRYPTEXT_API int qryptext_hexstr2bin </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>hexstr</em>, </td>
@@ -502,14 +515,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ae0140f1883fcdd81388051873e77620e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0140f1883fcdd81388051873e77620e">&#9670;&nbsp;</a></span>qryptext_is_fprintf_enabled()</h2>
+<a id="ae2c69093e083283387b0c4b297287c56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2c69093e083283387b0c4b297287c56">&#9670;&nbsp;</a></span>qryptext_is_fprintf_enabled()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool qryptext_is_fprintf_enabled </td>
+          <td class="memname">QRYPTEXT_API uint8_t qryptext_is_fprintf_enabled </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -572,8 +585,8 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a6e029ca711d467cec6c1dde04be91228"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e029ca711d467cec6c1dde04be91228">&#9670;&nbsp;</a></span>empty32</h2>
+<a id="a40af7315921a6f9798c0c46e0f40158f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40af7315921a6f9798c0c46e0f40158f">&#9670;&nbsp;</a></span>empty32</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -582,7 +595,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const unsigned char empty32[32]</td>
+          <td class="memname">const uint8_t empty32[32]</td>
         </tr>
       </table>
   </td>
@@ -605,8 +618,8 @@ Variables</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a065e72301221b809831106b92143a428"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a065e72301221b809831106b92143a428">&#9670;&nbsp;</a></span>empty64</h2>
+<a id="a3110689fb8003fe88ca3661098a9ddda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3110689fb8003fe88ca3661098a9ddda">&#9670;&nbsp;</a></span>empty64</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -615,7 +628,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const unsigned char empty64[64]</td>
+          <td class="memname">const uint8_t empty64[64]</td>
         </tr>
       </table>
   </td>

@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">types.h File Reference</div>  </div>
@@ -77,18 +78,16 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
-<code>#include &lt;pqclean_kyber1024_clean/api.h&gt;</code><br />
-<code>#include &lt;pqclean_falcon-1024_clean/api.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for types.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="types_8h__incl.png" border="0" usemap="#include_2qryptext_2types_8h" alt=""/></div>
 <map name="include_2qryptext_2types_8h" id="include_2qryptext_2types_8h">
-<area shape="rect" title="Types (structs) user in qryptext." alt="" coords="120,5,281,32"/>
-<area shape="rect" title=" " alt="" coords="5,87,73,114"/>
-<area shape="rect" title=" " alt="" coords="97,87,163,114"/>
-<area shape="rect" title=" " alt="" coords="187,80,359,121"/>
-<area shape="rect" title=" " alt="" coords="383,80,523,121"/>
+<area shape="rect" title="Types (structs) user in qryptext." alt="" coords="49,5,211,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,73,107"/>
+<area shape="rect" title=" " alt="" coords="97,80,163,107"/>
+<area shape="rect" href="constants_8h.html" title="Qryptext constants." alt="" coords="187,80,278,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -96,13 +95,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="types_8h__dep__incl.png" border="0" usemap="#include_2qryptext_2types_8hdep" alt=""/></div>
 <map name="include_2qryptext_2types_8hdep" id="include_2qryptext_2types_8hdep">
-<area shape="rect" title="Types (structs) user in qryptext." alt="" coords="487,5,648,32"/>
+<area shape="rect" title="Types (structs) user in qryptext." alt="" coords="580,5,741,32"/>
 <area shape="rect" href="decrypt_8h.html" title="Decrypt data that was encrypted using qryptext_encrypt() (Kyber1024 KEM + AES256&#45;GCM)." alt="" coords="5,80,177,107"/>
 <area shape="rect" href="encrypt_8h.html" title="Encrypt data using Kyber1024 KEM + AES256&#45;GCM." alt="" coords="201,80,373,107"/>
 <area shape="rect" href="guid_8h.html" title="Mh! The smell of fresh GUIDs.." alt="" coords="397,80,551,107"/>
 <area shape="rect" href="keygen_8h.html" title="Kyber&#45;1024 and Falcon&#45;1024 key generator functions." alt="" coords="575,80,746,107"/>
 <area shape="rect" href="sign_8h.html" title="Sign data using Falcon1024 (which within OQS uses SHAKE256 hashing internally)." alt="" coords="771,80,924,107"/>
-<area shape="rect" href="verify_8h.html" title="Verify signatures that were made using qryptext_sign() (Falcon1024)." alt="" coords="948,80,1107,107"/>
+<area shape="rect" href="util_8h.html" title="Useful utility functions for qryptext." alt="" coords="949,80,1095,107"/>
+<area shape="rect" href="verify_8h.html" title="Verify signatures that were made using qryptext_sign() (Falcon1024)." alt="" coords="1120,80,1279,107"/>
 </map>
 </div>
 </div>
@@ -123,7 +123,7 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqryptext__falcon1024__keypair.html">qryptext_falcon1024_keypair</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqryptext__guid.html">qryptext_guid</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct containing the output from a call to the <a class="el" href="guid_8h.html#a254720d6baf86d12a40427c8cf66b5c1">qryptext_new_guid()</a> function.  <a href="structqryptext__guid.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct containing the output from a call to the <a class="el" href="guid_8h.html#a13f9c2abcfba864b13d3524c32429b48">qryptext_new_guid()</a> function.  <a href="structqryptext__guid.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -146,7 +146,7 @@ typedef struct <a class="el" href="structqryptext__falcon1024__public__key.html"
 <tr class="memitem:a66596ef461600958fb3c1dc9c8b4c1f0"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structqryptext__falcon1024__keypair.html">qryptext_falcon1024_keypair</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8h.html#a66596ef461600958fb3c1dc9c8b4c1f0">qryptext_falcon1024_keypair</a></td></tr>
 <tr class="separator:a66596ef461600958fb3c1dc9c8b4c1f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01d543ef4e9d0cca03e8b53b9cacd93c"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structqryptext__guid.html">qryptext_guid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8h.html#a01d543ef4e9d0cca03e8b53b9cacd93c">qryptext_guid</a></td></tr>
-<tr class="memdesc:a01d543ef4e9d0cca03e8b53b9cacd93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct containing the output from a call to the <a class="el" href="guid_8h.html#a254720d6baf86d12a40427c8cf66b5c1">qryptext_new_guid()</a> function.  <a href="types_8h.html#a01d543ef4e9d0cca03e8b53b9cacd93c">More...</a><br /></td></tr>
+<tr class="memdesc:a01d543ef4e9d0cca03e8b53b9cacd93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct containing the output from a call to the <a class="el" href="guid_8h.html#a13f9c2abcfba864b13d3524c32429b48">qryptext_new_guid()</a> function.  <a href="types_8h.html#a01d543ef4e9d0cca03e8b53b9cacd93c">More...</a><br /></td></tr>
 <tr class="separator:a01d543ef4e9d0cca03e8b53b9cacd93c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -180,7 +180,7 @@ typedef struct <a class="el" href="structqryptext__falcon1024__public__key.html"
       </table>
 </div><div class="memdoc">
 
-<p>Struct containing the output from a call to the <a class="el" href="guid_8h.html#a254720d6baf86d12a40427c8cf66b5c1">qryptext_new_guid()</a> function. </p>
+<p>Struct containing the output from a call to the <a class="el" href="guid_8h.html#a13f9c2abcfba864b13d3524c32429b48">qryptext_new_guid()</a> function. </p>
 <p>36 characters (only 32 if you chose to omit the hyphens) + 1 NUL terminator. </p>
 
 </div>

@@ -76,20 +76,17 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
-<code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="types_8h_source.html">qryptext/types.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for guid.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="guid_8h__incl.png" border="0" usemap="#include_2qryptext_2guid_8h" alt=""/></div>
 <map name="include_2qryptext_2guid_8h" id="include_2qryptext_2guid_8h">
-<area shape="rect" title="Mh! The smell of fresh GUIDs.." alt="" coords="91,5,244,32"/>
-<area shape="rect" title=" " alt="" coords="5,162,73,189"/>
-<area shape="rect" title=" " alt="" coords="97,162,163,189"/>
-<area shape="rect" title=" " alt="" coords="298,80,373,107"/>
-<area shape="rect" href="types_8h.html" title="Types (structs) user in qryptext." alt="" coords="157,80,273,107"/>
-<area shape="rect" title=" " alt="" coords="187,155,359,196"/>
-<area shape="rect" title=" " alt="" coords="383,155,523,196"/>
+<area shape="rect" title="Mh! The smell of fresh GUIDs.." alt="" coords="67,5,220,32"/>
+<area shape="rect" title=" " alt="" coords="5,155,73,181"/>
+<area shape="rect" title=" " alt="" coords="213,155,279,181"/>
+<area shape="rect" href="types_8h.html" title="Types (structs) user in qryptext." alt="" coords="111,80,176,107"/>
+<area shape="rect" href="constants_8h.html" title="Qryptext constants." alt="" coords="98,155,189,181"/>
 </map>
 </div>
 </div>
@@ -97,57 +94,49 @@ Include dependency graph for guid.h:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a923b6b2c5b2f8a49dd07f3f8ba2eada2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structqryptext__guid.html">qryptext_guid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="guid_8h.html#a923b6b2c5b2f8a49dd07f3f8ba2eada2">qryptext_empty_guid</a> ()</td></tr>
-<tr class="separator:a923b6b2c5b2f8a49dd07f3f8ba2eada2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a254720d6baf86d12a40427c8cf66b5c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structqryptext__guid.html">qryptext_guid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="guid_8h.html#a254720d6baf86d12a40427c8cf66b5c1">qryptext_new_guid</a> (bool lowercase, bool hyphens)</td></tr>
-<tr class="separator:a254720d6baf86d12a40427c8cf66b5c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a532c31339c3b7c20409f90be91dbf491"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API <a class="el" href="structqryptext__guid.html">qryptext_guid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="guid_8h.html#a532c31339c3b7c20409f90be91dbf491">qryptext_empty_guid</a> ()</td></tr>
+<tr class="separator:a532c31339c3b7c20409f90be91dbf491"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13f9c2abcfba864b13d3524c32429b48"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API <a class="el" href="structqryptext__guid.html">qryptext_guid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="guid_8h.html#a13f9c2abcfba864b13d3524c32429b48">qryptext_new_guid</a> (uint8_t lowercase, uint8_t hyphens)</td></tr>
+<tr class="separator:a13f9c2abcfba864b13d3524c32429b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Mh! The smell of fresh GUIDs.. </p>
 <dl class="section author"><dt>Author</dt><dd>Raphael Beck </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a923b6b2c5b2f8a49dd07f3f8ba2eada2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a923b6b2c5b2f8a49dd07f3f8ba2eada2">&#9670;&nbsp;</a></span>qryptext_empty_guid()</h2>
+<a id="a532c31339c3b7c20409f90be91dbf491"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a532c31339c3b7c20409f90be91dbf491">&#9670;&nbsp;</a></span>qryptext_empty_guid()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="structqryptext__guid.html">qryptext_guid</a> qryptext_empty_guid </td>
+          <td class="memname">QRYPTEXT_API <a class="el" href="structqryptext__guid.html">qryptext_guid</a> qryptext_empty_guid </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Gets an empty GUID (<code>"00000000-0000-0000-0000-000000000000"</code>). </p><dl class="section return"><dt>Returns</dt><dd><code>"00000000-0000-0000-0000-000000000000"</code> </dd></dl>
 
 </div>
 </div>
-<a id="a254720d6baf86d12a40427c8cf66b5c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a254720d6baf86d12a40427c8cf66b5c1">&#9670;&nbsp;</a></span>qryptext_new_guid()</h2>
+<a id="a13f9c2abcfba864b13d3524c32429b48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13f9c2abcfba864b13d3524c32429b48">&#9670;&nbsp;</a></span>qryptext_new_guid()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structqryptext__guid.html">qryptext_guid</a> qryptext_new_guid </td>
+          <td class="memname">QRYPTEXT_API <a class="el" href="structqryptext__guid.html">qryptext_guid</a> qryptext_new_guid </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
+          <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>lowercase</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
+          <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>hyphens</em>&#160;</td>
         </tr>
         <tr>

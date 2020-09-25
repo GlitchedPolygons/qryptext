@@ -72,22 +72,21 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Decrypt data that was encrypted using <a class="el" href="encrypt_8h.html#a600f4e8ad04dfa604e98fde2a1cb8f14">qryptext_encrypt()</a> (Kyber1024 KEM + AES256-GCM).  
+<p>Decrypt data that was encrypted using <a class="el" href="encrypt_8h.html#a5aedab2040d2df1473e107173decb85b">qryptext_encrypt()</a> (Kyber1024 KEM + AES256-GCM).  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="types_8h_source.html">qryptext/types.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for decrypt.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="decrypt_8h__incl.png" border="0" usemap="#include_2qryptext_2decrypt_8h" alt=""/></div>
 <map name="include_2qryptext_2decrypt_8h" id="include_2qryptext_2decrypt_8h">
-<area shape="rect" title="Decrypt data that was encrypted using qryptext_encrypt() (Kyber1024 KEM + AES256&#45;GCM)." alt="" coords="32,5,204,32"/>
-<area shape="rect" title=" " alt="" coords="5,162,71,189"/>
-<area shape="rect" title=" " alt="" coords="95,162,163,189"/>
-<area shape="rect" href="types_8h.html" title="Types (structs) user in qryptext." alt="" coords="156,80,272,107"/>
-<area shape="rect" title=" " alt="" coords="187,155,359,196"/>
-<area shape="rect" title=" " alt="" coords="383,155,523,196"/>
+<area shape="rect" title="Decrypt data that was encrypted using qryptext_encrypt() (Kyber1024 KEM + AES256&#45;GCM)." alt="" coords="55,5,227,32"/>
+<area shape="rect" title=" " alt="" coords="5,155,71,181"/>
+<area shape="rect" title=" " alt="" coords="211,155,279,181"/>
+<area shape="rect" href="types_8h.html" title="Types (structs) user in qryptext." alt="" coords="108,80,173,107"/>
+<area shape="rect" href="constants_8h.html" title="Qryptext constants." alt="" coords="95,155,186,181"/>
 </map>
 </div>
 </div>
@@ -95,21 +94,21 @@ Include dependency graph for decrypt.h:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6f11dba4bbc05f721ec6cb1d4a3cfe05"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decrypt_8h.html#a6f11dba4bbc05f721ec6cb1d4a3cfe05">qryptext_decrypt</a> (uint8_t *encrypted_data, size_t encrypted_data_length, bool encrypted_data_base64, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, <a class="el" href="structqryptext__kyber1024__secret__key.html">qryptext_kyber1024_secret_key</a> secret_kyber1024_key)</td></tr>
-<tr class="separator:a6f11dba4bbc05f721ec6cb1d4a3cfe05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20c99f407ce52bc50a6d95cbf0ed5514"><td class="memItemLeft" align="right" valign="top">QRYPTEXT_API int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decrypt_8h.html#a20c99f407ce52bc50a6d95cbf0ed5514">qryptext_decrypt</a> (uint8_t *encrypted_data, size_t encrypted_data_length, uint8_t encrypted_data_base64, uint8_t *output_buffer, size_t output_buffer_size, size_t *output_length, <a class="el" href="structqryptext__kyber1024__secret__key.html">qryptext_kyber1024_secret_key</a> secret_kyber1024_key)</td></tr>
+<tr class="separator:a20c99f407ce52bc50a6d95cbf0ed5514"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Decrypt data that was encrypted using <a class="el" href="encrypt_8h.html#a600f4e8ad04dfa604e98fde2a1cb8f14">qryptext_encrypt()</a> (Kyber1024 KEM + AES256-GCM). </p>
+<div class="textblock"><p>Decrypt data that was encrypted using <a class="el" href="encrypt_8h.html#a5aedab2040d2df1473e107173decb85b">qryptext_encrypt()</a> (Kyber1024 KEM + AES256-GCM). </p>
 <dl class="section author"><dt>Author</dt><dd>Raphael Beck </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a6f11dba4bbc05f721ec6cb1d4a3cfe05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f11dba4bbc05f721ec6cb1d4a3cfe05">&#9670;&nbsp;</a></span>qryptext_decrypt()</h2>
+<a id="a20c99f407ce52bc50a6d95cbf0ed5514"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20c99f407ce52bc50a6d95cbf0ed5514">&#9670;&nbsp;</a></span>qryptext_decrypt()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int qryptext_decrypt </td>
+          <td class="memname">QRYPTEXT_API int qryptext_decrypt </td>
           <td>(</td>
           <td class="paramtype">uint8_t *&#160;</td>
           <td class="paramname"><em>encrypted_data</em>, </td>
@@ -123,7 +122,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
+          <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>encrypted_data_base64</em>, </td>
         </tr>
         <tr>
@@ -157,11 +156,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Decrypts a given byte array of data that was encrypted using <a class="el" href="encrypt_8h.html#a600f4e8ad04dfa604e98fde2a1cb8f14">qryptext_encrypt()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Decrypts a given byte array of data that was encrypted using <a class="el" href="encrypt_8h.html#a5aedab2040d2df1473e107173decb85b">qryptext_encrypt()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">encrypted_data</td><td>The data to decrypt. </td></tr>
     <tr><td class="paramname">encrypted_data_length</td><td>Length of the data array. </td></tr>
-    <tr><td class="paramname">encrypted_data_base64</td><td>Is the encrypted data a base64-encoded string? </td></tr>
+    <tr><td class="paramname">encrypted_data_base64</td><td>Is the encrypted data a base64-encoded string? Pass a non-zero value for <code>true</code>. </td></tr>
     <tr><td class="paramname">output_buffer</td><td>Where to write the decrypted data into (make sure that this is allocated sufficiently big!). </td></tr>
     <tr><td class="paramname">output_buffer_size</td><td>How big the output buffer is (usually, when unsure, allocate the same size as the encrypted data length; that's guaranteed to be sufficiently big). </td></tr>
     <tr><td class="paramname">output_length</td><td>Where to write the number of bytes written to the output buffer into (will be left untouched in case of a failure). </td></tr>

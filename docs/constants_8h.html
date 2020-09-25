@@ -74,11 +74,33 @@ $(function() {
 
 <p>Qryptext constants.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="constants_8h__dep__incl.png" border="0" usemap="#include_2qryptext_2constants_8hdep" alt=""/></div>
+<map name="include_2qryptext_2constants_8hdep" id="include_2qryptext_2constants_8hdep">
+<area shape="rect" title="Qryptext constants." alt="" coords="567,5,754,32"/>
+<area shape="rect" href="types_8h.html" title="Types (structs) user in qryptext." alt="" coords="580,80,741,107"/>
+<area shape="rect" href="decrypt_8h.html" title="Decrypt data that was encrypted using qryptext_encrypt() (Kyber1024 KEM + AES256&#45;GCM)." alt="" coords="5,155,177,181"/>
+<area shape="rect" href="encrypt_8h.html" title="Encrypt data using Kyber1024 KEM + AES256&#45;GCM." alt="" coords="201,155,373,181"/>
+<area shape="rect" href="guid_8h.html" title="Mh! The smell of fresh GUIDs.." alt="" coords="397,155,551,181"/>
+<area shape="rect" href="keygen_8h.html" title="Kyber&#45;1024 and Falcon&#45;1024 key generator functions." alt="" coords="575,155,746,181"/>
+<area shape="rect" href="sign_8h.html" title="Sign data using Falcon1024 (which within OQS uses SHAKE256 hashing internally)." alt="" coords="771,155,924,181"/>
+<area shape="rect" href="util_8h.html" title="Useful utility functions for qryptext." alt="" coords="949,155,1095,181"/>
+<area shape="rect" href="verify_8h.html" title="Verify signatures that were made using qryptext_sign() (Falcon1024)." alt="" coords="1120,155,1279,181"/>
+</map>
+</div>
+</div>
 <p><a href="constants_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:aaf2c4fd9b7400929635f4bd907fb5196"><td class="memItemLeft" align="right" valign="top"><a id="aaf2c4fd9b7400929635f4bd907fb5196"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>QRYPTEXT_VERSION</b>&#160;&#160;&#160;100</td></tr>
+<tr class="separator:aaf2c4fd9b7400929635f4bd907fb5196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a053b8920726b2f2b15c662ad72195f4d"><td class="memItemLeft" align="right" valign="top"><a id="a053b8920726b2f2b15c662ad72195f4d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>QRYPTEXT_VERSION_STR</b>&#160;&#160;&#160;&quot;1.0.0&quot;</td></tr>
+<tr class="separator:a053b8920726b2f2b15c662ad72195f4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa5531fc354b30f3c970785b82245221"><td class="memItemLeft" align="right" valign="top"><a id="aaa5531fc354b30f3c970785b82245221"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>QRYPTEXT_ERROR_NULL_ARG</b>&#160;&#160;&#160;1000</td></tr>
 <tr class="separator:aaa5531fc354b30f3c970785b82245221"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -91,6 +113,18 @@ Macros</h2></td></tr>
 <tr class="memitem:aa3c23736d4feab6e3049509c96889c4b"><td class="memItemLeft" align="right" valign="top"><a id="aa3c23736d4feab6e3049509c96889c4b"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>QRYPTEXT_ERROR_INSUFFICIENT_OUTPUT_BUFFER_SIZE</b>&#160;&#160;&#160;1003</td></tr>
 <tr class="separator:aa3c23736d4feab6e3049509c96889c4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8479514eb580b6cec19df3604ff5390"><td class="memItemLeft" align="right" valign="top"><a id="ab8479514eb580b6cec19df3604ff5390"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PQCLEAN_KYBER1024_CLEAN_CRYPTO_SECRETKEYBYTES</b>&#160;&#160;&#160;3168</td></tr>
+<tr class="separator:ab8479514eb580b6cec19df3604ff5390"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9abe6f1daaef84cd745a72f813e3535c"><td class="memItemLeft" align="right" valign="top"><a id="a9abe6f1daaef84cd745a72f813e3535c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PQCLEAN_KYBER1024_CLEAN_CRYPTO_PUBLICKEYBYTES</b>&#160;&#160;&#160;1568</td></tr>
+<tr class="separator:a9abe6f1daaef84cd745a72f813e3535c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a095cac647d11af350674279a15f4c1f6"><td class="memItemLeft" align="right" valign="top"><a id="a095cac647d11af350674279a15f4c1f6"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PQCLEAN_FALCON1024_CLEAN_CRYPTO_SECRETKEYBYTES</b>&#160;&#160;&#160;2305</td></tr>
+<tr class="separator:a095cac647d11af350674279a15f4c1f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae635941d3567d04b703b46d4295b08dc"><td class="memItemLeft" align="right" valign="top"><a id="ae635941d3567d04b703b46d4295b08dc"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PQCLEAN_FALCON1024_CLEAN_CRYPTO_PUBLICKEYBYTES</b>&#160;&#160;&#160;1793</td></tr>
+<tr class="separator:ae635941d3567d04b703b46d4295b08dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Qryptext constants. </p>

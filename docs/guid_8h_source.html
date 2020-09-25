@@ -94,29 +94,22 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="types_8h.html">qryptext/types.h</a>&gt;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="structqryptext__guid.html">qryptext_guid</a> _qryptext_empty_guid = { .<a class="code" href="structqryptext__guid.html#a482aecc7edbcc018b5ab614e826b01dd">string</a> = <span class="stringliteral">&quot;00000000-0000-0000-0000-000000000000&quot;</span> };</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;QRYPTEXT_API <a class="code" href="structqryptext__guid.html">qryptext_guid</a> <a class="code" href="guid_8h.html#a532c31339c3b7c20409f90be91dbf491">qryptext_empty_guid</a>();</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="guid_8h.html#a923b6b2c5b2f8a49dd07f3f8ba2eada2">   44</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="structqryptext__guid.html">qryptext_guid</a> <a class="code" href="guid_8h.html#a923b6b2c5b2f8a49dd07f3f8ba2eada2">qryptext_empty_guid</a>()</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> _qryptext_empty_guid;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<a class="code" href="structqryptext__guid.html">qryptext_guid</a> <a class="code" href="guid_8h.html#a254720d6baf86d12a40427c8cf66b5c1">qryptext_new_guid</a>(<span class="keywordtype">bool</span> lowercase, <span class="keywordtype">bool</span> hyphens);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <span class="comment">// extern &quot;C&quot;</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif // QRYPTEXT_GUID_H</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;QRYPTEXT_API <a class="code" href="structqryptext__guid.html">qryptext_guid</a> <a class="code" href="guid_8h.html#a13f9c2abcfba864b13d3524c32429b48">qryptext_new_guid</a>(uint8_t lowercase, uint8_t hyphens);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <span class="comment">// extern &quot;C&quot;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif // QRYPTEXT_GUID_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructqryptext__guid_html"><div class="ttname"><a href="structqryptext__guid.html">qryptext_guid</a></div><div class="ttdoc">Struct containing the output from a call to the qryptext_new_guid() function.</div><div class="ttdef"><b>Definition:</b> types.h:74</div></div>
+<div class="ttc" id="aguid_8h_html_a532c31339c3b7c20409f90be91dbf491"><div class="ttname"><a href="guid_8h.html#a532c31339c3b7c20409f90be91dbf491">qryptext_empty_guid</a></div><div class="ttdeci">QRYPTEXT_API qryptext_guid qryptext_empty_guid()</div></div>
+<div class="ttc" id="astructqryptext__guid_html"><div class="ttname"><a href="structqryptext__guid.html">qryptext_guid</a></div><div class="ttdoc">Struct containing the output from a call to the qryptext_new_guid() function.</div><div class="ttdef"><b>Definition:</b> types.h:83</div></div>
 <div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div><div class="ttdoc">Types (structs) user in qryptext.</div></div>
-<div class="ttc" id="aguid_8h_html_a923b6b2c5b2f8a49dd07f3f8ba2eada2"><div class="ttname"><a href="guid_8h.html#a923b6b2c5b2f8a49dd07f3f8ba2eada2">qryptext_empty_guid</a></div><div class="ttdeci">static qryptext_guid qryptext_empty_guid()</div><div class="ttdef"><b>Definition:</b> guid.h:44</div></div>
-<div class="ttc" id="astructqryptext__guid_html_a482aecc7edbcc018b5ab614e826b01dd"><div class="ttname"><a href="structqryptext__guid.html#a482aecc7edbcc018b5ab614e826b01dd">qryptext_guid::string</a></div><div class="ttdeci">char string[36+1]</div><div class="ttdef"><b>Definition:</b> types.h:77</div></div>
-<div class="ttc" id="aguid_8h_html_a254720d6baf86d12a40427c8cf66b5c1"><div class="ttname"><a href="guid_8h.html#a254720d6baf86d12a40427c8cf66b5c1">qryptext_new_guid</a></div><div class="ttdeci">qryptext_guid qryptext_new_guid(bool lowercase, bool hyphens)</div></div>
+<div class="ttc" id="aguid_8h_html_a13f9c2abcfba864b13d3524c32429b48"><div class="ttname"><a href="guid_8h.html#a13f9c2abcfba864b13d3524c32429b48">qryptext_new_guid</a></div><div class="ttdeci">QRYPTEXT_API qryptext_guid qryptext_new_guid(uint8_t lowercase, uint8_t hyphens)</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
