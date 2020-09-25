@@ -7,4 +7,8 @@
     <RootNamespace>GlitchedPolygons.QryptextSharp</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)lib\**" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+  
 </Project>
