@@ -33,18 +33,10 @@ extern "C" {
 #include "types.h"
 
 /**
- * @private
- */
-static const qryptext_guid _qryptext_empty_guid = { .string = "00000000-0000-0000-0000-000000000000" };
-
-/**
  * Gets an empty GUID (<c>"00000000-0000-0000-0000-000000000000"</c>).
  * @return <c>"00000000-0000-0000-0000-000000000000"</c>
  */
-static inline qryptext_guid qryptext_empty_guid()
-{
-    return _qryptext_empty_guid;
-}
+QRYPTEXT_API qryptext_guid qryptext_empty_guid();
 
 /**
  * Generates a new GUID (a.k.a. UUID).

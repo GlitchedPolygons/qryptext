@@ -34,6 +34,13 @@ extern "C" {
 #define QRYPTEXT_GUID_UPPERCASE_NO_HYPHENS "%08X%04X%04X%02X%02X%02X%02X%02X%02X%02X%02X"
 #define QRYPTEXT_GET_GUID_FORMAT(lowercase, hyphens) ((lowercase) ? (hyphens) ? (QRYPTEXT_GUID_LOWERCASE_HYPHENS) : (QRYPTEXT_GUID_LOWERCASE_NO_HYPHENS) : (hyphens) ? (QRYPTEXT_GUID_UPPERCASE_HYPHENS) : (QRYPTEXT_GUID_UPPERCASE_NO_HYPHENS))
 
+static const qryptext_guid qryptext_empty_guid_instance = { .string = "00000000-0000-0000-0000-000000000000" };
+
+qryptext_guid qryptext_empty_guid()
+{
+    return qryptext_empty_guid_instance;
+}
+
 #ifdef _WIN32
 
 qryptext_guid qryptext_new_guid(const bool lowercase, const bool hyphens)
