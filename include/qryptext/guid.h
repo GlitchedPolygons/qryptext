@@ -39,8 +39,8 @@ QRYPTEXT_API qryptext_guid qryptext_empty_guid();
 
 /**
  * Generates a new GUID (a.k.a. UUID).
- * @param lowercase Should the GUID be lowercase or UPPERCASE only?
- * @param hyphens Should the GUID contain hyphen separators?
+ * @param lowercase Should the GUID be lowercase or UPPERCASE only? Pass any non-zero value for "true".
+ * @param hyphens Should the GUID contain hyphen separators? Pass any non-zero value for "true".
  * @return The qryptext_guid
  */
 QRYPTEXT_API qryptext_guid qryptext_new_guid(uint8_t lowercase, uint8_t hyphens);
