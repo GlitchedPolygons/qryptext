@@ -25,7 +25,7 @@
 #include "qryptext/verify.h"
 #include "qryptext/constants.h"
 
-int qryptext_verify(const uint8_t* data, const size_t data_length, const uint8_t* signature, const size_t signature_length, const bool signature_base64, const qryptext_falcon1024_public_key public_falcon1024_key)
+int qryptext_verify(const uint8_t* data, const size_t data_length, const uint8_t* signature, const size_t signature_length, const uint8_t signature_base64, const qryptext_falcon1024_public_key public_falcon1024_key)
 {
     if (data == NULL || signature == NULL)
     {

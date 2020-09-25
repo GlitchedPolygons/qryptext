@@ -28,11 +28,10 @@
 #include <pqclean_kyber1024_clean/api.h>
 
 #include "qryptext/util.h"
-#include <qryptext/guid.h>
+#include "qryptext/guid.h"
 #include "qryptext/encrypt.h"
-#include "qryptext/constants.h"
 
-int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, const size_t output_buffer_size, size_t* output_length, const bool output_base64, const qryptext_kyber1024_public_key public_kyber1024_key)
+int qryptext_encrypt(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, const size_t output_buffer_size, size_t* output_length, const uint8_t output_base64, const qryptext_kyber1024_public_key public_kyber1024_key)
 {
     int ret = 1;
 

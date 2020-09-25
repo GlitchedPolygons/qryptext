@@ -55,7 +55,7 @@ int main(const int argc, const char* argv[])
     memset(&public_key, 0x00, sizeof(qryptext_falcon1024_public_key));
     memcpy(public_key.hexstring, public_key_hexstr, public_key_hexstr_len);
 
-    int r = qryptext_verify((const uint8_t*)message, message_len, (const uint8_t*)signature, signature_len, true, public_key);
+    int r = qryptext_verify((const uint8_t*)message, message_len, (const uint8_t*)signature, signature_len, 1, public_key);
     if (r != 0)
     {
         return -3;

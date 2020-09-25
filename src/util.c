@@ -30,9 +30,9 @@
 
 #include <mbedtls/base64.h>
 
-static unsigned char qryptext_fprintf_enabled = true;
+static uint8_t qryptext_fprintf_enabled = 1;
 
-unsigned char qryptext_is_fprintf_enabled()
+uint8_t qryptext_is_fprintf_enabled()
 {
     return qryptext_fprintf_enabled;
 }
@@ -41,13 +41,13 @@ int (*qryptext_fprintf_fptr)(FILE* stream, const char* format, ...) = &fprintf;
 
 void qryptext_enable_fprintf()
 {
-    qryptext_fprintf_enabled = true;
+    qryptext_fprintf_enabled = 1;
     qryptext_fprintf_fptr = &fprintf;
 }
 
 void qryptext_disable_fprintf()
 {
-    qryptext_fprintf_enabled = false;
+    qryptext_fprintf_enabled = 0;
     qryptext_fprintf_fptr = &qryptext_printvoid;
 }
 

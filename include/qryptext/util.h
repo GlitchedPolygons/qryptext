@@ -49,7 +49,7 @@ extern "C" {
  * Checks whether qryptext's fprintf is enabled (whether errors are fprintfed into stderr).
  * @return Whether errors are fprintfed into stderr or not.
  */
-QRYPTEXT_API unsigned char qryptext_is_fprintf_enabled();
+QRYPTEXT_API uint8_t qryptext_is_fprintf_enabled();
 
 /**
  * Like fprintf() except it doesn't do anything. Like printing into <c>/dev/null</c> :D lots of fun!
@@ -128,7 +128,7 @@ QRYPTEXT_API int qryptext_hexstr2bin(const char* hexstr, size_t hexstr_length, u
  * @param uppercase Should the \p output string characters be UPPER- or lowercase? <c>0 == false; anything else == true</c>
  * @return <c>0</c> if conversion succeeded. <c>1</c> if one or more required arguments were <c>NULL</c> or invalid. <c>2</c> if the output buffer size is insufficient: please allocate at least <c>(bin_length * 2) + 1</c> bytes!
  */
-QRYPTEXT_API int qryptext_bin2hexstr(const uint8_t* bin, size_t bin_length, char* output, size_t output_size, size_t* output_length, unsigned char uppercase);
+QRYPTEXT_API int qryptext_bin2hexstr(const uint8_t* bin, size_t bin_length, char* output, size_t output_size, size_t* output_length, uint8_t uppercase);
 
 /**
  * (Tries to) read from <c>/dev/urandom</c> (or Windows equivalent, yeah...) filling the given \p output_buffer with \p output_buffer_size random bytes.
@@ -146,11 +146,11 @@ QRYPTEXT_API void qryptext_dev_urandom(uint8_t* output_buffer, size_t output_buf
  */
 static inline uint64_t qryptext_get_random_big_integer()
 {
-    srand(time(NULL) * time(NULL));
+    srand((unsigned int)(time(NULL) * time(NULL)));
     return (uint64_t)rand() * (uint64_t)rand() * (uint64_t)rand() * (uint64_t)rand();
 }
 
-static const unsigned char empty32[32] = {
+static const uint8_t empty32[32] = {
     //
     0x00, 0x00, 0x00, 0x00, //
     0x00, 0x00, 0x00, 0x00, //
@@ -162,7 +162,7 @@ static const unsigned char empty32[32] = {
     0x00, 0x00, 0x00, 0x00, //
 };
 
-static const unsigned char empty64[64] = {
+static const uint8_t empty64[64] = {
     //
     0x00, 0x00, 0x00, 0x00, //
     0x00, 0x00, 0x00, 0x00, //

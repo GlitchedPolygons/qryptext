@@ -29,7 +29,7 @@
 #include "qryptext/decrypt.h"
 #include "qryptext/constants.h"
 
-int qryptext_decrypt(uint8_t* encrypted_data, const size_t encrypted_data_length, const bool encrypted_data_base64, uint8_t* output_buffer, const size_t output_buffer_size, size_t* output_length, const qryptext_kyber1024_secret_key secret_kyber1024_key)
+int qryptext_decrypt(uint8_t* encrypted_data, const size_t encrypted_data_length, const uint8_t encrypted_data_base64, uint8_t* output_buffer, const size_t output_buffer_size, size_t* output_length, const qryptext_kyber1024_secret_key secret_kyber1024_key)
 {
     if (encrypted_data == NULL || output_buffer == NULL || output_length == NULL)
     {

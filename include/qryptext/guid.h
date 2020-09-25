@@ -29,7 +29,6 @@ extern "C" {
 
 #include <stddef.h>
 #include <stdint.h>
-#include <stdbool.h>
 #include "types.h"
 
 /**
@@ -44,7 +43,7 @@ QRYPTEXT_API qryptext_guid qryptext_empty_guid();
  * @param hyphens Should the GUID contain hyphen separators?
  * @return The qryptext_guid
  */
-QRYPTEXT_API qryptext_guid qryptext_new_guid(bool lowercase, bool hyphens);
+QRYPTEXT_API qryptext_guid qryptext_new_guid(uint8_t lowercase, uint8_t hyphens);
 
 #ifdef __cplusplus
 } // extern "C"

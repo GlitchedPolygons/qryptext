@@ -35,14 +35,14 @@ extern "C" {
  * Decrypts a given byte array of data that was encrypted using qryptext_encrypt().
  * @param encrypted_data The data to decrypt.
  * @param encrypted_data_length Length of the data array.
- * @param encrypted_data_base64 Is the encrypted data a base64-encoded string?
+ * @param encrypted_data_base64 Is the encrypted data a base64-encoded string? Pass a non-zero value for <c>true</c>.
  * @param output_buffer Where to write the decrypted data into (make sure that this is allocated sufficiently big!).
  * @param output_buffer_size How big the output buffer is (usually, when unsure, allocate the same size as the encrypted data length; that's guaranteed to be sufficiently big).
  * @param output_length Where to write the number of bytes written to the output buffer into (will be left untouched in case of a failure).
  * @param secret_kyber1024_key The Kyber1024 private key with which to decrypt the AES key.
  * @return The status code: <c>0</c> for success, all other status codes can be found inside the various qryptext header files.
  */
-QRYPTEXT_API int qryptext_decrypt(uint8_t* encrypted_data, size_t encrypted_data_length, bool encrypted_data_base64, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, qryptext_kyber1024_secret_key secret_kyber1024_key);
+QRYPTEXT_API int qryptext_decrypt(uint8_t* encrypted_data, size_t encrypted_data_length, uint8_t encrypted_data_base64, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, qryptext_kyber1024_secret_key secret_kyber1024_key);
 
 #ifdef __cplusplus
 } // extern "C"

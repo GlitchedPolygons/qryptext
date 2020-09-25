@@ -25,7 +25,7 @@
 #include "qryptext/util.h"
 #include "qryptext/sign.h"
 
-int qryptext_sign(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, const size_t output_buffer_size, size_t* output_length, const bool output_base64, const qryptext_falcon1024_secret_key secret_falcon1024_key)
+int qryptext_sign(const uint8_t* data, const size_t data_length, uint8_t* output_buffer, const size_t output_buffer_size, size_t* output_length, const uint8_t output_base64, const qryptext_falcon1024_secret_key secret_falcon1024_key)
 {
     if (data == NULL || output_buffer == NULL || output_length == NULL)
     {

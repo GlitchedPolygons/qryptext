@@ -62,7 +62,7 @@ int main(const int argc, const char* argv[])
         return -3;
     }
 
-    int r = qryptext_encrypt((uint8_t*)message, message_len, o, olen, NULL, true, public_key);
+    int r = qryptext_encrypt((uint8_t*)message, message_len, o, olen, NULL, 1, public_key);
     if (r != 0)
     {
         free(o);

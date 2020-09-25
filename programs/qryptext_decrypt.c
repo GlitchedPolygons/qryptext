@@ -63,7 +63,7 @@ int main(const int argc, const char* argv[])
         return -3;
     }
 
-    int r = qryptext_decrypt((uint8_t*)message, message_len, true, o, message_len, &olen, secret_key);
+    int r = qryptext_decrypt((uint8_t*)message, message_len, 1, o, message_len, &olen, secret_key);
     if (r != 0)
     {
         memset(o, 0x00, message_len);

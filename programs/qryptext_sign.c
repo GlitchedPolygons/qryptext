@@ -64,7 +64,7 @@ int main(const int argc, const char* argv[])
         return -3;
     }
 
-    int r = qryptext_sign((uint8_t*)message, message_len, o, olen, &olen, true, secret_key);
+    int r = qryptext_sign((uint8_t*)message, message_len, o, olen, &olen, 1, secret_key);
     if (r != 0)
     {
         free(o);

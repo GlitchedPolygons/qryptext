@@ -29,7 +29,6 @@ extern "C" {
 
 #include <stddef.h>
 #include <stdint.h>
-#include <stdbool.h>
 #include "types.h"
 
 /**
@@ -39,11 +38,11 @@ extern "C" {
  * @param output_buffer Where to write the signature into.
  * @param output_buffer_size How big the signature output buffer is. Make sure to allocate at least \p OQS_SIG_falcon_1024_length_signature bytes!
  * @param output_length How many bytes were written into the output buffer.
- * @param output_base64 Should the output signature bytes be base64-encoded for you? If you pass <c>true</c>, make sure to allocate at least qryptext_calc_base64_length(OQS_SIG_falcon_1024_length_signature) bytes! If you pass <c>false</c>, the raw signature bytes are written into the \p output_buffer!
+ * @param output_base64 Should the output signature bytes be base64-encoded for you? Pass a non-zero value for <c>true</c>. If you pass <c>true</c>, make sure to allocate at least qryptext_calc_base64_length(OQS_SIG_falcon_1024_length_signature) bytes! If you pass <c>false</c>, the raw signature bytes are written into the \p output_buffer!
  * @param secret_falcon1024_key The Falcon-1024 secret key to use for signing.
  * @return <c>0</c> on success; error codes as defined in constants.h otherwise.
  */
-QRYPTEXT_API int qryptext_sign(const uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, bool output_base64, qryptext_falcon1024_secret_key secret_falcon1024_key);
+QRYPTEXT_API int qryptext_sign(const uint8_t* data, size_t data_length, uint8_t* output_buffer, size_t output_buffer_size, size_t* output_length, uint8_t output_base64, qryptext_falcon1024_secret_key secret_falcon1024_key);
 
 #ifdef __cplusplus
 } // extern "C"

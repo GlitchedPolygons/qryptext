@@ -54,7 +54,7 @@ This builds qryptext as a static lib (without its MbedTLS dependencies though; t
 
 ```bash
 mkdir -p build && cd build
-cmake -DCMAKE_BUILD_TYPE=Release -Dqryptext_PACKAGE=On -Dqryptext_ONLY_BUILD_LIB=On ..
+cmake -DCMAKE_BUILD_TYPE=Release -Dqryptext_PACKAGE=On ..
 cmake --build . --config Release
 ```
 

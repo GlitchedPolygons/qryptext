@@ -43,7 +43,7 @@ qryptext_guid qryptext_empty_guid()
 
 #ifdef _WIN32
 
-qryptext_guid qryptext_new_guid(const bool lowercase, const bool hyphens)
+qryptext_guid qryptext_new_guid(const uint8_t lowercase, const uint8_t hyphens)
 {
     qryptext_guid out;
     memset(&out, 0x00, sizeof(out));
@@ -59,7 +59,7 @@ qryptext_guid qryptext_new_guid(const bool lowercase, const bool hyphens)
 
 #else
 
-qryptext_guid qryptext_new_guid(const bool lowercase, const bool hyphens)
+qryptext_guid qryptext_new_guid(const uint8_t lowercase, const uint8_t hyphens)
 {
     qryptext_guid out;
     memset(&out, 0x00, sizeof(out));
