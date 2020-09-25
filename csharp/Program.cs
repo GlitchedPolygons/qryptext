@@ -138,63 +138,77 @@ namespace GlitchedPolygons.QryptextSharp
         /// </summary>
         public string LoadedLibraryPath { get; }
 
-        public QryptextSharpContext()
+        /// <summary>
+        /// Creates a new qryptext instance. <para> </para>
+        /// Make sure to create one only once and cache it as needed, since loading the DLLs into memory can negatively affect the performance.
+        /// <param name="sharedLibPathOverride">[OPTIONAL] Don't look for a <c>lib/</c> folder and directly use this path as a pre-resolved, platform-specific shared lib/DLL file path. Pass this if you want to manually handle the various platform's paths yourself.</param>
+        /// </summary>
+        public QryptextSharpContext(string sharedLibPathOverride = null)
         {
-            StringBuilder pathBuilder = new StringBuilder(256);
-            pathBuilder.Append("lib/");
-
-            switch (RuntimeInformation.ProcessArchitecture)
-            {
-                case Architecture.X64:
-                    pathBuilder.Append("x64/");
-                    break;
-                case Architecture.X86:
-                    pathBuilder.Append("x86/");
-                    break;
-                case Architecture.Arm:
-                    pathBuilder.Append("armeabi-v7a/");
-                    break;
-                case Architecture.Arm64:
-                    pathBuilder.Append("arm64-v8a/");
-                    break;
-            }
-
-            if (!Directory.Exists(pathBuilder.ToString()))
-            {
-                throw new PlatformNotSupportedException($"Shared library not found in {pathBuilder} and/or unsupported CPU architecture. Please don't forget to copy the shared libraries/DLL into the 'lib/{{CPU_ARCHITECTURE}}/{{OS}}/{{SHARED_LIB_FILE}}' folder of your output build directory.  https://github.com/GlitchedPolygons/qryptext/tree/master/csharp");
-            }
-
+            string os;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
+                os = "windows";
                 loadUtils = new SharedLibLoadUtilsWindows();
-                pathBuilder.Append("windows/");
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
+                os = "linux";
                 loadUtils = new SharedLibLoadUtilsLinux();
-                pathBuilder.Append("linux/");
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
+                os = "mac";
                 loadUtils = new SharedLibLoadUtilsMac();
-                pathBuilder.Append("mac/");
             }
             else
             {
                 throw new PlatformNotSupportedException("Unsupported OS");
             }
-
-            string[] l = Directory.GetFiles(pathBuilder.ToString());
-            if (l == null || l.Length != 1)
+            
+            if (string.IsNullOrEmpty(sharedLibPathOverride))
             {
-                throw new FileLoadException("There should only be exactly one shared library file per supported platform!");
+                StringBuilder pathBuilder = new StringBuilder(256);
+                pathBuilder.Append("lib/");
+
+                switch (RuntimeInformation.ProcessArchitecture)
+                {
+                    case Architecture.X64:
+                        pathBuilder.Append("x64/");
+                        break;
+                    case Architecture.X86:
+                        pathBuilder.Append("x86/");
+                        break;
+                    case Architecture.Arm:
+                        pathBuilder.Append("armeabi-v7a/");
+                        break;
+                    case Architecture.Arm64:
+                        pathBuilder.Append("arm64-v8a/");
+                        break;
+                }
+
+                if (!Directory.Exists(pathBuilder.ToString()))
+                {
+                    throw new PlatformNotSupportedException($"Qryptext shared library not found in {pathBuilder} and/or unsupported CPU architecture. Please don't forget to copy the Qryptext shared libraries/DLL into the 'lib/{{CPU_ARCHITECTURE}}/{{OS}}/{{SHARED_LIB_FILE}}' folder of your output build directory.  https://github.com/GlitchedPolygons/qryptext/tree/master/csharp/lib/");
+                }
+
+                pathBuilder.Append(os);
+                pathBuilder.Append('/');
+
+                string[] l = Directory.GetFiles(pathBuilder.ToString());
+                if (l == null || l.Length != 1)
+                {
+                    throw new FileLoadException("There should only be exactly one shared library file per supported platform!");
+                }
+
+                pathBuilder.Append(Path.GetFileName(l[0]));
+                LoadedLibraryPath = Path.GetFullPath(pathBuilder.ToString());
+                pathBuilder.Clear();
             }
-
-            pathBuilder.Append(Path.GetFileName(l[0]));
-
-            LoadedLibraryPath = Path.GetFullPath(pathBuilder.ToString());
-
-            pathBuilder.Clear();
+            else
+            {
+                LoadedLibraryPath = sharedLibPathOverride;
+            }
 
             lib = loadUtils.LoadLibrary(LoadedLibraryPath);
             if (lib == IntPtr.Zero)
@@ -215,6 +229,8 @@ namespace GlitchedPolygons.QryptextSharp
         {
             loadUtils.FreeLibrary(lib);
         }
+        
+        // TODO: implement C# wrapper class
     }
     
     //  --------------------------------------------------------------------
@@ -229,6 +245,8 @@ namespace GlitchedPolygons.QryptextSharp
         private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            
+            // TODO: write example usage
         }
     }
 }
