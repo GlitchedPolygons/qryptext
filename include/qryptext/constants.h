@@ -28,6 +28,10 @@ extern "C" {
 #endif
 
 // Qryptext constants:
+
+#define QRYPTEXT_VERSION 100
+#define QRYPTEXT_VERSION_STR "1.0.0"
+
 #define QRYPTEXT_ERROR_NULL_ARG 1000
 #define QRYPTEXT_ERROR_INVALID_ARG 1001
 #define QRYPTEXT_ERROR_OUT_OF_MEMORY 1002

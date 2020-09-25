@@ -201,6 +201,8 @@ namespace GlitchedPolygons.QryptextSharp
             {
                 goto hell;
             }
+
+            return;
             
             hell:
             throw new Exception($"Failed to load one or more functions from the shared library \"{LoadedLibraryPath}\"!");

@@ -32,7 +32,6 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 #include "types.h"
 
@@ -50,7 +49,7 @@ extern "C" {
  * Checks whether qryptext's fprintf is enabled (whether errors are fprintfed into stderr).
  * @return Whether errors are fprintfed into stderr or not.
  */
-QRYPTEXT_API bool qryptext_is_fprintf_enabled();
+QRYPTEXT_API unsigned char qryptext_is_fprintf_enabled();
 
 /**
  * Like fprintf() except it doesn't do anything. Like printing into <c>/dev/null</c> :D lots of fun!
@@ -65,7 +64,7 @@ static inline int qryptext_printvoid(FILE* stream, const char* format, ...)
 }
 
 /** @private */
-extern int (*_qryptext_fprintf_fptr)(FILE* stream, const char* format, ...);
+extern int (*qryptext_fprintf_fptr)(FILE* stream, const char* format, ...);
 
 /**
  * Enables qryptext's use of fprintf().
@@ -78,7 +77,7 @@ QRYPTEXT_API void qryptext_enable_fprintf();
 QRYPTEXT_API void qryptext_disable_fprintf();
 
 /** @private */
-#define qryptext_fprintf _qryptext_fprintf_fptr
+#define qryptext_fprintf qryptext_fprintf_fptr
 
 /**
  * Calculates the final output size of a ciphertext that would result from the qryptext_encrypt() function (based on a given plaintext length).
@@ -93,6 +92,18 @@ QRYPTEXT_API size_t qryptext_calc_encryption_output_length(size_t plaintext_leng
  * @return How much memory you should allocate if you were to encode \p data_length bytes.
  */
 QRYPTEXT_API size_t qryptext_calc_base64_length(size_t data_length);
+
+/**
+ * Gets the current qryptext version number (as an unsigned integer).
+ * @return Current qryptext version number.
+ */
+QRYPTEXT_API uint64_t qryptext_get_version_number();
+
+/**
+ * Gets the current qryptext version number as a nicely formatted, human-readable string.
+ * @return The current qryptext version number as a nicely formatted, human-readable string.
+ */
+QRYPTEXT_API char* qryptext_get_version_number_string();
 
 /**
  * Converts a hex string to binary array. <p>
@@ -114,10 +125,10 @@ QRYPTEXT_API int qryptext_hexstr2bin(const char* hexstr, size_t hexstr_length, u
  * @param output Where to write the hex string into.
  * @param output_size Maximum capacity of the \p output buffer. Make sure to allocate at least <c>(bin_length * 2) + 1</c> bytes!
  * @param output_length [OPTIONAL] Where to write the output string length into. This is always gonna be <c>bin_length * 2</c>, but you can still choose to write it out just to be sure. If you want to omit this: no problem.. just pass <c>NULL</c>!
- * @param uppercase Should the \p output string characters be UPPER- or lowercase?
+ * @param uppercase Should the \p output string characters be UPPER- or lowercase? <c>0 == false; anything else == true</c>
  * @return <c>0</c> if conversion succeeded. <c>1</c> if one or more required arguments were <c>NULL</c> or invalid. <c>2</c> if the output buffer size is insufficient: please allocate at least <c>(bin_length * 2) + 1</c> bytes!
  */
-QRYPTEXT_API int qryptext_bin2hexstr(const uint8_t* bin, size_t bin_length, char* output, size_t output_size, size_t* output_length, bool uppercase);
+QRYPTEXT_API int qryptext_bin2hexstr(const uint8_t* bin, size_t bin_length, char* output, size_t output_size, size_t* output_length, unsigned char uppercase);
 
 /**
  * (Tries to) read from <c>/dev/urandom</c> (or Windows equivalent, yeah...) filling the given \p output_buffer with \p output_buffer_size random bytes.

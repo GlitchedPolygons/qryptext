@@ -358,11 +358,11 @@ static void qryptext_fprintf_enables_and_disables_correctly()
 {
     qryptext_disable_fprintf();
     TEST_CHECK(!qryptext_is_fprintf_enabled());
-    TEST_CHECK(memcmp(_qryptext_fprintf_fptr, &fprintf, sizeof(&fprintf)) != 0);
+    TEST_CHECK(memcmp(qryptext_fprintf_fptr, &fprintf, sizeof(&fprintf)) != 0);
 
     qryptext_enable_fprintf();
     TEST_CHECK(qryptext_is_fprintf_enabled());
-    TEST_CHECK(memcmp(_qryptext_fprintf_fptr, &fprintf, sizeof(&fprintf)) == 0);
+    TEST_CHECK(memcmp(qryptext_fprintf_fptr, &fprintf, sizeof(&fprintf)) == 0);
 
     qryptext_disable_fprintf();
 }

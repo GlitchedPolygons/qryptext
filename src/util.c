@@ -16,7 +16,6 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h>
 #include "qryptext/util.h"
 
 #include <oqs/oqs.h>
@@ -31,25 +30,35 @@
 
 #include <mbedtls/base64.h>
 
-static bool _qryptext_fprintf_enabled = true;
+static unsigned char qryptext_fprintf_enabled = true;
 
-bool qryptext_is_fprintf_enabled()
+unsigned char qryptext_is_fprintf_enabled()
 {
-    return _qryptext_fprintf_enabled;
+    return qryptext_fprintf_enabled;
 }
 
-int (*_qryptext_fprintf_fptr)(FILE* stream, const char* format, ...) = &fprintf;
+int (*qryptext_fprintf_fptr)(FILE* stream, const char* format, ...) = &fprintf;
 
 void qryptext_enable_fprintf()
 {
-    _qryptext_fprintf_enabled = true;
-    _qryptext_fprintf_fptr = &fprintf;
+    qryptext_fprintf_enabled = true;
+    qryptext_fprintf_fptr = &fprintf;
 }
 
 void qryptext_disable_fprintf()
 {
-    _qryptext_fprintf_enabled = false;
-    _qryptext_fprintf_fptr = &qryptext_printvoid;
+    qryptext_fprintf_enabled = false;
+    qryptext_fprintf_fptr = &qryptext_printvoid;
+}
+
+uint64_t qryptext_get_version_number()
+{
+    return QRYPTEXT_VERSION;
+}
+
+char* qryptext_get_version_number_string()
+{
+    return QRYPTEXT_VERSION_STR;
 }
 
 void qryptext_dev_urandom(uint8_t* output_buffer, const size_t output_buffer_size)
@@ -120,7 +129,7 @@ int qryptext_hexstr2bin(const char* hexstr, const size_t hexstr_length, unsigned
     return 0;
 }
 
-int qryptext_bin2hexstr(const unsigned char* bin, const size_t bin_length, char* output, const size_t output_size, size_t* output_length, const bool uppercase)
+int qryptext_bin2hexstr(const unsigned char* bin, const size_t bin_length, char* output, const size_t output_size, size_t* output_length, const unsigned char uppercase)
 {
     if (bin == NULL || bin_length == 0 || output == NULL)
     {
