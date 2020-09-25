@@ -35,6 +35,29 @@ If you don't want to use git submodules, you can also start vendoring a specific
 
 If you use [CMake](https://cmake.org) you can just `add_subdirectory(path_to_submodule)` and then `target_link_libraries(your_project PRIVATE qryptext)` inside your own CMakeLists.txt file.
 
+### Building from source
+
+#### DLL/Shared library build + CLI Programs (statically linked)
+
+```bash
+bash build.sh
+```
+This works on Windows too: just use the [Git Bash for Windows](https://git-scm.com/download/win) CLI!
+
+If the build succeeds, you should now have a new `.tar.gz` file inside the `build/` directory!
+
+The `build.sh` script builds by default the qryptext DLL/shared library, as well as the qryptext CLI programs (those are statically linked).
+
+#### Static library
+
+This builds qryptext as a static lib (without its MbedTLS dependencies though; those you'd need to manually gather and link yourself from `build/mbedtls/library`!)
+
+```bash
+mkdir -p build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release -Dqryptext_PACKAGE=On -Dqryptext_ONLY_BUILD_LIB=On ..
+cmake --build . --config Release
+```
+
 ### Programs
 
 There is a set of fully functional CLI programs ready to be compiled and used inside the [programs/](https://github.com/GlitchedPolygons/qryptext/tree/master/programs) directory. 
