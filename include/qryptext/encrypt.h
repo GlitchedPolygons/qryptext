@@ -32,7 +32,7 @@ extern "C" {
 #include "types.h"
 
 /**
- * Encrypts a given byte array of data using AES256-CBC, Kyber1024 and (optionally) RSA.
+ * Encrypts a given byte array of data using AES256-GCM + Kyber1024.
  * @param data The data to encrypt.
  * @param data_length Length of the data array.
  * @param output_buffer Where to write the encrypted ciphertext into. Make sure that this is allocated sufficiently big! If you're unsure about how much to allocate, you can use util.h's qryptext_calc_encryption_output_length() function.
