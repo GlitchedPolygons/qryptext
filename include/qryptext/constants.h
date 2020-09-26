@@ -29,8 +29,8 @@ extern "C" {
 
 // Qryptext constants:
 
-#define QRYPTEXT_VERSION 100
-#define QRYPTEXT_VERSION_STR "1.0.0"
+#define QRYPTEXT_VERSION 101
+#define QRYPTEXT_VERSION_STR "1.0.1"
 
 #define QRYPTEXT_ERROR_NULL_ARG 1000
 #define QRYPTEXT_ERROR_INVALID_ARG 1001
